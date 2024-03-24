@@ -19,7 +19,7 @@ gdd <- function(
     start_temp = 5,
     end_temp = 4,
     window_width = 7,
-    pick = "longest",
+    pick = "all",
     msgs = TRUE) {
   
   chk_flag(ignore_truncation)

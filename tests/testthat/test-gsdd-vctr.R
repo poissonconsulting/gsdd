@@ -155,13 +155,22 @@ test_that("Gets growth period shortest", {
   expect_equal(gsdd_vctr, 800)
 })
 
+test_that("Gets all by default", {
+  x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
+  gsdd_vctr <- gsdd_vctr(x,
+                         window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+                         ignore_truncation = TRUE
+  )
+  expect_equal(gsdd_vctr, 1300)
+})
+
 test_that("Gets growth period longest", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
   gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
   gsdd_vctr <- gsdd_vctr(x,
                   window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                  ignore_truncation = TRUE
+                  ignore_truncation = TRUE, pick = "longest"
   )
   expect_equal(gsdd_vctr, 500)
 })
