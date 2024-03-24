@@ -12,7 +12,6 @@
 #'
 #' @examples
 #' data <- gsdd::simulated_data
-#' data$temperature <- data$synthetic
 #' gsdd(data)
 gsdd <- function(
     x, 

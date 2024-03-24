@@ -59,7 +59,6 @@ Calculate Growing Seasons
 }
 \examples{
 data <- gsdd::simulated_data
-data$temperature <- data$synthetic
 gss(data)
 }
 \seealso{

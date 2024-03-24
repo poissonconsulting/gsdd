@@ -10,6 +10,6 @@ simulated_data <- tibble::tibble(
     to = as.Date("2019-12-31"),
     by = "day"
   ),
-  synthetic = simulated_data
+  temperature = simulated_data
 )
 usethis::use_data(simulated_data, overwrite = TRUE)

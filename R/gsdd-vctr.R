@@ -56,7 +56,7 @@
 #'
 #' @examples
 #' gsdd_vctr(c(rep(1, 10), rep(10, 20), rep(1, 200)))
-#' gsdd_vctr(gsdd::simulated_data$synthetic)
+#' gsdd_vctr(gsdd::simulated_data$temperature)
 gsdd_vctr <- function(x,
                     ignore_truncation = FALSE,
                     start_temp = 5,

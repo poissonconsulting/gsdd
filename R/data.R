@@ -5,9 +5,8 @@
 #'
 #' @format A tibble with columns:
 #' \describe{
-#' \item{Date}{date for each calendar year}
-#' \item{synthetic}{synthetic yearly temperature data for demonstration and
-#' testing}
+#' \item{date}{A Date vector for 2019.}
+#' \item{temperature}{A real vector of synthetic mean daily water temperature values.}
 #' }
 #'
 "simulated_data"

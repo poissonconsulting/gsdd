@@ -62,7 +62,6 @@ The GSDD is calculated for each study year.
 }
 \examples{
 data <- gsdd::simulated_data
-data$temperature <- data$synthetic
 gsdd(data)
 }
 \seealso{

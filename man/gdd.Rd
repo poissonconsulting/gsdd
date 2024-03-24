@@ -62,7 +62,6 @@ mean daily water temperature in degrees centigrade.
 }
 \examples{
 data <- gsdd::simulated_data
-data$temperature <- data$synthetic
 gdd(data)
 }
 \seealso{
