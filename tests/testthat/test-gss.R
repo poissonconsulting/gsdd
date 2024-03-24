@@ -23,6 +23,24 @@ test_that("gss preserves if shift start date", {
   })
 })
 
+test_that("gss preserves if shift before leap year", {
+  data <- temperature_data
+  data <- data[-(1:10),]
+  gss <- gss(data, start_date = as.Date("2019-02-28"), min_length = 100)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss preserves if shift after leap", {
+  data <- temperature_data
+  data <- data[-(1:10),]
+  gss <- gss(data, start_date = as.Date("2019-03-01"), min_length = 100)
+  expect_snapshot({
+    gss
+  })
+})
+
 test_that("gss preserves if shift start date", {
   gss <- gss(temperature_data, start_date = as.Date("2019-03-20"), ignore_truncation = TRUE)
   expect_snapshot({
