@@ -149,13 +149,13 @@
     min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
   }
 
-  gsdd <- x |>
-    dplyr::summarise(gsdd = gsdd_vctr(
-      .data$temperature,     
-      ignore_truncation = ignore_truncation, min_length = min_length, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width, pick = pick), .groups = "keep") |>
-    dplyr::ungroup()
-  
   if(isFALSE(gss)) {
+    gsdd <- x |>
+      dplyr::summarise(gsdd = gsdd_vctr(
+        .data$temperature,     
+        ignore_truncation = ignore_truncation, min_length = min_length, start_temp, end_temp = end_temp, window_width = window_width, pick = pick, msgs = msgs), .groups = "keep") |>
+      dplyr::ungroup()
+    
     return(gsdd)
   }
   
@@ -168,7 +168,7 @@
       end_temp = end_temp, 
       window_width = window_width, 
       pick = pick,
-      msgs = FALSE), .keep = TRUE)
+      msgs = msgs), .keep = TRUE)
   
   if(!nrow(x)) {
     return(tibble::tibble(year = integer(), start_dayte = as.Date(integer()),
