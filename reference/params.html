@@ -53,14 +53,14 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>end_date</dt>
-<dd><p>A Date scalar of the last date within each year to consider (the year is ignored).
-If <code>end_date</code> is less than <code>start_date</code> (ignoring the year) then the window is considered
-to span two calendar years.</p></dd>
+<dd><p>A Date scalar of the last date
+within each year to consider (the year is ignored).</p></dd>
 
 
 <dt>end_temp</dt>
 <dd><p>A positive real number of the average water temperature
-at the end of the growing season(s) in C. It must be greater than or equal to
+at the end of the growing season(s) in C.
+It must be greater than or equal to
 the start temperature.</p></dd>
 
 
@@ -69,6 +69,11 @@ the start temperature.</p></dd>
 of the mean daily water temperature vector
 or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 (equivalent to TRUE) specifying which type of truncation to ignore.</p></dd>
+
+
+<dt>min_length</dt>
+<dd><p>A whole number of the minimum length to consider.
+Must be at least twice the window width but no more than 365.</p></dd>
 
 
 <dt>msgs</dt>
@@ -83,8 +88,10 @@ the GSDD value for the "longest" 'season'.</p></dd>
 
 
 <dt>start_date</dt>
-<dd><p>A Date scalar of the first date within each year to consider (the year
-is ignored).</p></dd>
+<dd><p>A Date scalar of the first date
+within each year to consider (the year is ignored).
+#' If <code>start_date</code> occurs before the <code>end_date</code> (when ignoring the year)
+then the window is considered  to span two calendar years.</p></dd>
 
 
 <dt>start_temp</dt>
