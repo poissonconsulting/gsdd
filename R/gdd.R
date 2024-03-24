@@ -38,7 +38,8 @@ gdd <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
-    msgs = msgs) |>
+    msgs = msgs,
+    gss =  FALSE) |>
     dplyr::rename(gdd = "gsdd")
   
   if(!nrow(gdd) || all(is.na(gdd$gdd))) {
@@ -55,8 +56,7 @@ gdd <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = "last",
-    msgs = msgs,
-    gss = TRUE) |>
+    msgs = msgs) |>
     dplyr::select("year", "end_dayte")
   
   gdd <- gdd |> dplyr::right_join(gss, by = "year")

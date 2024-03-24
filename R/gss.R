@@ -32,6 +32,5 @@ gss <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
-    msgs = msgs, 
-    gss = TRUE)
+    msgs = msgs)
 }

@@ -120,7 +120,7 @@
     window_width,
     pick,
     msgs,
-    gss = FALSE) {
+    gss = TRUE) {
   check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
   chk_date(start_date)
   chk_date(end_date)

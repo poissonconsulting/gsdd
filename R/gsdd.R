@@ -72,5 +72,6 @@ gsdd <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
-    msgs = msgs)
+    msgs = msgs,
+    gss = FALSE)
 }
