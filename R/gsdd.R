@@ -52,7 +52,7 @@
 #' gsdd(gsdd::temperature_data)
 gsdd <- function(
     x, 
-    start_date = as.Date("1972-02-28"), 
+    start_date = as.Date("1972-03-01"), 
     end_date = as.Date("1972-11-30"), 
     ignore_truncation = FALSE,
     min_length = NULL,

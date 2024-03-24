@@ -5,6 +5,13 @@ test_that("gss works", {
   })
 })
 
+test_that("gss before leap year", {
+  gss <- gss(temperature_data, start_date = as.Date("1972-02-28"))
+  expect_snapshot({
+    gss
+  })
+})
+
 test_that("gss shifts by 10", {
   data <- temperature_data
   data <- data[-(1:10),]
