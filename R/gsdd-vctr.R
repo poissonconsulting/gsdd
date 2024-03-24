@@ -25,7 +25,7 @@ gsdd_vctr <- function(x,
     pick, 
     c("biggest", "smallest", "longest", "shortest", "first", "last", "all"))
   
-  data <- .gss(
+  data <- .gss_vctr(
     x, 
     ignore_truncation = ignore_truncation, 
     min_length = min_length,

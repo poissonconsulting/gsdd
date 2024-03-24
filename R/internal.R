@@ -1,4 +1,4 @@
-.gss <- function(x,
+.gss_vctr <- function(x,
                  ignore_truncation,
                  min_length,
                  start_temp,

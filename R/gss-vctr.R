@@ -6,7 +6,7 @@ gss_vctr <- function(x,
                      window_width = 7,
                      pick = "all",
                      msgs = TRUE) {
-  data <- .gss(
+  data <- .gss_vctr(
     x, 
     min_length = min_length,
     ignore_truncation = ignore_truncation, 
