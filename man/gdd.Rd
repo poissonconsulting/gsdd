@@ -6,7 +6,7 @@
 \usage{
 gdd(
   x,
-  start_date = as.Date("1972-01-01"),
+  start_date = as.Date("1972-02-28"),
   end_date = as.Date("1972-09-30"),
   min_length = NULL,
   ignore_truncation = FALSE,

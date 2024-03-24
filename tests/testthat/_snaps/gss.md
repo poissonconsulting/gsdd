@@ -29,7 +29,7 @@
       # Groups:   year [1]
          year start_dayte end_dayte   gsdd
         <int> <date>      <date>     <dbl>
-      1  2019 1972-03-09  1972-10-27 3899.
+      1  2019 1972-03-19  1972-11-06 3899.
 
 # gss preserves if shift start date
 

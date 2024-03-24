@@ -8,7 +8,7 @@ test_that("gsdd works", {
 test_that("gsdd NA if middle truncation", {
   data <- temperature_data
   data$temperature[200] <- NA_real_
-  expect_message(gsdd <- gsdd(data, min_length = 100), "The growing season is truncated at the end of the sequence.")
+  expect_message(gsdd <- gsdd(data, min_length = 100), "The growing season is truncated at the start of the sequence.")
   expect_snapshot({
     gsdd
   })
@@ -40,7 +40,7 @@ test_that("gsdd ignore truncation", {
 })
 
 test_that("gsdd ignore truncation tiny window", {
-  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-06"),
+  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-07"),
                        msgs = FALSE, ignore_truncation = TRUE, window_width = 3)
   expect_snapshot({
     gsdd
@@ -55,7 +55,7 @@ test_that("gsdd multiple years", {
   data2$temperature <- data2$temperature + 1
   data <- rbind(data, data2)
   
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-06"),
+  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-07"),
                        msgs = FALSE, ignore_truncation = TRUE, window_width = 3)
   expect_snapshot({
     gsdd

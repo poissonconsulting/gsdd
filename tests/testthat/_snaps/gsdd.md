@@ -56,7 +56,7 @@
       # A tibble: 1 x 2
          year  gsdd
         <int> <dbl>
-      1  2019  93.7
+      1  2019  110.
 
 # gsdd multiple years
 
@@ -66,8 +66,8 @@
       # A tibble: 2 x 2
          year  gsdd
         <int> <dbl>
-      1  1972  99.7
-      2  2019  93.7
+      1  1972  117.
+      2  2019  110.
 
 # gsdd spans a year
 

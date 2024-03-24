@@ -137,7 +137,7 @@
     dplyr::arrange(.data$dayte)
   
   if(is.null(min_length)) {
-    min_length <- min(as.integer(end_dayte) - as.integer(start_dayte) + 1L, 364L)
+    min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
   }
 
   gsdd <- x |>
