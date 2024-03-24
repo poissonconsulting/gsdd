@@ -11,34 +11,27 @@
 #' @examples
 #' gsdd_vctr(c(rep(1, 10), rep(10, 20), rep(1, 200)))
 #' gsdd_vctr(gsdd::temperature_data$temperature)
-gsdd_vctr <- function(x,
-                      ignore_truncation = FALSE,
-                      min_length = 274,
-                      start_temp = 5,
-                      end_temp = 4,
-                      window_width = 7,
-                      pick = "all",
-                      msgs = TRUE) {
-  
-  chk_string(pick)
-  chk_subset(
-    pick, 
-    c("biggest", "smallest", "longest", "shortest", "first", "last", "all"))
-  
-  data <- .gss_vctr(
+gsdd_vctr <- function(
+    x,
+    ignore_truncation = FALSE,
+    min_length = 274,
+    start_temp = 5,
+    end_temp = 4,
+    window_width = 7,
+    pick = "all",
+    msgs = TRUE) {
+  gss <- .gss_vctr(
     x, 
     ignore_truncation = ignore_truncation, 
     min_length = min_length,
     start_temp = start_temp, 
     end_temp = end_temp,
-    window_width = window_width, 
+    window_width = window_width,
+    pick = pick,
     msgs = msgs)
   
-  if(vld_scalar(data)) {
-    return(data)
+  if(vld_scalar(gss)) {
+    return(gss)
   }
-  data <- data |> 
-    pick_season(pick)
-  
-  sum(data$gsdd)
+  sum(gss$gsdd)
 }

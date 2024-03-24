@@ -4,6 +4,7 @@
                  start_temp,
                  end_temp,
                  window_width,
+                 pick,
                  msgs) {
   chk_numeric(x)
   chk_vector(x)
@@ -26,6 +27,11 @@
   if (is_even(window_width)) {
     abort_chk("`window_width` must be odd.")
   }
+  chk_string(pick)
+  chk_subset(
+    pick, 
+    c("biggest", "smallest", "longest", "shortest", "first", "last", "all"))
+  
   chk_flag(msgs)
   
   if(length(x) < min_length) {
@@ -97,7 +103,10 @@
       .y = .data$end_index,
       .f = sum_vector,
       ..vector = x
-    ))
+    )) |>
+    pick_season(pick = pick) |>
+    dplyr::select("start_index", "end_index", "gsdd") |>
+    dplyr::arrange(.data$start_index)
 }
 
 .gsdd <- function(
