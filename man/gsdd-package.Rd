@@ -5,7 +5,7 @@
 \alias{gsdd-package}
 \title{gsdd: Calculate Growing Season Degree Days from Water Temperature Data}
 \description{
-Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature data.
+Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and the Growing Seasons (GSS) from water temperature data. GSSD is a water temperature metric that is a useful predictor of age-0 trout size at the beginning of winter. It is the accumulated thermal units (in C) during the growing season based on the mean daily water temperature values. GDD is the GSSD to a particular date.
 }
 \seealso{
 Useful links:

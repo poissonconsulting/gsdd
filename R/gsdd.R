@@ -1,17 +1,18 @@
 #' Calculate Growing Season Degree Days (GSDD)
 #' 
 #' Growing Season Degree Days (GSDD) is a water temperature metric
-#' that is a useful predictor of Cutthroat trout size at the
+#' that is a useful predictor of age-0 trout size at the
 #' beginning of winter. 
 #' It is the accumulated thermal units (in C) 
 #' during the growing season based on the mean daily water temperature values.
 #' 
 #' The GSDD is calculated across the longest consecutive sequence of non-missing
-#' values which must be at least twice the window width in length otherwise a 
-#' missing value is returned.
-#' If the vector includes missing values it is recommended that they are
-#' replaced by estimates of the actual values.
-#'
+#' values.
+#' Truncation occurs when the start and/or end
+#' of the sequence of non-missing values is part way through a growing season.
+#' If the user chooses to ignore truncation then the returned value
+#' very likely to be less than the actual value.
+#' 
 #' The default values and implementation of the 
 #' growing season are based on
 #' Coleman and Fausch (2007) who stated that
@@ -23,13 +24,12 @@
 #' the last day of the first week that
 #' average stream temperature dropped below 4C.
 #'
-#' For the purposes of the calculation week is assumed to refer to a seven day
+#' For the purposes of the calculation week refers to a seven day
 #' rolling average as opposed to the calendar week.
-#' 
 #' If there are multiple growing 'seasons' within the same year then by
 #' default the returned value is the sum of the GSDD values for `"all"` seasons.
 #' 
-#' The user also has the option to pick the `"first"`/`"last"` or
+#' The user has the option to pick the `"first"`/`"last"` or
 #'  `"longest"`/`"shortest"` season or the season with 
 #'  the `"biggest"`/`"smallest"` GSDD.
 #'  If the user picks the `"longest"` season but there are multiple seasons
@@ -37,12 +37,12 @@
 #' season with the `"biggest"` GSDD is selected.
 #' Conversely in the case of multiple `"shortest"` seasons then the
 #' candidate with the `"smallest"` GSDD is selected.
-#' 
-#' Truncation occurs when the start and/or end
-#' of the time series is part way through a growing season.
-#' If the user chooses to ignore truncation then the returned value
-#' very likely to be less than the actual GSDD.
 #'
+#' @references Coleman, M.A., and Fausch, K.D. 2007. 
+#' Cold Summer Temperature Limits Recruitment of Age-0 Cutthroat Trout in 
+#' High-Elevation Colorado Streams. 
+#' Transactions of the American Fisheries Society 136(5): 1231–1244. 
+#' doi:10.1577/T05-244.1.
 #' @inheritParams params
 #' @return A tibble with two columns `year` and `gsdd`.
 #' @seealso [gsdd_vctr()], [gdd()] and [gss()]
