@@ -20,8 +20,6 @@ gss_vctr <- function(x,
   }
   data |>
     pick_season(pick = pick) |>
-    dplyr::select("start_index",
-                  end_index = "index_end",
-                  "gsdd") |>
+    dplyr::select("start_index", "end_index", "gsdd") |>
     dplyr::arrange(.data$start_index)
 }

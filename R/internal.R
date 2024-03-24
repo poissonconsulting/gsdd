@@ -63,38 +63,38 @@
     }
   }
   # pick which indices have values above and temp that begin runs
-  index_end <- index_begin_run(rollmean < end_temp)
+  end_index <- index_begin_run(rollmean < end_temp)
   # if season doesnt end ignore_truncation right
-  if (!length(index_end) || max(start_index) > max(index_end)) {
+  if (!length(end_index) || max(start_index) > max(end_index)) {
     if (ignore_truncation %in% c("none", "start")) {
       if (msgs) {
         msg("The growing season is truncated at the end of the sequence.")
       }
       return(NA_real_)
     }
-    index_end <- as.integer(c(index_end, length(rollmean)))
+    end_index <- as.integer(c(end_index, length(rollmean)))
   }
   
   tidyr::expand_grid(
     start_index = start_index,
-    index_end = index_end
+    end_index = end_index
   ) |>
-    dplyr::filter(.data$start_index <= .data$index_end) |>
+    dplyr::filter(.data$start_index <= .data$end_index) |>
     dplyr::group_by(.data$start_index) |>
-    dplyr::arrange(.data$index_end) |>
+    dplyr::arrange(.data$end_index) |>
     dplyr::slice(1) |>
     dplyr::ungroup() |>
-    dplyr::group_by(.data$index_end) |>
+    dplyr::group_by(.data$end_index) |>
     dplyr::arrange(.data$start_index) |>
     dplyr::slice(1) |>
     dplyr::ungroup() |>
     dplyr::mutate(
-      index_end = .data$index_end + (as.integer(window_width) - 1L),
-      ndays = .data$index_end - .data$start_index + 1L
+      end_index = .data$end_index + (as.integer(window_width) - 1L),
+      ndays = .data$end_index - .data$start_index + 1L
     ) |>
     dplyr::mutate(gsdd = purrr::map2_dbl(
       .x = .data$start_index,
-      .y = .data$index_end,
+      .y = .data$end_index,
       .f = sum_vector,
       ..vector = x
     ))
