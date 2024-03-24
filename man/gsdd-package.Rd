@@ -2,6 +2,7 @@
 % Please edit documentation in R/gsdd-package.R
 \docType{package}
 \name{gsdd-package}
+\alias{gsdd}
 \alias{gsdd-package}
 \title{gsdd: Calculate Growing Season Degree Days from Water Temperature Data}
 \description{

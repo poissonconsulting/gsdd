@@ -14,7 +14,7 @@
 #'  (the year is ignored).
 #' If `end_date` is less than `start_date` (ignoring the year) then the window is considered 
 #' to span two calendar years.
-#' @inheritParams gsdd
+#' @inheritParams gsdd_vctr
 #' @param ignore_truncation A flag specifying whether to ignore start truncation (end truncation is always ignored).
 #' @return A tibble with two columns `year` and `gdd`.
 #' `year`, which is an integer vector, indicates the year in which the window

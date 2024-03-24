@@ -132,7 +132,7 @@
     dplyr::arrange(.data$dayte)
   
   gsdd <- x |>
-    dplyr::summarise(gsdd = gsdd(
+    dplyr::summarise(gsdd = gsdd_vctr(
       .data$temperature,     
       ignore_truncation = ignore_truncation, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width), .groups = "keep") |>
     dplyr::ungroup()

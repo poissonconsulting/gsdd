@@ -33,7 +33,7 @@ or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 
 \item{msgs}{A flag specifying whether to provide messages.}
 
-\item{...}{Additional arguments passed to \code{\link[=gsdd]{gsdd()}}.}
+\item{...}{Additional arguments passed to \code{\link[=gsdd_vctr]{gsdd_vctr()}}.}
 }
 \value{
 A tibble with four columns \code{year}, \code{start_dayte}, \code{end_dayte} and \code{gsdd}.

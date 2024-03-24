@@ -70,9 +70,9 @@
 #' @export
 #'
 #' @examples
-#' gsdd(c(rep(1, 10), rep(10, 20), rep(1, 200)))
-#' gsdd(gsdd::simulated_data$synthetic)
-gsdd <- function(x,
+#' gsdd_vctr(c(rep(1, 10), rep(10, 20), rep(1, 200)))
+#' gsdd_vctr(gsdd::simulated_data$synthetic)
+gsdd_vctr <- function(x,
                     ignore_truncation = FALSE,
                     start_temp = 5,
                     end_temp = 4,
