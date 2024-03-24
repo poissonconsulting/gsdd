@@ -71,8 +71,7 @@ test_that("x must have a length less than 366", {
 })
 
 test_that("growth period with biggest GSDD even though shorter period.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  gss <- gss_vctr(x, window_width = 3, start_temp = 9, end_temp = 9)
+  gss <- gss_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9)
   expect_snapshot({
     gss
   })

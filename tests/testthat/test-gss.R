@@ -74,9 +74,8 @@ test_that("gss NA if missing", {
 })
 
 test_that("growth period with biggest GSDD even though shorter period.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  data <- data.frame(temperature = x)
-  data$date <- as.Date("2022-01-01") + 1:nrow(data)
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
   gss <- gss(data, window_width = 3, start_temp = 9, end_temp = 9, min_length = 100)
   expect_snapshot({
     gss
