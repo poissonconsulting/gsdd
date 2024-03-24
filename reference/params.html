@@ -73,7 +73,9 @@ or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 
 <dt>min_length</dt>
 <dd><p>A whole number of the minimum length to consider.
-Must be at least twice the window width but no more than 365.</p></dd>
+Must be at least twice the window width but no more than 365.
+If NULL then set to be the difference between <code>start_date</code> and <code>end_date</code>
+(ignoring the year).</p></dd>
 
 
 <dt>msgs</dt>
