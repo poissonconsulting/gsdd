@@ -78,7 +78,7 @@
         <int> <dbl>
       1  2019  77.0
 
-# gdd NA if stops before
+# gdd present if stops at
 
     Code
       gdd
@@ -86,7 +86,7 @@
       # A tibble: 1 x 2
          year   gdd
         <int> <dbl>
-      1  2019 3592.
+      1  2019 3605.
 
 # gdd NA if missing
 
@@ -96,5 +96,5 @@
       # A tibble: 1 x 2
          year   gdd
         <int> <dbl>
-      1  2019 3592.
+      1  2019    NA
 

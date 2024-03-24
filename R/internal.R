@@ -181,9 +181,14 @@
                     end_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$end_index - 1L),
       ) |>
       dplyr::select("year", "start_dayte", "end_dayte", "gsdd")
-
+    
     return(x)
   }
+  x |>
+    dplyr::filter(is.na(.data$temperature)) |>
+    dplyr::arrange(.data$dayte) |>
+    dplyr::slice_tail() |>
+    dplyr::select("year", "dayte")
 }
 
 pick_season <- function(x, pick) {

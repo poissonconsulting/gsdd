@@ -59,8 +59,23 @@ gdd <- function(
     msgs = msgs) |>
     dplyr::select("year", "end_dayte")
   
-  gdd <- gdd |> dplyr::right_join(gss, by = "year")
+  na <- .gss(
+    x, 
+    start_date = start_date, 
+    end_date = end_date, 
+    ignore_truncation = ignore_truncation, 
+    min_length = min_length,
+    start_temp = start_temp,
+    end_temp = end_temp,
+    window_width = window_width,
+    pick = "last",
+    msgs = msgs, 
+    gss = NULL)
   
-  gdd |>
+  gdd |> dplyr::left_join(gss, by = "year") |>
+    dplyr::left_join(na, by = "year") |>
+    dplyr::mutate(
+      cutoff = !is.na(.data$dayte) & .data$end_dayte < .data$dayte,
+      gdd = dplyr::if_else(.data$cutoff, NA_real_, .data$gdd)) |>
     dplyr::select("year", "gdd")
 }

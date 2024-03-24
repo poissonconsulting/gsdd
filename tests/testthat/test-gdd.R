@@ -63,18 +63,27 @@ test_that("gdd works shortened", {
 
 test_that("gdd works very shortened", {
   data <- temperature_data
-
   gdd <- gdd(data, end_date = as.Date("1972-04-01"), min_length = 14)
   expect_snapshot({
     gdd
   })
 })
 
-test_that("gdd NA if stops before", {
-  skip("gdd should be NA")
+test_that("gdd present if stops at", {
   data <- temperature_data
 
-  data <- data[data$date < as.Date("2019-09-30"),]
+  data <- data[data$date <= as.Date("2019-09-30"),]
+  gdd <- gdd(data, min_length = 14)
+  expect_snapshot({
+    gdd
+  })
+})
+
+test_that("gdd NA if stops before", {
+  skip()
+  data <- temperature_data
+  
+  data <- data[data$date <= as.Date("2019-09-29"),]
   expect_message(gdd <- gdd(data, min_length = 14))
   expect_snapshot({
     gdd
