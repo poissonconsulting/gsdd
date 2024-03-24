@@ -117,8 +117,8 @@
   chk_date(end_date)
   chk_null_or(min_length, vld = vld_whole_number)
   
-  end_dayte <- dttr2::dtt_dayte(end_date, start = start_date)
-  start_dayte <- dttr2::dtt_dayte(start_date, start = start_date)
+  end_dayte <- dttr2::dtt_dayte(end_date, start_date)
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
   
   x <- x |>
     dplyr::mutate(
@@ -137,9 +137,9 @@
     dplyr::arrange(.data$dayte)
   
   if(is.null(min_length)) {
-    min_length <- min(as.integer(end_dayte) - as.integer(start_dayte) + 1L, 365L)
+    min_length <- min(as.integer(end_dayte) - as.integer(start_dayte) + 1L, 364L)
   }
-  
+
   gsdd <- x |>
     dplyr::summarise(gsdd = gsdd_vctr(
       .data$temperature,     

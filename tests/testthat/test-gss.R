@@ -76,7 +76,34 @@ test_that("gss NA if missing", {
 test_that("growth period with biggest GSDD even though shorter period.", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2
-  gss <- gss(data, window_width = 3, start_temp = 9, end_temp = 9, min_length = 100)
+  gss <- gss(data, window_width = 3, start_temp = 9, end_temp = 9)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("growth period default t2", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("growth period default t2", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, start_date = as.Date("1972-01-02"))
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("growth period default t2", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, start_date = as.Date("1972-03-02"))
   expect_snapshot({
     gss
   })
