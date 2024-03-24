@@ -48,13 +48,13 @@ test_that("if end_temp is not reached, gsdd_vctr calculated to end of vector and
 test_that("truncated at 100.", {
   x <- temperature_data$temperature
   x[100] <- NA_real_
-  expect_message(expect_identical(gsdd_vctr(x), NA_real_), "The growing season is truncated at the start of the sequence.")
+  expect_message(expect_identical(gsdd_vctr(x, min_length = 184), NA_real_), "The growing season is truncated at the start of the sequence.")
 })
 
 test_that("truncated at 200.", {
   x <- temperature_data$temperature
   x[200] <- NA_real_
-  expect_message(expect_identical(gsdd_vctr(x), NA_real_), "The growing season is truncated at the end of the sequence.")
+  expect_message(expect_identical(gsdd_vctr(x, min_length = 184), NA_real_), "The growing season is truncated at the end of the sequence.")
 })
 
 test_that("if end_temp is reached at end of vector x, indicies do not fall off the edge", {
@@ -67,7 +67,7 @@ test_that("if start_temp is reached at start of vector x, indicies do not fall o
   x <- x[163:length(x)]
   gsdd_vctr <- gsdd_vctr(x, end_temp = 4, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE)
+  gsdd_vctr <- gsdd_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE, min_length = 184)
   expect_equal(gsdd_vctr, 2687.98160174586)
 })
 
@@ -172,31 +172,31 @@ test_that("Gets growth gives messages with truncation.", {
 
 test_that("Gets gsdd_vctr with single boiling day.", {
   x <- c(rep(0, 100), rep(100, 1), rep(0, 100))
-  expect_identical(gsdd_vctr(x), 100)
+  expect_identical(gsdd_vctr(x, min_length = 184), 100)
 })
 
 test_that("Gets gsdd_vctr with single hot day.", {
   x <- c(rep(0, 100), rep(36, 1), rep(0, 100))
-  expect_identical(gsdd_vctr(x), 36)
+  expect_identical(gsdd_vctr(x, min_length = 184), 36)
 })
 
 test_that("Gets 0 gsdd_vctr with single warm day.", {
   x <- c(rep(0, 100), rep(35, 1), rep(0, 100))
-  expect_identical(gsdd_vctr(x), 0)
+  expect_identical(gsdd_vctr(x, min_length = 184), 0)
 })
 
 test_that("gsdd_vctr with two weeks", {
   x <- c(rep(0, 100), rep(5.1, 7), rep(3.8, 7), rep(0, 100))
   expect_gte(mean(c(rep(5.1, 2), rep(3.8, 5))), 4)
   expect_lt(mean(c(rep(5.1, 1), rep(3.8, 6))), 4)
-  expect_equal(gsdd_vctr(x), 5.1 * 7 + 3.8 * 6)
+  expect_equal(gsdd_vctr(x, min_length = 184), 5.1 * 7 + 3.8 * 6)
 })
 
 test_that("Gets with two weeks and 3 day window width - great test", {
   x <- c(rep(0, 100), rep(5.1, 7), rep(3.8, 7), rep(0, 100))
   expect_gte(mean(c(rep(5.1, 2), rep(3.8, 1))), 4)
   expect_lt(mean(c(rep(5.1, 0), rep(3.8, 3))), 4)
-  expect_equal(gsdd_vctr(x, window_width = 3), 5.1 * 7 + 3.8 * 3)
+  expect_equal(gsdd_vctr(x, window_width = 3, min_length = 184), 5.1 * 7 + 3.8 * 3)
 })
 
 test_that("Gets with two weeks and 3 day window and smaller", {
@@ -204,27 +204,27 @@ test_that("Gets with two weeks and 3 day window and smaller", {
   expect_lt(mean(c(rep(5.1, 6), 0)), 5)
   expect_gte(mean(c(rep(5.1, 2), rep(3, 1))), 4)
   expect_lt(mean(c(rep(5.1, 1), rep(3, 2))), 4)
-  expect_equal(gsdd_vctr(x, window_width = 3), 5.1 * 7 + 3 * 2)
+  expect_equal(gsdd_vctr(x, window_width = 3, min_length = 184), 5.1 * 7 + 3 * 2)
 })
 
 test_that("Gets with two weeks and 3 day window and smaller", {
   x <- c(rep(0, 100), rep(5.1, 7), rep(0, 100))
-  expect_equal(gsdd_vctr(x), 5.1 * 7)
+  expect_equal(gsdd_vctr(x, min_length = 184), 5.1 * 7)
 })
 
 test_that("Gets one week with end day after of 0", {
   x <- c(rep(0, 180), rep(5.1, 7), rep(1, 0))
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE), 5.1 * 7)
+  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), 5.1 * 7)
 })
 
 test_that("Gets one week with end day after of 1", {
   x <- c(rep(0, 180), rep(5.1, 7), rep(1, 1))
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE), 5.1 * 7 + 1)
+  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), 5.1 * 7 + 1)
 })
 
 test_that("Gets with two weeks and 3 day window and smaller", {
   x <- c(rep(0, 180), rep(5.1, 7))
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE), 5.1 * 7)
+  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), 5.1 * 7)
 })
 
 test_that("Gets triangle", {
@@ -235,7 +235,7 @@ test_that("Gets triangle", {
     tibble::tibble(index = 1:length(x), x = x, ma = ma)
   })
   
-  expect_equal(gsdd_vctr(x), sum(x[9:26]))
+  expect_equal(gsdd_vctr(x, min_length = 184), sum(x[9:26]))
 })
 
 test_that("Gets asymmetric triangle", {
@@ -245,7 +245,7 @@ test_that("Gets asymmetric triangle", {
   testthat::expect_snapshot({
     tibble::tibble(index = 1:length(x), x = x, ma = ma)
   })
-  expect_equal(gsdd_vctr(x), sum(x[9:26]))
+  expect_equal(gsdd_vctr(x, min_length = 184), sum(x[9:26]))
 })
 
 test_that("2 asymetric triangles, first one longer but lower, second should be chosen.", {
@@ -263,7 +263,7 @@ test_that("2 asymetric triangles, first one longer but lower, second should be c
     tibble::tibble(index = 1:length(x), x = x, ma = ma)
   })
   
-  expect_equal(gsdd_vctr(x, pick = "biggest"), sum(x[41:61]))
+  expect_equal(gsdd_vctr(x, pick = "biggest", min_length = 184), sum(x[41:61]))
 })
 
 test_that("2 asymetric triangles, first one longer but lower, second should be chosen unless longest.", {
@@ -281,7 +281,7 @@ test_that("2 asymetric triangles, first one longer but lower, second should be c
     tibble::tibble(index = 1:length(x), x = x, ma = ma)
   })
   
-  expect_equal(gsdd_vctr(x, pick = "longest"), 193)
+  expect_equal(gsdd_vctr(x, pick = "longest", min_length = 184), 193)
 })
 
 test_that("2 asymetric triangles, second one longer but lower, first one should be chosen.", {
@@ -298,7 +298,7 @@ test_that("2 asymetric triangles, second one longer but lower, first one should 
     tibble::tibble(index = 1:length(x), x = x, ma = ma)
   })
   
-  expect_equal(gsdd_vctr(x, pick = "biggest"), sum(x[3:24]))
+  expect_equal(gsdd_vctr(x, pick = "biggest", min_length = 184), sum(x[3:24]))
 })
 
 test_that("Right truncated triangle", {
@@ -314,7 +314,7 @@ test_that("Right truncated triangle", {
   })
   
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE), sum(x[15:length(x)]))
+  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), sum(x[15:length(x)]))
 })
 
 test_that("Left truncated triangle", {
@@ -330,7 +330,7 @@ test_that("Left truncated triangle", {
   })
   
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
-  expect_equal(gsdd_vctr(x, ignore_truncation = "start", msgs = FALSE), sum(x[0:25]))
+  expect_equal(gsdd_vctr(x, ignore_truncation = "start", msgs = FALSE, min_length = 184), sum(x[0:25]))
 })
 
 test_that("NA if less than 14 values after trimming trailing NAs", {

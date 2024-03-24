@@ -7,7 +7,7 @@
 gsdd_vctr(
   x,
   ignore_truncation = FALSE,
-  min_length = 184,
+  min_length = 274,
   start_temp = 5,
   end_temp = 4,
   window_width = 7,
