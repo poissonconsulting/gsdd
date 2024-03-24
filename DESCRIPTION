@@ -27,5 +27,13 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 4.1)
 LazyData: true
-VignetteBuilder: knitr
-
+Imports: 
+    chk,
+    dplyr,
+    dttr2,
+    purrr,
+    rlang,
+    stringr,
+    tibble,
+    tidyr,
+    zoo

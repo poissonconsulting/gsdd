@@ -1,19 +1,17 @@
-
 # gsdd
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/poissonconsulting/gsdd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/gsdd/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/poissonconsulting/gsdd/branch/main/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/gsdd?branch=main)
 <!-- badges: end -->
 
-The goal of gsdd is to ...
+`gsdd` is an R package to calculate Growing Season Degree Days (GSDD), 
+Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature
+data based on Coleman and Fausch (2007).
 
 ## Installation
 
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(gsdd)
-## basic example code
+```r
+install.packages("remotes")
+remotes::install_github("poissonconsulting/gsdd")
 ```
