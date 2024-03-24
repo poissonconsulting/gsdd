@@ -12,4 +12,6 @@ temperature_data <- tibble::tibble(
   ),
   temperature = temperature_data
 )
+temperature_data$temperature2 <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 125))
+
 usethis::use_data(temperature_data, overwrite = TRUE)

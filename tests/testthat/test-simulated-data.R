@@ -1,13 +1,11 @@
-test_that("column names of temperature_data are correct", {
-  expect_identical(c("date", "temperature"), colnames(temperature_data))
-})
-
-test_that("confirm correct data classes in temperature_data", {
-  expect_s3_class(temperature_data, "data.frame")
-  expect_s3_class(temperature_data$date, "Date")
-  expect_type(temperature_data$temperature, "double")
-})
-
-test_that("confirm there are no NAs in temperature_data", {
-  expect_false(any(is.na(temperature_data)))
+test_that("check temperature_data", {
+  chk::check_data(
+    gsdd::temperature_data, 
+    values = list(date = as.Date(c("2019-01-01", "2019-12-31")),
+                  temperature = c(0, 26),
+                  temperature2 = c(0, 20)),
+    exclusive = TRUE,
+    order = TRUE,
+    nrow = 365,
+    key = "date")
 })
