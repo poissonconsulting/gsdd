@@ -54,7 +54,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gsdd_vctr</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  ignore_truncation <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  min_length <span class="op">=</span> <span class="fl">184</span>,</span>
+<span>  min_length <span class="op">=</span> <span class="fl">274</span>,</span>
 <span>  start_temp <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  end_temp <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  window_width <span class="op">=</span> <span class="fl">7</span>,</span>
@@ -127,7 +127,8 @@ the GSDD value for the "longest" 'season'.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gsdd_vctr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 208</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `The length of `x` must be at least 274.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
 <span class="r-in"><span><span class="fu">gsdd_vctr</span><span class="op">(</span><span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="temperature_data.html">temperature_data</a></span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3898.806</span>
 </code></pre></div>
