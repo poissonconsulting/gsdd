@@ -65,7 +65,7 @@
 #' "biggest" or "smallest" GSDD. By default the returned value is the
 #' the GSDD value for the "longest" 'season'.
 #' @param msgs A flag specifying whether to provide messages.
-#' @seealso [`gsdd_data()`]
+#' @seealso [`gsdd()`]
 #' @return A non-negative real number of the GSDD.
 #' @export
 #'

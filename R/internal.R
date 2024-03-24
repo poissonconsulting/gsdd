@@ -98,7 +98,7 @@
     ))
 }
 
-.gsdd_data <- function(
+.gsdd <- function(
     x, 
     start_date, 
     end_date, 

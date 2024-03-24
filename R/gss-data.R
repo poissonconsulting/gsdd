@@ -2,9 +2,9 @@
 #' 
 #'
 #' @inheritParams gsdd_vctr
-#' @inheritParams gsdd_data
+#' @inheritParams gsdd
 #' @return A tibble with four columns `year`, `start_dayte`, `end_dayte` and `gsdd`.
-#' @seealso [gsdd_data()]
+#' @seealso [gsdd()]
 #' @export
 #'
 #' @examples
@@ -19,7 +19,7 @@ gss_data <- function(
     msgs = TRUE, 
     ...) {
   
-  .gsdd_data(x, start_date = start_date, end_date = end_date, 
+  .gsdd(x, start_date = start_date, end_date = end_date, 
              ignore_truncation = ignore_truncation,
              msgs = msgs,
              ..., gss = TRUE)

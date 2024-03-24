@@ -1,4 +1,4 @@
-# gsdd_data works
+# gsdd works
 
     Code
       gsdd
@@ -8,7 +8,7 @@
         <int> <dbl>
       1  2019 3899.
 
-# gsdd_data NA if middle truncation
+# gsdd NA if middle truncation
 
     Code
       gsdd
@@ -18,7 +18,7 @@
         <int> <dbl>
       1  2019    NA
 
-# gsdd_data NA if earlier truncation
+# gsdd NA if earlier truncation
 
     Code
       gsdd
@@ -28,7 +28,7 @@
         <int> <dbl>
       1  2019    NA
 
-# gsdd_data NA if truncated
+# gsdd NA if truncated
 
     Code
       gsdd
@@ -38,7 +38,7 @@
         <int> <dbl>
       1  2019    NA
 
-# gsdd_data ignore truncation
+# gsdd ignore truncation
 
     Code
       gsdd
@@ -48,7 +48,7 @@
         <int> <dbl>
       1  2019  545.
 
-# gsdd_data ignore truncation tiny window
+# gsdd ignore truncation tiny window
 
     Code
       gsdd
@@ -58,7 +58,7 @@
         <int> <dbl>
       1  2019  93.7
 
-# gsdd_data multiple years
+# gsdd multiple years
 
     Code
       gsdd
@@ -69,7 +69,7 @@
       1  1972  99.7
       2  2019  93.7
 
-# gsdd_data spans a year
+# gsdd spans a year
 
     Code
       gsdd

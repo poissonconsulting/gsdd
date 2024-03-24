@@ -25,8 +25,8 @@
 #' @examples
 #' data <- gsdd::simulated_data
 #' data$temperature <- data$synthetic
-#' gsdd_data(data)
-gsdd_data <- function(
+#' gsdd(data)
+gsdd <- function(
     x, 
     start_date = as.Date("1972-01-01"), 
     end_date = as.Date("1972-12-31"), 
@@ -34,7 +34,7 @@ gsdd_data <- function(
     msgs = TRUE, 
     ...) {
   
-  .gsdd_data(x, start_date = start_date, end_date = end_date, 
+  .gsdd(x, start_date = start_date, end_date = end_date, 
              ignore_truncation = ignore_truncation,
              msgs = msgs,
              ...)

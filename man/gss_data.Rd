@@ -47,5 +47,5 @@ data$temperature <- data$synthetic
 gss_data(data)
 }
 \seealso{
-\code{\link[=gsdd_data]{gsdd_data()}}
+\code{\link[=gsdd]{gsdd()}}
 }

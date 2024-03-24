@@ -20,7 +20,7 @@
 #' `year`, which is an integer vector, indicates the year in which the window
 #' began and `gdd` which is a non-negative real number provides the GSDD
 #' or a missing value if it cannot be calculated.
-#' @seealso [gsdd_data()]
+#' @seealso [gsdd()]
 #' @export
 #'
 #' @examples
@@ -44,7 +44,7 @@ gdd <- function(
     ignore_truncation <- "end"
   }
   
-  .gsdd_data(
+  .gsdd(
     x, 
     start_date, 
     end_date, 
