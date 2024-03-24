@@ -1,5 +1,5 @@
 test_that("output is a numeric value", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   gss <- gss_vctr(x)
   expect_snapshot({
     gss
@@ -7,17 +7,17 @@ test_that("output is a numeric value", {
 })
 
 test_that("vector must be longer than window_width", {
-  x <- simulated_data$temperature[180]
+  x <- temperature_data$temperature[180]
   expect_chk_error(gss_vctr(x, window_width = 181))
 })
 
 test_that("window_width must be odd", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   expect_chk_error(gss_vctr(x, window_width = 6), "`window_width` must be odd.")
 })
 
 test_that("gss returns no rows when missing summer", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x[11:360] <- NA_real_
   gss <- gss_vctr(x, msgs = FALSE)
   expect_snapshot({
@@ -26,7 +26,7 @@ test_that("gss returns no rows when missing summer", {
 })
 
 test_that("gss trims missing values", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x[c(1,length(x))] <- NA_real_
   gss <- gss_vctr(x, msgs = FALSE)
   expect_snapshot({
@@ -35,12 +35,12 @@ test_that("gss trims missing values", {
 })
 
 test_that("start temp must be greater than or equal to end temp", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   expect_chk_error(gss_vctr(x, end_temp = 40, start_temp = 30))
 })
 
 test_that("if max temp in vector is lower than start_temp the function return no row", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   gss <- gss_vctr(x, start_temp = 50)
   expect_snapshot({
     gss
@@ -48,7 +48,7 @@ test_that("if max temp in vector is lower than start_temp the function return no
 })
 
 test_that("if end_temp is reached at end of vector x, indicies do not fall off the edge", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   gss <- gss_vctr(x, end_temp = -4, msgs = FALSE, ignore_truncation = TRUE)
   expect_snapshot({
     gss
@@ -56,7 +56,7 @@ test_that("if end_temp is reached at end of vector x, indicies do not fall off t
 })
 
 test_that("if start_temp is reached at start of vector x, indicies do not fall off the edge", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x <- x[163:length(x)]
   gss1 <- gss_vctr(x, end_temp = 4, msgs = FALSE)
   gss2 <- gss_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE)

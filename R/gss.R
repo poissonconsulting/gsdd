@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' data <- gsdd::simulated_data
+#' data <- gsdd::temperature_data
 #' gss(data)
 gss <- function(
     x, 

@@ -1,5 +1,5 @@
 test_that("gsdd works", {
-  data <- simulated_data
+  data <- temperature_data
 
   gsdd <- gsdd(data)
   expect_snapshot({
@@ -8,7 +8,7 @@ test_that("gsdd works", {
 })
 
 test_that("gsdd NA if middle truncation", {
-  data <- simulated_data
+  data <- temperature_data
 
   data$temperature[200] <- NA_real_
   expect_message(gsdd <- gsdd(data), "The growing season is truncated at the end of the sequence.")
@@ -18,7 +18,7 @@ test_that("gsdd NA if middle truncation", {
 })
 
 test_that("gsdd NA if earlier truncation", {
-  data <- simulated_data
+  data <- temperature_data
 
   data$temperature[100] <- NA_real_
   expect_message(gsdd <- gsdd(data), "The growing season is truncated at the start of the sequence.")
@@ -28,7 +28,7 @@ test_that("gsdd NA if earlier truncation", {
 })
 
 test_that("gsdd NA if truncated", {
-  data <- simulated_data
+  data <- temperature_data
 
   gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
                        msgs = FALSE)
@@ -38,7 +38,7 @@ test_that("gsdd NA if truncated", {
 })
 
 test_that("gsdd ignore truncation", {
-  data <- simulated_data
+  data <- temperature_data
 
   gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
                        msgs = FALSE, ignore_truncation = TRUE)
@@ -48,7 +48,7 @@ test_that("gsdd ignore truncation", {
 })
 
 test_that("gsdd ignore truncation tiny window", {
-  data <- simulated_data
+  data <- temperature_data
 
   gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-06"),
                        msgs = FALSE, ignore_truncation = TRUE, window_width = 3)
@@ -58,7 +58,7 @@ test_that("gsdd ignore truncation tiny window", {
 })
 
 test_that("gsdd multiple years", {
-  data <- simulated_data
+  data <- temperature_data
 
   data2 <- data
   data2$date <- dttr2::dtt_set_year(data2$date, 1972L)
@@ -73,7 +73,7 @@ test_that("gsdd multiple years", {
 })
 
 test_that("gsdd errors duplicates", {
-  data <- simulated_data
+  data <- temperature_data
 
   data <- rbind(data, data)
   
@@ -81,7 +81,7 @@ test_that("gsdd errors duplicates", {
 })
 
 test_that("gsdd spans a year", {
-  data <- simulated_data
+  data <- temperature_data
 
   data$date <- dttr2::dtt_add_days(data$date, 200)
   

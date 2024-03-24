@@ -1,27 +1,27 @@
 test_that("output is a numeric value", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   output <- gsdd_vctr(x)
   expect_equal(output, 3898.80557580767)
 })
 
 test_that("vector must be longer than window_width", {
-  x <- simulated_data$temperature[180]
+  x <- temperature_data$temperature[180]
   expect_chk_error(gsdd_vctr(x, window_width = 181))
 })
 
 test_that("window_width must be odd", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   expect_chk_error(gsdd_vctr(x, window_width = 6), "`window_width` must be odd.")
 })
 
 test_that("gsdd_vctr returns NA when missing summer", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x[11:360] <- NA_real_
   expect_identical(gsdd_vctr(x, msgs = FALSE), NA_real_)
 })
 
 test_that("vector must not contain NA values", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   set.seed(100)
   random_indices <- sample(seq_along(x), 40)
   x[random_indices] <- NA
@@ -29,47 +29,47 @@ test_that("vector must not contain NA values", {
 })
 
 test_that("gsdd_vctr trims missing values", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x[c(1,length(x))] <- NA_real_
   expect_equal(gsdd_vctr(x), 3898.80557580767)
 })
 
 test_that("start temp must be greater than or equal to end temp", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   expect_chk_error(gsdd_vctr(x, end_temp = 40, start_temp = 30))
 })
 
 test_that("if max temp in vector is lower than start_temp the function return 0", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   output <- gsdd_vctr(x, start_temp = 50)
   expect_identical(output, 0)
 })
 
 test_that("if end_temp is not reached, gsdd_vctr calculated to end of vector and message is provided.", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   expect_message(expect_identical(gsdd_vctr(x, end_temp = -40), NA_real_), "The growing season is truncated at the end of the sequence.")
 })
 
 test_that("truncated at 100.", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x[100] <- NA_real_
   expect_message(expect_identical(gsdd_vctr(x), NA_real_), "The growing season is truncated at the start of the sequence.")
 })
 
 test_that("truncated at 200.", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x[200] <- NA_real_
   expect_message(expect_identical(gsdd_vctr(x), NA_real_), "The growing season is truncated at the end of the sequence.")
 })
 
 test_that("if end_temp is reached at end of vector x, indicies do not fall off the edge", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   gsdd_vctr <- gsdd_vctr(x, end_temp = -4, msgs = FALSE, ignore_truncation = TRUE)
   expect_equal(gsdd_vctr, 3921.63308)
 })
 
 test_that("if start_temp is reached at start of vector x, indicies do not fall off the edge", {
-  x <- simulated_data$temperature
+  x <- temperature_data$temperature
   x <- x[163:length(x)]
   gsdd_vctr <- gsdd_vctr(x, end_temp = 4, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)

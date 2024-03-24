@@ -61,7 +61,7 @@ with \code{date} and \code{temperature} columns.
 mean daily water temperature in degrees centigrade.
 }
 \examples{
-data <- gsdd::simulated_data
+data <- gsdd::temperature_data
 gdd(data)
 }
 \seealso{

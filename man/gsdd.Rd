@@ -61,7 +61,7 @@ or a missing value if it cannot be calculated.
 The GSDD is calculated for each study year.
 }
 \examples{
-data <- gsdd::simulated_data
+data <- gsdd::temperature_data
 gsdd(data)
 }
 \seealso{

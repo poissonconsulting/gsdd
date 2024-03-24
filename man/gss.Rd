@@ -58,7 +58,7 @@ A tibble with four columns \code{year}, \code{start_dayte}, \code{end_dayte} and
 Calculate Growing Seasons
 }
 \examples{
-data <- gsdd::simulated_data
+data <- gsdd::temperature_data
 gss(data)
 }
 \seealso{

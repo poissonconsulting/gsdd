@@ -94,7 +94,7 @@ will be less than the actual GSDD.
 }
 \examples{
 gsdd_vctr(c(rep(1, 10), rep(10, 20), rep(1, 200)))
-gsdd_vctr(gsdd::simulated_data$temperature)
+gsdd_vctr(gsdd::temperature_data$temperature)
 }
 \seealso{
 \code{\link[=gsdd]{gsdd()}}
