@@ -59,7 +59,7 @@ test_that("if start_temp is reached at start of vector x, indicies do not fall o
   x <- temperature_data$temperature
   x <- x[163:length(x)]
   gss1 <- gss_vctr(x, end_temp = 4, msgs = FALSE)
-  gss2 <- gss_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE)
+  gss2 <- gss_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE, min_length = 184)
   expect_snapshot({
     gss1
     gss2
@@ -92,7 +92,7 @@ test_that("growth period with higher GSDD even though shorter period.", {
 
 test_that("Gets gss with single boiling day.", {
   x <- c(rep(0, 100), rep(100, 1), rep(0, 100))
-  gss <- gss_vctr(x)
+  gss <- gss_vctr(x, min_length = 184)
   expect_snapshot({
     gss
   })
@@ -100,7 +100,7 @@ test_that("Gets gss with single boiling day.", {
 
 test_that("Gets gss with single hot day.", {
   x <- c(rep(0, 100), rep(36, 1), rep(0, 100))
-  gss <- gss_vctr(x)
+  gss <- gss_vctr(x, min_length = 184)
   expect_snapshot({
     gss
   })
@@ -108,7 +108,7 @@ test_that("Gets gss with single hot day.", {
 
 test_that("Gets 0 gss with single warm day.", {
   x <- c(rep(0, 100), rep(35, 1), rep(0, 100))
-  gss <- gss_vctr(x)
+  gss <- gss_vctr(x, min_length = 184)
   expect_snapshot({
     gss
   })
