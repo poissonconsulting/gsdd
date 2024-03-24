@@ -128,6 +128,14 @@ test_that("growth period default t2", {
 test_that("growth period default t2", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2
+  gss <- gss(data, start_date = as.Date("1972-02-28"))
+  expect_snapshot({
+    gss
+  })
+})
+test_that("growth period default t2", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
   gss <- gss(data, start_date = as.Date("1972-03-02"))
   expect_snapshot({
     gss
