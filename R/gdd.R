@@ -28,7 +28,7 @@ gdd <- function(
     ignore_truncation <- "end"
   }
   
-  gdd <- gsdd(
+  gdd <- .gsdd(
     x, 
     start_date = start_date, 
     end_date = end_date, 
@@ -44,8 +44,8 @@ gdd <- function(
   if(!nrow(gdd) || all(is.na(gdd$gdd))) {
     return(gdd)
   }
-
-  gss <- gss(
+  
+  gss <- .gsdd(
     x, 
     start_date = start_date, 
     end_date = end_date, 
@@ -55,7 +55,8 @@ gdd <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = "last",
-    msgs = msgs) |>
+    msgs = msgs,
+    gss = TRUE) |>
     dplyr::select("year", "end_dayte")
   
   gdd <- gdd |> dplyr::right_join(gss, by = "year")
