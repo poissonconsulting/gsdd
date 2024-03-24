@@ -104,9 +104,10 @@
     end_date, 
     ignore_truncation,
     msgs,
-    start_temp = 5,
-    end_temp = 4,
-    window_width = 7,
+    start_temp,
+    end_temp,
+    window_width,
+    pick,
     gss = FALSE) {
   check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
   chk_date(start_date)
@@ -134,7 +135,7 @@
   gsdd <- x |>
     dplyr::summarise(gsdd = gsdd_vctr(
       .data$temperature,     
-      ignore_truncation = ignore_truncation, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width), .groups = "keep") |>
+      ignore_truncation = ignore_truncation, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width, pick = pick), .groups = "keep") |>
     dplyr::ungroup()
   
   if(!gss) {

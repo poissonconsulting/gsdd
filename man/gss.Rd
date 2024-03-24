@@ -2,15 +2,18 @@
 % Please edit documentation in R/gss.R
 \name{gss}
 \alias{gss}
-\title{Calculate Growing Seasons from a Data Frame}
+\title{Calculate Growing Seasons}
 \usage{
 gss(
   x,
   start_date = as.Date("1972-01-01"),
   end_date = as.Date("1972-12-31"),
   ignore_truncation = FALSE,
-  msgs = TRUE,
-  ...
+  start_temp = 5,
+  end_temp = 4,
+  window_width = 7,
+  pick = "longest",
+  msgs = TRUE
 )
 }
 \arguments{
@@ -31,15 +34,28 @@ of the mean daily water temperature vector
 or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 (equivalent to TRUE) specifying which type of truncation to ignore.}
 
-\item{msgs}{A flag specifying whether to provide messages.}
+\item{start_temp}{A positive real number of the average water temperature
+at the start of the growing season(s) in C.}
 
-\item{...}{Additional arguments passed to \code{\link[=gsdd_vctr]{gsdd_vctr()}}.}
+\item{end_temp}{A positive real number of the average water temperature
+at the end of the growing season(s) in C. It must be greater than or equal to
+the start temperature.}
+
+\item{window_width}{A positive whole number of the
+width of the rolling mean window in days. By default 7.}
+
+\item{pick}{A string specifying whether to pick the
+"longest", "shortest", "first" or "last" 'season' or the season with the
+"biggest" or "smallest" GSDD. By default the returned value is the
+the GSDD value for the "longest" 'season'.}
+
+\item{msgs}{A flag specifying whether to provide messages.}
 }
 \value{
 A tibble with four columns \code{year}, \code{start_dayte}, \code{end_dayte} and \code{gsdd}.
 }
 \description{
-Calculate Growing Seasons from a Data Frame
+Calculate Growing Seasons
 }
 \examples{
 data <- gsdd::simulated_data

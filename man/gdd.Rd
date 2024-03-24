@@ -2,7 +2,7 @@
 % Please edit documentation in R/gdd.R
 \name{gdd}
 \alias{gdd}
-\title{Calculate Growing Degree Days (GDD) from a Data Frame}
+\title{Calculate Growing Degree Days (GDD)}
 \usage{
 gdd(
   x,

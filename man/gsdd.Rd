@@ -2,15 +2,18 @@
 % Please edit documentation in R/gsdd.R
 \name{gsdd}
 \alias{gsdd}
-\title{Calculate Growing Season Degree Days (GSDD) from a Data Frame}
+\title{Calculate Growing Season Degree Days (GSDD)}
 \usage{
 gsdd(
   x,
   start_date = as.Date("1972-01-01"),
   end_date = as.Date("1972-12-31"),
   ignore_truncation = FALSE,
-  msgs = TRUE,
-  ...
+  start_temp = 5,
+  end_temp = 4,
+  window_width = 7,
+  pick = "longest",
+  msgs = TRUE
 )
 }
 \arguments{
@@ -31,9 +34,22 @@ of the mean daily water temperature vector
 or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 (equivalent to TRUE) specifying which type of truncation to ignore.}
 
-\item{msgs}{A flag specifying whether to provide messages.}
+\item{start_temp}{A positive real number of the average water temperature
+at the start of the growing season(s) in C.}
 
-\item{...}{Additional arguments passed to \code{\link[=gsdd_vctr]{gsdd_vctr()}}.}
+\item{end_temp}{A positive real number of the average water temperature
+at the end of the growing season(s) in C. It must be greater than or equal to
+the start temperature.}
+
+\item{window_width}{A positive whole number of the
+width of the rolling mean window in days. By default 7.}
+
+\item{pick}{A string specifying whether to pick the
+"longest", "shortest", "first" or "last" 'season' or the season with the
+"biggest" or "smallest" GSDD. By default the returned value is the
+the GSDD value for the "longest" 'season'.}
+
+\item{msgs}{A flag specifying whether to provide messages.}
 }
 \value{
 A tibble with two columns \code{year} and \code{gsdd}.
@@ -42,12 +58,7 @@ began and \code{gsdd} which is a non-negative real number provides the GSDD
 or a missing value if it cannot be calculated.
 }
 \description{
-The GSDD is calculated for each study year from a data frame
-with \code{date} and \code{temperature} columns.
-\code{date}, which must be of class Date provides the dates and
-\code{temperature} which must be a numeric vector provides the
-mean daily water temperature in degrees centigrade. For additional information on
-GSDD and the various arguments that can be passed via \code{...} see \code{\link[=gsdd]{gsdd()}}.
+The GSDD is calculated for each study year.
 }
 \examples{
 data <- gsdd::simulated_data
@@ -55,5 +66,5 @@ data$temperature <- data$synthetic
 gsdd(data)
 }
 \seealso{
-\code{\link[=gsdd]{gsdd()}} and \code{\link[=gdd]{gdd()}}
+\code{\link[=gsdd_vctr]{gsdd_vctr()}}, \code{\link[=gdd]{gdd()}} and \code{\link[=gss]{gss()}}
 }

@@ -1,4 +1,4 @@
-#' Calculate Growing Degree Days (GDD) from a Data Frame
+#' Calculate Growing Degree Days (GDD)
 #' 
 #' The GDD which is a the growing degree days to the end date 
 #' is calculated for each study year from a data frame. 
@@ -52,6 +52,7 @@ gdd <- function(
     msgs = msgs,
     start_temp = start_temp,
     end_temp = end_temp,
-    window_width = window_width) |>
+    window_width = window_width,
+    pick = pick) |>
     dplyr::rename(gdd = "gsdd")
 }

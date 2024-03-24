@@ -1,19 +1,13 @@
-#' Calculate Growing Season Degree Days (GSDD) from a Data Frame
+#' Calculate Growing Season Degree Days (GSDD)
 #' 
-#' The GSDD is calculated for each study year from a data frame 
-#' with `date` and `temperature` columns. 
-#' `date`, which must be of class Date provides the dates and 
-#' `temperature` which must be a numeric vector provides the 
-#' mean daily water temperature in degrees centigrade. For additional information on 
-#' GSDD and the various arguments that can be passed via `...` see [`gsdd()`].
+#' The GSDD is calculated for each study year.
 #'
 #' @inheritParams params
-#' @param ... Additional arguments passed to [`gsdd_vctr()`].
 #' @return A tibble with two columns `year` and `gsdd`.
 #' `year`, which is an integer vector, indicates the year in which the window
 #' began and `gsdd` which is a non-negative real number provides the GSDD
 #' or a missing value if it cannot be calculated.
-#' @seealso [gsdd()] and [gdd()]
+#' @seealso [gsdd_vctr()], [gdd()] and [gss()]
 #' @export
 #'
 #' @examples
@@ -25,11 +19,17 @@ gsdd <- function(
     start_date = as.Date("1972-01-01"), 
     end_date = as.Date("1972-12-31"), 
     ignore_truncation = FALSE,
-    msgs = TRUE, 
-    ...) {
+    start_temp = 5,
+    end_temp = 4,
+    window_width = 7,
+    pick = "longest",
+    msgs = TRUE) {
   
   .gsdd(x, start_date = start_date, end_date = end_date, 
-             ignore_truncation = ignore_truncation,
-             msgs = msgs,
-             ...)
+        ignore_truncation = ignore_truncation,
+        start_temp = start_temp,
+        end_temp = end_temp,
+        window_width = window_width,
+        pick = pick,
+        msgs = msgs)
 }
