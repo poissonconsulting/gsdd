@@ -4,6 +4,7 @@ gss_vctr <- function(x,
                      start_temp = 5,
                      end_temp = 4,
                      window_width = 7,
+                     pick = "all",
                      msgs = TRUE) {
   data <- .gss(
     x, 
@@ -18,6 +19,7 @@ gss_vctr <- function(x,
     return(tibble::tibble(start_index = integer(0), end_index = integer(0), gsdd = numeric(0)))
   }
   data |>
+    pick_season(pick = pick) |>
     dplyr::select(start_index = "index_start",
                   end_index = "index_end",
                   "gsdd") |>

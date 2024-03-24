@@ -113,3 +113,52 @@ test_that("Gets 0 gss with single warm day.", {
     gss
   })
 })
+
+test_that("pick all", {
+  gss <- gss_vctr(temperature_data$temperature2)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("pick smallest", {
+  gss <- gss_vctr(temperature_data$temperature2, pick = "smallest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("pick biggest", {
+  gss <- gss_vctr(temperature_data$temperature2, pick = "biggest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("pick longest", {
+  gss <- gss_vctr(temperature_data$temperature2, pick = "longest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("pick shortest", {
+  gss <- gss_vctr(temperature_data$temperature2, pick = "shortest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("pick first", {
+  gss <- gss_vctr(temperature_data$temperature2, pick = "first")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("pick last", {
+  gss <- gss_vctr(temperature_data$temperature2, pick = "first")
+  expect_snapshot({
+    gss
+  })
+})

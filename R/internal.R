@@ -158,6 +158,7 @@
       start_temp = start_temp,
       end_temp = end_temp, 
       window_width = window_width, 
+      pick = pick,
       msgs = FALSE), .keep = TRUE)
   
   if(!nrow(x)) {

@@ -141,3 +141,57 @@ test_that("growth period default t2", {
     gss
   })
 })
+
+test_that("gss biggest", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, pick = "biggest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss smallest", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, pick = "smallest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss longest", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, pick = "longest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss shortest", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, pick = "shortest")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss first", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, pick = "first")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss last", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  gss <- gss(data, pick = "last")
+  expect_snapshot({
+    gss
+  })
+})

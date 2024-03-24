@@ -178,3 +178,69 @@
       1  2019 1971-04-08  1971-06-04   500
       2  2019 1971-07-15  1971-09-03   800
 
+# gss biggest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-07-15  1971-09-03   800
+
+# gss smallest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-04-08  1971-06-04   500
+
+# gss longest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-04-08  1971-06-04   500
+
+# gss shortest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-07-15  1971-09-03   800
+
+# gss first
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-04-08  1971-06-04   500
+
+# gss last
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-07-15  1971-09-03   800
+

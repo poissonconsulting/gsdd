@@ -114,3 +114,74 @@
       # A tibble: 0 x 3
       # i 3 variables: start_index <int>, end_index <int>, gsdd <dbl>
 
+# pick all
+
+    Code
+      gss
+    Output
+      # A tibble: 2 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1          98       155   500
+      2         196       246   800
+
+# pick smallest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1          98       155   500
+
+# pick biggest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1         196       246   800
+
+# pick longest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1          98       155   500
+
+# pick shortest
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1         196       246   800
+
+# pick first
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1          98       155   500
+
+# pick last
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 3
+        start_index end_index  gsdd
+              <int>     <int> <dbl>
+      1          98       155   500
+
