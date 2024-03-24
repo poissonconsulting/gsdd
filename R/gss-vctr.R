@@ -1,12 +1,18 @@
 gss_vctr <- function(x,
-                   ignore_truncation = FALSE,
-                   start_temp = 5,
-                   end_temp = 4,
-                   window_width = 7,
-                   msgs = TRUE) {
-  data <- .gss(x, ignore_truncation = ignore_truncation, 
-               start_temp = start_temp, end_temp = end_temp,
-               window_width = window_width, msgs = msgs)
+                     ignore_truncation = FALSE,
+                     min_length = 184,
+                     start_temp = 5,
+                     end_temp = 4,
+                     window_width = 7,
+                     msgs = TRUE) {
+  data <- .gss(
+    x, 
+    min_length = min_length,
+    ignore_truncation = ignore_truncation, 
+    start_temp = start_temp, 
+    end_temp = end_temp,
+    window_width = window_width, 
+    msgs = msgs)
   
   if(vld_scalar(data)) {
     return(tibble::tibble(start_index = integer(0), end_index = integer(0), gsdd = numeric(0)))

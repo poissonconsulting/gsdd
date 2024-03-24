@@ -1,7 +1,5 @@
 test_that("gsdd works", {
-  data <- temperature_data
-
-  gsdd <- gsdd(data)
+  gsdd <- gsdd(temperature_data)
   expect_snapshot({
     gsdd
   })
@@ -9,9 +7,8 @@ test_that("gsdd works", {
 
 test_that("gsdd NA if middle truncation", {
   data <- temperature_data
-
   data$temperature[200] <- NA_real_
-  expect_message(gsdd <- gsdd(data), "The growing season is truncated at the end of the sequence.")
+  expect_message(gsdd <- gsdd(data, min_length = 100), "The growing season is truncated at the end of the sequence.")
   expect_snapshot({
     gsdd
   })
@@ -19,18 +16,15 @@ test_that("gsdd NA if middle truncation", {
 
 test_that("gsdd NA if earlier truncation", {
   data <- temperature_data
-
   data$temperature[100] <- NA_real_
-  expect_message(gsdd <- gsdd(data), "The growing season is truncated at the start of the sequence.")
+  expect_message(gsdd <- gsdd(data, min_length = 200), "The growing season is truncated at the start of the sequence.")
   expect_snapshot({
     gsdd
   })
 })
 
 test_that("gsdd NA if truncated", {
-  data <- temperature_data
-
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
+  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
                        msgs = FALSE)
   expect_snapshot({
     gsdd
@@ -38,9 +32,7 @@ test_that("gsdd NA if truncated", {
 })
 
 test_that("gsdd ignore truncation", {
-  data <- temperature_data
-
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
+  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
                        msgs = FALSE, ignore_truncation = TRUE)
   expect_snapshot({
     gsdd
@@ -48,9 +40,7 @@ test_that("gsdd ignore truncation", {
 })
 
 test_that("gsdd ignore truncation tiny window", {
-  data <- temperature_data
-
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-06"),
+  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-06"),
                        msgs = FALSE, ignore_truncation = TRUE, window_width = 3)
   expect_snapshot({
     gsdd
@@ -73,18 +63,13 @@ test_that("gsdd multiple years", {
 })
 
 test_that("gsdd errors duplicates", {
-  data <- temperature_data
-
-  data <- rbind(data, data)
-  
+  data <- rbind(temperature_data, temperature_data)
   expect_chk_error(gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-06")))
 })
 
 test_that("gsdd spans a year", {
   data <- temperature_data
-
   data$date <- dttr2::dtt_add_days(data$date, 200)
-  
   gsdd <- gsdd(data, start_date = as.Date("1972-12-15"), end_date = as.Date("1972-01-15"), ignore_truncation = TRUE)
   expect_snapshot({
     gsdd

@@ -14,6 +14,7 @@ gdd <- function(
     x, 
     start_date = as.Date("1972-01-01"), 
     end_date = as.Date("1972-09-30"),
+    min_length = NULL,
     ignore_truncation = FALSE,
     start_temp = 5,
     end_temp = 4,
@@ -29,9 +30,10 @@ gdd <- function(
   
   .gsdd(
     x, 
-    start_date, 
-    end_date, 
+    start_date = start_date, 
+    end_date = end_date, 
     ignore_truncation = ignore_truncation, 
+    min_length = min_length,
     start_temp = start_temp,
     end_temp = end_temp,
     window_width = window_width,

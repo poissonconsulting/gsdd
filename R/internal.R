@@ -1,5 +1,6 @@
 .gss <- function(x,
                  ignore_truncation,
+                 min_length,
                  start_temp,
                  end_temp,
                  window_width,
@@ -14,6 +15,8 @@
     ignore_truncation <- "none"
   }
   chk_subset(ignore_truncation, c("none", "start", "end", "both"))
+  chk_whole_number(min_length)
+  chk_range(min_length, c(window_width * 2, 365))
   chk_number(start_temp)
   chk_number(end_temp)
   chk_gt(start_temp)
@@ -25,7 +28,6 @@
   }
   chk_flag(msgs)
   
-  min_length <-  window_width * 2
   if(length(x) < min_length) {
     if (msgs) {
       msg(paste0("`The length of `x` must be at least ", min_length, "."))
@@ -103,15 +105,17 @@
     start_date, 
     end_date, 
     ignore_truncation,
-    msgs,
+    min_length,
     start_temp,
     end_temp,
     window_width,
     pick,
+    msgs,
     gss = FALSE) {
   check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
   chk_date(start_date)
   chk_date(end_date)
+  chk_null_or(min_length, vld = vld_whole_number)
   
   end_dayte <- dttr2::dtt_dayte(end_date, start = start_date)
   start_dayte <- dttr2::dtt_dayte(start_date, start = start_date)
@@ -132,10 +136,14 @@
     dplyr::group_by(.data$year) |>
     dplyr::arrange(.data$dayte)
   
+  if(is.null(min_length)) {
+    min_length <- min(as.integer(end_dayte) - as.integer(start_dayte) + 1L, 365L)
+  }
+  
   gsdd <- x |>
     dplyr::summarise(gsdd = gsdd_vctr(
       .data$temperature,     
-      ignore_truncation = ignore_truncation, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width, pick = pick), .groups = "keep") |>
+      ignore_truncation = ignore_truncation, min_length = min_length, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width, pick = pick), .groups = "keep") |>
     dplyr::ungroup()
   
   if(!gss) {
@@ -143,7 +151,14 @@
   }
   
   x <- x |>
-    dplyr::group_modify(~gss_vctr(.x$temperature, ignore_truncation = ignore_truncation, start_temp, end_temp = end_temp, window_width = window_width, msgs = FALSE), .keep = TRUE)
+    dplyr::group_modify(~gss_vctr(
+      .x$temperature,
+      ignore_truncation = ignore_truncation, 
+      min_length = min_length,
+      start_temp = start_temp,
+      end_temp = end_temp, 
+      window_width = window_width, 
+      msgs = FALSE), .keep = TRUE)
   
   if(!nrow(x)) {
     return(tibble::tibble(year = integer(), start_dayte = as.Date(integer()),

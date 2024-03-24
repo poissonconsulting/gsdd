@@ -7,6 +7,7 @@
 gsdd_vctr(
   x,
   ignore_truncation = FALSE,
+  min_length = 184,
   start_temp = 5,
   end_temp = 4,
   window_width = 7,
@@ -23,6 +24,9 @@ of interest in C.}
 of the mean daily water temperature vector
 or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 (equivalent to TRUE) specifying which type of truncation to ignore.}
+
+\item{min_length}{A whole number of the minimum length to consider.
+Must be at least twice the window width but no more than 365.}
 
 \item{start_temp}{A positive real number of the average water temperature
 at the start of the growing season(s) in C.}

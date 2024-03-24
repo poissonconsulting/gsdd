@@ -8,6 +8,7 @@ gdd(
   x,
   start_date = as.Date("1972-01-01"),
   end_date = as.Date("1972-09-30"),
+  min_length = NULL,
   ignore_truncation = FALSE,
   start_temp = 5,
   end_temp = 4,
@@ -29,6 +30,9 @@ then the window is considered  to span two calendar years.}
 
 \item{end_date}{A Date scalar of the last date
 within each year to consider (the year is ignored).}
+
+\item{min_length}{A whole number of the minimum length to consider.
+Must be at least twice the window width but no more than 365.}
 
 \item{ignore_truncation}{A flag specifying whether to ignore start truncation (end truncation is always ignored).}
 

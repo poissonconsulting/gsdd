@@ -339,21 +339,21 @@ test_that("Left truncated triangle", {
 
 test_that("NA if less than 14 values after trimming trailing NAs", {
   x <- c(rep(1,13), rep(NA,100))
-  expect_message(expect_identical(gsdd_vctr(x),NA_real_), "The length of the longest non-missing sequence in `x` must be at least 14.")
+  expect_message(expect_identical(gsdd_vctr(x, min_length = 14),NA_real_), "The length of the longest non-missing sequence in `x` must be at least 14.")
   x <- c(rep(1,15), rep(NA,100))
-  expect_identical(gsdd_vctr(x),0)
+  expect_identical(gsdd_vctr(x, min_length = 15),0)
 })
 
 test_that("NA if less than 20 values after trimming trailing NAs", {
   x <- c(rep(1,21), rep(NA,100))
-  expect_message(expect_identical(gsdd_vctr(x, window_width = 11),NA_real_), "The length of the longest non-missing sequence in `x` must be at least 22.")
+  expect_message(expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22),NA_real_), "The length of the longest non-missing sequence in `x` must be at least 22.")
   x <- c(rep(1,22), rep(NA,100))
-  expect_identical(gsdd_vctr(x, window_width = 11),0)
+  expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22),0)
 })
 
 test_that("extracts longest non-missing sequence (not just trim tails)", {
   x <- c(NA,1,NA,rep(1,13),NA,1,NA)
   expect_identical(gsdd_vctr(x, msgs = FALSE),NA_real_) 
   x <- c(NA,1,NA,rep(1,14),NA,1,NA)
-  expect_identical(gsdd_vctr(x),0) 
+  expect_identical(gsdd_vctr(x, min_length = 14),0) 
 })
