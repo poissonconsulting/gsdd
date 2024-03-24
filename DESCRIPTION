@@ -18,7 +18,7 @@ Description: Calculates Growing Season Degree Days (GSDD), Growing Degree
     during the growing season based on the mean daily water temperature values.
     GDD is the GSSD to a particular date.
 License: MIT + file LICENSE
-URL: https://github.com/poissonconsulting/gsdd
+URL: https://poissonconsulting.github.io/gsdd/, https://github.com/poissonconsulting/gsdd
 BugReports: https://github.com/poissonconsulting/gsdd/issues/
 Depends: 
     R (>= 4.1)

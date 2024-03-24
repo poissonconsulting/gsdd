@@ -10,6 +10,7 @@ Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and the 
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://poissonconsulting.github.io/gsdd/}
   \item \url{https://github.com/poissonconsulting/gsdd}
   \item Report bugs at \url{https://github.com/poissonconsulting/gsdd/issues/}
 }
