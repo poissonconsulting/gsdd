@@ -1,11 +1,11 @@
 .gss_vctr <- function(x,
-                 ignore_truncation,
-                 min_length,
-                 start_temp,
-                 end_temp,
-                 window_width,
-                 pick,
-                 msgs) {
+                      ignore_truncation,
+                      min_length,
+                      start_temp,
+                      end_temp,
+                      window_width,
+                      pick,
+                      msgs) {
   chk_numeric(x)
   chk_vector(x)
   chk_lte(length(x), 366)
@@ -148,38 +148,42 @@
   if(is.null(min_length)) {
     min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
   }
-
+  
   if(isFALSE(gss)) {
-    gsdd <- x |>
+    x <- x |>
       dplyr::summarise(gsdd = gsdd_vctr(
         .data$temperature,     
         ignore_truncation = ignore_truncation, min_length = min_length, start_temp, end_temp = end_temp, window_width = window_width, pick = pick, msgs = msgs), .groups = "keep") |>
       dplyr::ungroup()
     
-    return(gsdd)
+    return(x)
   }
   
-  x <- x |>
-    dplyr::group_modify(~gss_vctr(
-      .x$temperature,
-      ignore_truncation = ignore_truncation, 
-      min_length = min_length,
-      start_temp = start_temp,
-      end_temp = end_temp, 
-      window_width = window_width, 
-      pick = pick,
-      msgs = msgs), .keep = TRUE)
-  
-  if(!nrow(x)) {
-    return(tibble::tibble(year = integer(), start_dayte = as.Date(integer()),
-                          end_dayte = as.Date(integer()), gsdd = numeric()))
+  if(isTRUE(gss)) {
+    x <- x |>
+      dplyr::group_modify(~gss_vctr(
+        .x$temperature,
+        ignore_truncation = ignore_truncation, 
+        min_length = min_length,
+        start_temp = start_temp,
+        end_temp = end_temp, 
+        window_width = window_width, 
+        pick = pick,
+        msgs = msgs), .keep = TRUE)
+    
+    if(!nrow(x)) {
+      return(tibble::tibble(year = integer(), start_dayte = as.Date(integer()),
+                            end_dayte = as.Date(integer()), gsdd = numeric()))
+    }
+    x <- x |>
+      dplyr::mutate(.start_dayte = start_dayte,
+                    start_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$start_index - 1L),
+                    end_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$end_index - 1L),
+      ) |>
+      dplyr::select("year", "start_dayte", "end_dayte", "gsdd")
+
+    return(x)
   }
-  x |>
-    dplyr::mutate(.start_dayte = start_dayte,
-                  start_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$start_index - 1L),
-                  end_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$end_index - 1L),
-    ) |>
-    dplyr::select("year", "start_dayte", "end_dayte", "gsdd")
 }
 
 pick_season <- function(x, pick) {
