@@ -1,6 +1,5 @@
 test_that("output is a numeric value", {
-  x <- temperature_data$temperature
-  output <- gsdd_vctr(x)
+  output <- gsdd_vctr(temperature_data$temperature)
   expect_equal(output, 3898.80557580767)
 })
 
@@ -10,8 +9,7 @@ test_that("vector must be longer than window_width", {
 })
 
 test_that("window_width must be odd", {
-  x <- temperature_data$temperature
-  expect_chk_error(gsdd_vctr(x, window_width = 6), "`window_width` must be odd.")
+  expect_chk_error(gsdd_vctr(temperature_data$temperature, window_width = 6), "`window_width` must be odd.")
 })
 
 test_that("gsdd_vctr returns NA when missing summer", {
@@ -35,19 +33,16 @@ test_that("gsdd_vctr trims missing values", {
 })
 
 test_that("start temp must be greater than or equal to end temp", {
-  x <- temperature_data$temperature
-  expect_chk_error(gsdd_vctr(x, end_temp = 40, start_temp = 30))
+  expect_chk_error(gsdd_vctr(temperature_data$temperature, end_temp = 40, start_temp = 30))
 })
 
 test_that("if max temp in vector is lower than start_temp the function return 0", {
-  x <- temperature_data$temperature
-  output <- gsdd_vctr(x, start_temp = 50)
+  output <- gsdd_vctr(temperature_data$temperature, start_temp = 50)
   expect_identical(output, 0)
 })
 
 test_that("if end_temp is not reached, gsdd_vctr calculated to end of vector and message is provided.", {
-  x <- temperature_data$temperature
-  expect_message(expect_identical(gsdd_vctr(x, end_temp = -40), NA_real_), "The growing season is truncated at the end of the sequence.")
+  expect_message(expect_identical(gsdd_vctr(temperature_data$temperature, end_temp = -40), NA_real_), "The growing season is truncated at the end of the sequence.")
 })
 
 test_that("truncated at 100.", {
@@ -63,8 +58,7 @@ test_that("truncated at 200.", {
 })
 
 test_that("if end_temp is reached at end of vector x, indicies do not fall off the edge", {
-  x <- temperature_data$temperature
-  gsdd_vctr <- gsdd_vctr(x, end_temp = -4, msgs = FALSE, ignore_truncation = TRUE)
+  gsdd_vctr <- gsdd_vctr(temperature_data$temperature, end_temp = -4, msgs = FALSE, ignore_truncation = TRUE)
   expect_equal(gsdd_vctr, 3921.63308)
 })
 
@@ -82,32 +76,27 @@ test_that("x must have a length less than 366", {
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, pick = "biggest")
+  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "biggest")
   expect_equal(gsdd_vctr, 800)
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, pick = "last")
+  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "last")
   expect_equal(gsdd_vctr, 800)
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, pick = "first")
+  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "first")
   expect_equal(gsdd_vctr, 500)
 })
 
 test_that("Gets growth period with smallest gsdd_vctr.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, pick = "smallest")
+  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "smallest")
   expect_equal(gsdd_vctr, 500)
 })
 
 test_that("Gets growth period with all gsdd_vctr.", {
-  x <- c(rep(0, 100), rep(10, 50), rep(0, 50), rep(20, 40), rep(0, 115))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, pick = "all")
+  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "all")
   expect_equal(gsdd_vctr, 1300)
 })
 
@@ -256,8 +245,6 @@ test_that("Gets asymmetric triangle", {
   testthat::expect_snapshot({
     tibble::tibble(index = 1:length(x), x = x, ma = ma)
   })
-  
-
   expect_equal(gsdd_vctr(x), sum(x[9:26]))
 })
 
