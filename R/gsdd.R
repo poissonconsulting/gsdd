@@ -65,14 +65,14 @@
 #' "biggest" or "smallest" GSDD. By default the returned value is the
 #' the GSDD value for the "longest" 'season'.
 #' @param msgs A flag specifying whether to provide messages.
-#' @seealso [`gsdd_cf_data()`]
+#' @seealso [`gsdd_data()`]
 #' @return A non-negative real number of the GSDD.
 #' @export
 #'
 #' @examples
-#' gsdd_cf(c(rep(1, 10), rep(10, 20), rep(1, 200)))
-#' gsdd_cf(gsdd::simulated_data$synthetic)
-gsdd_cf <- function(x,
+#' gsdd(c(rep(1, 10), rep(10, 20), rep(1, 200)))
+#' gsdd(gsdd::simulated_data$synthetic)
+gsdd <- function(x,
                     ignore_truncation = FALSE,
                     start_temp = 5,
                     end_temp = 4,

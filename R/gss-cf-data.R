@@ -1,10 +1,10 @@
 #' Calculate Growing Seasons from a Data Frame
 #' 
 #'
-#' @inheritParams gsdd_cf
-#' @inheritParams gsdd_cf_data
+#' @inheritParams gsdd
+#' @inheritParams gsdd_data
 #' @return A tibble with four columns `year`, `start_dayte`, `end_dayte` and `gsdd`.
-#' @seealso [gsdd_cf_data()]
+#' @seealso [gsdd_data()]
 #' @export
 #'
 #' @examples

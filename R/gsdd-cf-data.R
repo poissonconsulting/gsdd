@@ -5,7 +5,7 @@
 #' `date`, which must be of class Date provides the dates and 
 #' `temperature` which must be a numeric vector provides the 
 #' mean daily water temperature in degrees centigrade. For additional information on 
-#' GSDD and the various arguments that can be passed via `...` see [`gsdd_cf()`].
+#' GSDD and the various arguments that can be passed via `...` see [`gsdd()`].
 #'
 #' @param x A data frame with two columns `date` and `temperature`. 
 #' @param start_date A Date scalar of the first date within each year to consider (the year
@@ -13,20 +13,20 @@
 #' @param end_date A Date scalar of the last date within each year to consider (the year is ignored).
 #' If `end_date` is less than `start_date` (ignoring the year) then the window is considered 
 #' to span two calendar years.
-#' @inheritParams gsdd_cf
-#' @param ... Additional arguments passed to [`gsdd_cf()`].
+#' @inheritParams gsdd
+#' @param ... Additional arguments passed to [`gsdd()`].
 #' @return A tibble with two columns `year` and `gsdd`.
 #' `year`, which is an integer vector, indicates the year in which the window
 #' began and `gsdd` which is a non-negative real number provides the GSDD
 #' or a missing value if it cannot be calculated.
-#' @seealso [gsdd_cf()] and [gdd_cf_data()]
+#' @seealso [gsdd()] and [gdd_cf_data()]
 #' @export
 #'
 #' @examples
 #' data <- gsdd::simulated_data
 #' data$temperature <- data$synthetic
-#' gsdd_cf_data(data)
-gsdd_cf_data <- function(
+#' gsdd_data(data)
+gsdd_data <- function(
     x, 
     start_date = as.Date("1972-01-01"), 
     end_date = as.Date("1972-12-31"), 
