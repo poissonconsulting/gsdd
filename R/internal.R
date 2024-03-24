@@ -109,7 +109,7 @@
     dplyr::arrange(.data$start_index)
 }
 
-.gsdd <- function(
+.gss <- function(
     x, 
     start_date, 
     end_date, 

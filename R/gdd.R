@@ -28,7 +28,7 @@ gdd <- function(
     ignore_truncation <- "end"
   }
   
-  gdd <- .gsdd(
+  gdd <- .gss(
     x, 
     start_date = start_date, 
     end_date = end_date, 
@@ -45,7 +45,7 @@ gdd <- function(
     return(gdd)
   }
   
-  gss <- .gsdd(
+  gss <- .gss(
     x, 
     start_date = start_date, 
     end_date = end_date, 

@@ -22,7 +22,7 @@ gss <- function(
     pick = "all",
     msgs = TRUE) {
   
-  .gsdd(
+  .gss(
     x, 
     start_date = start_date, 
     end_date = end_date, 
