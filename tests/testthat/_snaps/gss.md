@@ -53,6 +53,28 @@
         <int> <date>      <date>     <dbl>
       1  2019 1971-03-20  1971-11-07 3899.
 
+# gss preserves if shift before leap year
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1972-03-19  1972-11-06 3899.
+
+# gss preserves if shift after leap
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd
+        <int> <date>      <date>     <dbl>
+      1  2019 1971-03-20  1971-11-07 3899.
+
 # gss one message
 
     Code
