@@ -26,9 +26,6 @@ Authors:
 Other contributors:
 \itemize{
   \item Bronwen Lewis [contributor]
-  \item Jill Brooks [contributor]
-  \item Andrew Harwood [contributor]
-  \item Todd Hatfield [contributor]
   \item Teck Resources [funder, copyright holder]
 }
 

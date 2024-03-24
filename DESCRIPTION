@@ -7,9 +7,6 @@ Authors@R: c(
     person("Sarah", "Lyons", role = "aut",
            comment = c(ORCID = "0000-0002-6745-6796")),
     person("Bronwen", "Lewis", role = "ctb"),
-    person("Jill", "Brooks", role = "ctb"),
-    person("Andrew", "Harwood", role = "ctb"),
-    person("Todd", "Hatfield", role = "ctb"),
     person("Teck Resources", role = c("fnd", "cph"))
   )
 Description: Calculates Growing Season Degree Days (GSDD), 
