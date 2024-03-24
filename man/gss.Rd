@@ -2,7 +2,7 @@
 % Please edit documentation in R/gss.R
 \name{gss}
 \alias{gss}
-\title{Calculate Growing Seasons}
+\title{Calculate Growing Seasons (GSS)}
 \usage{
 gss(
   x,
@@ -17,10 +17,10 @@ gss(
 )
 }
 \arguments{
-\item{x}{A numeric vector of the
-mean daily water temperature values for the period
-of interest in C. It must be consist of no more than
-366 values.}
+\item{x}{A data frame with two columns \code{date} and \code{temperature}.
+\code{date}, which must be of class Date provides the dates and
+\code{temperature} which must be a numeric vector provides the
+mean daily water temperature in degrees centigrade.}
 
 \item{start_date}{A Date scalar of the first date within each year to consider (the year
 is ignored).
@@ -55,11 +55,10 @@ the GSDD value for the "longest" 'season'.}
 A tibble with four columns \code{year}, \code{start_dayte}, \code{end_dayte} and \code{gsdd}.
 }
 \description{
-Calculate Growing Seasons
+Calculate the number of growing degree days to the specified end date.
 }
 \examples{
-data <- gsdd::temperature_data
-gss(data)
+gss(gsdd::temperature_data)
 }
 \seealso{
 \code{\link[=gsdd]{gsdd()}}

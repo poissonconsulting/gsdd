@@ -50,11 +50,9 @@ the GSDD value for the "longest" 'season'.}
 }
 \value{
 A tibble with two columns \code{year} and \code{gdd}.
-\code{year}, which is an integer vector, indicates the year in which the window
-began and \code{gdd} which is a non-negative real number provides the GDD value.
 }
 \description{
-Calculate the number of growing degree days to specified the end date.
+Calculate the number of growing degree days to the specified end date.
 }
 \examples{
 gdd(gsdd::temperature_data)

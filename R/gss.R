@@ -1,15 +1,14 @@
-#' Calculate Growing Seasons
+#' Calculate Growing Seasons (GSS)
 #' 
+#' Calculate the number of growing degree days to the specified end date.
 #'
-#' @inheritParams gsdd_vctr
-#' @inheritParams gsdd
+#' @inheritParams params
 #' @return A tibble with four columns `year`, `start_dayte`, `end_dayte` and `gsdd`.
 #' @seealso [gsdd()]
 #' @export
 #'
 #' @examples
-#' data <- gsdd::temperature_data
-#' gss(data)
+#' gss(gsdd::temperature_data)
 gss <- function(
     x, 
     start_date = as.Date("1972-01-01"), 
@@ -21,11 +20,15 @@ gss <- function(
     pick = "longest",
     msgs = TRUE) {
   
-  .gsdd(x, start_date = start_date, end_date = end_date, 
-        ignore_truncation = ignore_truncation,
-        start_temp = start_temp,
-        end_temp = end_temp,
-        window_width = window_width,
-        pick = pick,
-        msgs = msgs, gss = TRUE)
+  .gsdd(
+    x, 
+    start_date = start_date, 
+    end_date = end_date, 
+    ignore_truncation = ignore_truncation,
+    start_temp = start_temp,
+    end_temp = end_temp,
+    window_width = window_width,
+    pick = pick,
+    msgs = msgs, 
+    gss = TRUE)
 }

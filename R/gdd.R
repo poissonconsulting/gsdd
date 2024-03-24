@@ -5,8 +5,6 @@
 #' @inheritParams params
 #' @param ignore_truncation A flag specifying whether to ignore start truncation (end truncation is always ignored).
 #' @return A tibble with two columns `year` and `gdd`.
-#' `year`, which is an integer vector, indicates the year in which the window
-#' began and `gdd` which is a non-negative real number provides the GDD value.
 #' @seealso [gsdd()]
 #' @export
 #'
@@ -34,10 +32,10 @@ gdd <- function(
     start_date, 
     end_date, 
     ignore_truncation = ignore_truncation, 
-    msgs = msgs,
     start_temp = start_temp,
     end_temp = end_temp,
     window_width = window_width,
-    pick = pick) |>
+    pick = pick,
+    msgs = msgs) |>
     dplyr::rename(gdd = "gsdd")
 }
