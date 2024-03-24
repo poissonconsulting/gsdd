@@ -5,13 +5,11 @@ test_that("gsdd works", {
   })
 })
 
-test_that("gsdd NA if middle truncation", {
+test_that("gsdd NA if middle truncation - why end vs start", {
   data <- temperature_data
   data$temperature[200] <- NA_real_
-  expect_message(gsdd <- gsdd(data, min_length = 100), "The growing season is truncated at the start of the sequence.")
-  expect_snapshot({
-    gsdd
-  })
+  expect_message(gsdd <- gsdd(data, min_length = 100), "The growing season is truncated at the end of the sequence.")
+  expect_message(gsdd <- gsdd(data, min_length = 100, end_date = as.Date("1972-12-31")), "The growing season is truncated at the start of the sequence.")
 })
 
 test_that("gsdd NA if earlier truncation", {

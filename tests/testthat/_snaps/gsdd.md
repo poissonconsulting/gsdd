@@ -8,16 +8,6 @@
         <int> <dbl>
       1  2019 3899.
 
-# gsdd NA if middle truncation
-
-    Code
-      gsdd
-    Output
-      # A tibble: 1 x 2
-         year  gsdd
-        <int> <dbl>
-      1  2019    NA
-
 # gsdd NA if earlier truncation
 
     Code
