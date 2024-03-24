@@ -155,7 +155,7 @@
       ignore_truncation = ignore_truncation, min_length = min_length, msgs = msgs, start_temp, end_temp = end_temp, window_width = window_width, pick = pick), .groups = "keep") |>
     dplyr::ungroup()
   
-  if(!gss) {
+  if(isFALSE(gss)) {
     return(gsdd)
   }
   
