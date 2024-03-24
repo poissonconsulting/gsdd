@@ -1,0 +1,15 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^data-raw$
+^docs$
+^pkgdown$
+^revdep$
+^scripts$
+^codecov\.yml$
+^\.covrignore$
+^cran-comments\.md$
+^CRAN-RELEASE$
+^LICENSE\.md$
+^_pkgdown\.yml$
+^README\.Rmd$
