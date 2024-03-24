@@ -45,15 +45,15 @@
   rollmean <- zoo::rollmean(x = x, k = window_width)
   
   # pick which indices have values above start temp that begin runs
-  index_start <- index_begin_run(rollmean > start_temp)
+  start_index <- index_begin_run(rollmean > start_temp)
   
   # no GSDD if season never starts
-  if (!length(index_start)) {
+  if (!length(start_index)) {
     return(0)
   }
   truncated <- FALSE
   # if season starts on first day, ignore_truncation left
-  if (index_start[1] == 1L) {
+  if (start_index[1] == 1L) {
     truncated <- TRUE
     if (ignore_truncation %in% c("none", "end")) {
       if (msgs) {
@@ -65,7 +65,7 @@
   # pick which indices have values above and temp that begin runs
   index_end <- index_begin_run(rollmean < end_temp)
   # if season doesnt end ignore_truncation right
-  if (!length(index_end) || max(index_start) > max(index_end)) {
+  if (!length(index_end) || max(start_index) > max(index_end)) {
     if (ignore_truncation %in% c("none", "start")) {
       if (msgs) {
         msg("The growing season is truncated at the end of the sequence.")
@@ -76,24 +76,24 @@
   }
   
   tidyr::expand_grid(
-    index_start = index_start,
+    start_index = start_index,
     index_end = index_end
   ) |>
-    dplyr::filter(.data$index_start <= .data$index_end) |>
-    dplyr::group_by(.data$index_start) |>
+    dplyr::filter(.data$start_index <= .data$index_end) |>
+    dplyr::group_by(.data$start_index) |>
     dplyr::arrange(.data$index_end) |>
     dplyr::slice(1) |>
     dplyr::ungroup() |>
     dplyr::group_by(.data$index_end) |>
-    dplyr::arrange(.data$index_start) |>
+    dplyr::arrange(.data$start_index) |>
     dplyr::slice(1) |>
     dplyr::ungroup() |>
     dplyr::mutate(
       index_end = .data$index_end + (as.integer(window_width) - 1L),
-      ndays = .data$index_end - .data$index_start + 1L
+      ndays = .data$index_end - .data$start_index + 1L
     ) |>
     dplyr::mutate(gsdd = purrr::map2_dbl(
-      .x = .data$index_start,
+      .x = .data$start_index,
       .y = .data$index_end,
       .f = sum_vector,
       ..vector = x
@@ -189,9 +189,9 @@ pick_season <- function(x, pick) {
     x |> dplyr::filter(.data$ndays == min(.data$ndays))  |>
       dplyr::arrange(.data$gsdd)
   } else if(pick == "last") {
-    x |> dplyr::filter(.data$index_start == max(.data$index_start))
+    x |> dplyr::filter(.data$start_index == max(.data$start_index))
   } else if(pick == "first") {
-    x |> dplyr::filter(.data$index_start == min(.data$index_start))
+    x |> dplyr::filter(.data$start_index == min(.data$start_index))
   }
   x |>
     dplyr::slice(1)
