@@ -171,22 +171,6 @@
                   end_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$end_index - 1L),
     ) |>
     dplyr::select("year", "start_dayte", "end_dayte", "gsdd")
-  
-  # complete <- x |>
-  #   dplyr::slice_tail() |>
-  #   dplyr::mutate(complete = .data$dayte == end_dayte)
-  # 
-  # if(msgs) {
-  #   n <- sum(!complete$complete)
-  #   if(n > 0) {
-  #     msg(message_chk("there %r %n year%s with insufficient enough degree days", n = n))
-  #   }
-  # }
-  # 
-  # gsdd |>
-  #   dplyr::inner_join(complete, by = "year") |>
-  #   dplyr::mutate(gdd = dplyr::if_else(!complete, NA_real_, .data$gsdd)) |>
-  #   dplyr::select("year", "gdd")
 }
 
 pick_season <- function(x, pick) {
