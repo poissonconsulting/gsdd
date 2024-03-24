@@ -88,6 +88,16 @@
         <int> <dbl>
       1  2019 3605.
 
+# gdd NA if stops before
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019    NA
+
 # gdd NA if missing
 
     Code

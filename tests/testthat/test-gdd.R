@@ -80,11 +80,10 @@ test_that("gdd present if stops at", {
 })
 
 test_that("gdd NA if stops before", {
-  skip()
   data <- temperature_data
   
   data <- data[data$date <= as.Date("2019-09-29"),]
-  expect_message(gdd <- gdd(data, min_length = 14))
+  gdd <- gdd(data, min_length = 14)
   expect_snapshot({
     gdd
   })

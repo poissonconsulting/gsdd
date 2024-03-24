@@ -184,11 +184,13 @@
     
     return(x)
   }
-  x |>
-    dplyr::filter(is.na(.data$temperature)) |>
-    dplyr::arrange(.data$dayte) |>
-    dplyr::slice_tail() |>
-    dplyr::select("year", "dayte")
+  x <- x |>
+    dplyr::filter(!is.na(.data$temperature)) |>
+    dplyr::summarise(last_dayte = max(.data$dayte)) |>
+    dplyr::ungroup()
+  
+  x$end_dayte <- end_dayte
+  x
 }
 
 pick_season <- function(x, pick) {
