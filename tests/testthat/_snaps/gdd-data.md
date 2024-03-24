@@ -1,4 +1,4 @@
-# gdd_cf_data works
+# gdd_data works
 
     Code
       gdd
@@ -18,7 +18,7 @@
         <int> <dbl>
       1  2019 3617.
 
-# gdd_cf_data shifts by 10
+# gdd_data shifts by 10
 
     Code
       gdd
@@ -28,7 +28,7 @@
         <int> <dbl>
       1  2019 3605.
 
-# gdd_cf_data preserves if shift start date
+# gdd_data preserves if shift start date
 
     Code
       gdd
@@ -48,7 +48,7 @@
         <int> <dbl>
       1  2019 3605.
 
-# gdd_cf_data one message
+# gdd_data one message
 
     Code
       gdd
@@ -58,7 +58,7 @@
         <int> <dbl>
       1  2019    NA
 
-# gdd_cf_data works shortened
+# gdd_data works shortened
 
     Code
       gdd
@@ -68,7 +68,7 @@
         <int> <dbl>
       1  2019 3592.
 
-# gdd_cf_data works very shortened
+# gdd_data works very shortened
 
     Code
       gdd
@@ -78,7 +78,7 @@
         <int> <dbl>
       1  2019  77.0
 
-# gdd_cf_data NA if stops before
+# gdd_data NA if stops before
 
     Code
       gdd
@@ -88,7 +88,7 @@
         <int> <dbl>
       1  2019 3592.
 
-# gdd_cf_data NA if missing
+# gdd_data NA if missing
 
     Code
       gdd

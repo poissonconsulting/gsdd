@@ -8,7 +8,7 @@
               <int>     <int> <dbl>
       1          79       311 3899.
 
-# gss_cf returns no rows when missing summer
+# gss returns no rows when missing summer
 
     Code
       gss
@@ -16,7 +16,7 @@
       # A tibble: 0 x 3
       # i 3 variables: start_index <int>, end_index <int>, gsdd <dbl>
 
-# gss_cf trims missing values
+# gss trims missing values
 
     Code
       gss

@@ -142,7 +142,7 @@
   }
   
   x <- x |>
-    dplyr::group_modify(~gss_cf(.x$temperature, ignore_truncation = ignore_truncation, start_temp, end_temp = end_temp, window_width = window_width, msgs = FALSE), .keep = TRUE)
+    dplyr::group_modify(~gss(.x$temperature, ignore_truncation = ignore_truncation, start_temp, end_temp = end_temp, window_width = window_width, msgs = FALSE), .keep = TRUE)
   
   if(!nrow(x)) {
     return(tibble::tibble(year = integer(), start_dayte = as.Date(integer()),

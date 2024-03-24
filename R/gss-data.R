@@ -10,8 +10,8 @@
 #' @examples
 #' data <- gsdd::simulated_data
 #' data$temperature <- data$synthetic
-#' gss_cf_data(data)
-gss_cf_data <- function(
+#' gss_data(data)
+gss_data <- function(
     x, 
     start_date = as.Date("1972-01-01"), 
     end_date = as.Date("1972-12-31"), 

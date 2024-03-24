@@ -19,7 +19,7 @@
 #' `year`, which is an integer vector, indicates the year in which the window
 #' began and `gsdd` which is a non-negative real number provides the GSDD
 #' or a missing value if it cannot be calculated.
-#' @seealso [gsdd()] and [gdd_cf_data()]
+#' @seealso [gsdd()] and [gdd_data()]
 #' @export
 #'
 #' @examples
