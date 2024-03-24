@@ -49,22 +49,7 @@
 #' mean daily water temperature values for the period
 #' of interest in C. It must be consist of no more than 
 #' 366 values.
-#' @param ignore_truncation A flag specifying whether to ignore truncation
-#' of the mean daily water temperature vector 
-#' or a string of "start", "end", "none" (equivalent to FALSE) or "both"
-#' (equivalent to TRUE) specifying which type of truncation to ignore.
-#' @param start_temp A positive real number of the average water temperature
-#' at the start of the growing season in C.
-#' @param end_temp A positive real number of the average water temperature
-#' at the end of the growing season in C. It must be greater than or equal to
-#' the start temperature.
-#' @param window_width A positive whole number of the
-#' width of the rolling mean window in days. By default 7.
-#' @param pick A string specifying whether to pick the
-#' "longest", "shortest", "first" or "last" 'season' or the season with the
-#' "biggest" or "smallest" GSDD. By default the returned value is the
-#' the GSDD value for the "longest" 'season'.
-#' @param msgs A flag specifying whether to provide messages.
+#' @inheritParams params
 #' @seealso [`gsdd()`]
 #' @return A non-negative real number of the GSDD.
 #' @export

@@ -30,10 +30,10 @@ to span two calendar years.}
 \item{ignore_truncation}{A flag specifying whether to ignore start truncation (end truncation is always ignored).}
 
 \item{start_temp}{A positive real number of the average water temperature
-at the start of the growing season in C.}
+at the start of the growing season(s) in C.}
 
 \item{end_temp}{A positive real number of the average water temperature
-at the end of the growing season in C. It must be greater than or equal to
+at the end of the growing season(s) in C. It must be greater than or equal to
 the start temperature.}
 
 \item{window_width}{A positive whole number of the

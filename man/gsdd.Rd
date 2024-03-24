@@ -14,7 +14,10 @@ gsdd(
 )
 }
 \arguments{
-\item{x}{A data frame with two columns \code{date} and \code{temperature}.}
+\item{x}{A data frame with two columns \code{date} and \code{temperature}.
+\code{date}, which must be of class Date provides the dates and
+\code{temperature} which must be a numeric vector provides the
+mean daily water temperature in degrees centigrade.}
 
 \item{start_date}{A Date scalar of the first date within each year to consider (the year
 is ignored).}
