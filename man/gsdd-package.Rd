@@ -25,6 +25,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Jill Brooks [contributor]
   \item Bronwen Lewis [contributor]
   \item Teck Resources [funder, copyright holder]
 }
