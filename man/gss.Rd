@@ -32,7 +32,9 @@ then the window is considered  to span two calendar years.}
 within each year to consider (the year is ignored).}
 
 \item{min_length}{A whole number of the minimum length to consider.
-Must be at least twice the window width but no more than 365.}
+Must be at least twice the window width but no more than 365.
+If NULL then set to be the difference between \code{start_date} and \code{end_date}
+(ignoring the year).}
 
 \item{ignore_truncation}{A flag specifying whether to ignore truncation
 of the mean daily water temperature vector

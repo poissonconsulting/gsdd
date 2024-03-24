@@ -13,6 +13,8 @@
 #' (equivalent to TRUE) specifying which type of truncation to ignore.
 #' @param min_length A whole number of the minimum length to consider.
 #' Must be at least twice the window width but no more than 365.
+#' If NULL then set to be the difference between `start_date` and `end_date`
+#' (ignoring the year).
 #' @param msgs A flag specifying whether to provide messages.
 #' @param pick A string specifying whether to pick the
 #' "longest", "shortest", "first" or "last" 'season' or the season with the
