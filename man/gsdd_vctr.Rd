@@ -28,7 +28,8 @@ or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 at the start of the growing season(s) in C.}
 
 \item{end_temp}{A positive real number of the average water temperature
-at the end of the growing season(s) in C. It must be greater than or equal to
+at the end of the growing season(s) in C.
+It must be greater than or equal to
 the start temperature.}
 
 \item{window_width}{A positive whole number of the

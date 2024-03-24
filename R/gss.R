@@ -1,9 +1,10 @@
 #' Calculate Growing Seasons (GSS)
 #' 
-#' Calculate the number of growing degree days to the specified end date.
+#' Calculate the start and end and gsdd values of all growing seasons in a year.
 #'
 #' @inheritParams params
-#' @return A tibble with four columns `year`, `start_dayte`, `end_dayte` and `gsdd`.
+#' @return A tibble with four columns:
+#' `year`, `start_dayte`, `end_dayte` and `gsdd`.
 #' @seealso [gsdd()]
 #' @export
 #'
