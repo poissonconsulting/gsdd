@@ -1,4 +1,4 @@
-# gss_data works
+# gss works
 
     Code
       gss
@@ -20,7 +20,7 @@
         <int> <date>      <date>     <dbl>
       1  2019 1972-03-16  1972-11-09 3920.
 
-# gss_data shifts by 10
+# gss shifts by 10
 
     Code
       gss
@@ -31,7 +31,7 @@
         <int> <date>      <date>     <dbl>
       1  2019 1972-03-09  1972-10-27 3899.
 
-# gss_data preserves if shift start date
+# gss preserves if shift start date
 
     Code
       gss
@@ -53,7 +53,7 @@
         <int> <date>      <date>     <dbl>
       1  2019 1971-03-20  1971-11-07 3899.
 
-# gss_data one message
+# gss one message
 
     Code
       gss
@@ -61,7 +61,7 @@
       # A tibble: 0 x 4
       # i 4 variables: year <int>, start_dayte <date>, end_dayte <date>, gsdd <dbl>
 
-# gss_data works shortened
+# gss works shortened
 
     Code
       gss
@@ -69,7 +69,7 @@
       # A tibble: 0 x 4
       # i 4 variables: year <int>, start_dayte <date>, end_dayte <date>, gsdd <dbl>
 
-# gss_data NA if stops before
+# gss NA if stops before
 
     Code
       gss
@@ -77,7 +77,7 @@
       # A tibble: 0 x 4
       # i 4 variables: year <int>, start_dayte <date>, end_dayte <date>, gsdd <dbl>
 
-# gss_data NA if missing
+# gss NA if missing
 
     Code
       gss

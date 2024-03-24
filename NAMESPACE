@@ -3,7 +3,7 @@
 export(gdd)
 export(gsdd)
 export(gsdd_vctr)
-export(gss_data)
+export(gss)
 import(chk)
 importFrom(rlang,.data)
 importFrom(tibble,tibble)
