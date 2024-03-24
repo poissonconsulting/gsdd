@@ -11,7 +11,7 @@ Authors@R: c(
   )
 Description: Calculates Growing Season Degree Days (GSDD), 
   Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature
-  data based on Coleman and Fausch (2007).
+  data.
 URL: https://github.com/poissonconsulting/gsdd
 BugReports: https://github.com/poissonconsulting/gsdd/issues/
 License: MIT + file LICENSE

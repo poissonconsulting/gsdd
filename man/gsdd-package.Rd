@@ -5,7 +5,7 @@
 \alias{gsdd-package}
 \title{gsdd: Calculate Growing Season Degree Days from Water Temperature Data}
 \description{
-Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature data based on Coleman and Fausch (2007).
+Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature data.
 }
 \seealso{
 Useful links:
