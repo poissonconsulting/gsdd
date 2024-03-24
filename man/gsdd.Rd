@@ -23,11 +23,11 @@ gsdd(
 mean daily water temperature in degrees centigrade.}
 
 \item{start_date}{A Date scalar of the first date within each year to consider (the year
-is ignored).}
-
-\item{end_date}{A Date scalar of the last date within each year to consider (the year is ignored).
-If \code{end_date} is less than \code{start_date} (ignoring the year) then the window is considered
+is ignored).
+#' If \code{start_date} occurs before the \code{end_date} (when ignoring the year) then the window is considered
 to span two calendar years.}
+
+\item{end_date}{A Date scalar of the last date within each year to consider (the year is ignored).}
 
 \item{ignore_truncation}{A flag specifying whether to ignore truncation
 of the mean daily water temperature vector

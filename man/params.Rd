@@ -4,9 +4,7 @@
 \alias{params}
 \title{Parameters for functions}
 \arguments{
-\item{end_date}{A Date scalar of the last date within each year to consider (the year is ignored).
-If \code{end_date} is less than \code{start_date} (ignoring the year) then the window is considered
-to span two calendar years.}
+\item{end_date}{A Date scalar of the last date within each year to consider (the year is ignored).}
 
 \item{end_temp}{A positive real number of the average water temperature
 at the end of the growing season(s) in C. It must be greater than or equal to
@@ -25,7 +23,9 @@ or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 the GSDD value for the "longest" 'season'.}
 
 \item{start_date}{A Date scalar of the first date within each year to consider (the year
-is ignored).}
+is ignored).
+#' If \code{start_date} occurs before the \code{end_date} (when ignoring the year) then the window is considered
+to span two calendar years.}
 
 \item{start_temp}{A positive real number of the average water temperature
 at the start of the growing season(s) in C.}

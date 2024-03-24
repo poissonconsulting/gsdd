@@ -1,31 +1,17 @@
 #' Calculate Growing Degree Days (GDD)
 #' 
-#' The GDD which is a the growing degree days to the end date 
-#' is calculated for each study year from a data frame. 
-#' with `date` and `temperature` columns. 
-#' `date`, which must be of class Date provides the dates and 
-#' `temperature` which must be a numeric vector provides the 
-#' mean daily water temperature in degrees centigrade.
+#' Calculate the number of growing degree days to the specified end date.
 #'
-#' @param x A data frame with two columns `date` and `temperature`. 
-#' @param start_date A Date scalar of the first date within each year to consider (the year
-#' is ignored).
-#' @param end_date A Date scalar of the end date for the growing degree days
-#'  (the year is ignored).
-#' If `end_date` is less than `start_date` (ignoring the year) then the window is considered 
-#' to span two calendar years.
-#' @inheritParams gsdd_vctr
+#' @inheritParams params
 #' @param ignore_truncation A flag specifying whether to ignore start truncation (end truncation is always ignored).
 #' @return A tibble with two columns `year` and `gdd`.
 #' `year`, which is an integer vector, indicates the year in which the window
-#' began and `gdd` which is a non-negative real number provides the GSDD
-#' or a missing value if it cannot be calculated.
+#' began and `gdd` which is a non-negative real number provides the GDD value.
 #' @seealso [gsdd()]
 #' @export
 #'
 #' @examples
-#' data <- gsdd::temperature_data
-#' gdd(data)
+#' gdd(gsdd::temperature_data)
 gdd <- function(
     x, 
     start_date = as.Date("1972-01-01"), 

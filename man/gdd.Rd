@@ -17,15 +17,17 @@ gdd(
 )
 }
 \arguments{
-\item{x}{A data frame with two columns \code{date} and \code{temperature}.}
+\item{x}{A data frame with two columns \code{date} and \code{temperature}.
+\code{date}, which must be of class Date provides the dates and
+\code{temperature} which must be a numeric vector provides the
+mean daily water temperature in degrees centigrade.}
 
 \item{start_date}{A Date scalar of the first date within each year to consider (the year
-is ignored).}
-
-\item{end_date}{A Date scalar of the end date for the growing degree days
-(the year is ignored).
-If \code{end_date} is less than \code{start_date} (ignoring the year) then the window is considered
+is ignored).
+#' If \code{start_date} occurs before the \code{end_date} (when ignoring the year) then the window is considered
 to span two calendar years.}
+
+\item{end_date}{A Date scalar of the last date within each year to consider (the year is ignored).}
 
 \item{ignore_truncation}{A flag specifying whether to ignore start truncation (end truncation is always ignored).}
 
@@ -49,20 +51,13 @@ the GSDD value for the "longest" 'season'.}
 \value{
 A tibble with two columns \code{year} and \code{gdd}.
 \code{year}, which is an integer vector, indicates the year in which the window
-began and \code{gdd} which is a non-negative real number provides the GSDD
-or a missing value if it cannot be calculated.
+began and \code{gdd} which is a non-negative real number provides the GDD value.
 }
 \description{
-The GDD which is a the growing degree days to the end date
-is calculated for each study year from a data frame.
-with \code{date} and \code{temperature} columns.
-\code{date}, which must be of class Date provides the dates and
-\code{temperature} which must be a numeric vector provides the
-mean daily water temperature in degrees centigrade.
+Calculate the number of growing degree days to specified the end date.
 }
 \examples{
-data <- gsdd::temperature_data
-gdd(data)
+gdd(gsdd::temperature_data)
 }
 \seealso{
 \code{\link[=gsdd]{gsdd()}}
