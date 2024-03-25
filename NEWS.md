@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# gsdd 0.0.1
+
+- Same as previous version.
+
+
 # gsdd 0.0.0.9001
 
 - Internal changes only.
