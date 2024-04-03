@@ -41,7 +41,8 @@
     return(NA_real_)
   }
   x <- longest_run(x)
-  if(length(x) < min_length || anyNA(x)) {
+  length_x <- length(x)
+  if(length_x < min_length || anyNA(x)) {
     if(msgs) {
       msg(paste0("The length of the longest non-missing sequence in `x` must be at least ", min_length, "."))
     }
@@ -57,10 +58,9 @@
   if (!length(start_index)) {
     return(0)
   }
-  truncated <- FALSE
+  
   # if season starts on first day, ignore_truncation left
   if (start_index[1] == 1L) {
-    truncated <- TRUE
     if (ignore_truncation %in% c("none", "end")) {
       if (msgs) {
         msg("The growing season is truncated at the start of the sequence.")
@@ -96,7 +96,12 @@
     dplyr::ungroup() |>
     dplyr::mutate(
       end_index = .data$end_index + (as.integer(window_width) - 1L),
-      ndays = .data$end_index - .data$start_index + 1L
+      ndays = .data$end_index - .data$start_index + 1L,
+      truncation = dplyr::case_when(
+        start_index == 1L & end_index == length_x ~ "both",
+        start_index == 1L ~ "start",
+        end_index == length_x ~ "end",
+        TRUE ~ "none")
     ) |>
     dplyr::mutate(gsdd = purrr::map2_dbl(
       .x = .data$start_index,
@@ -105,7 +110,7 @@
       ..vector = x
     )) |>
     pick_season(pick = pick) |>
-    dplyr::select("start_index", "end_index", "gsdd") |>
+    dplyr::select("start_index", "end_index", "gsdd", "truncation") |>
     dplyr::arrange(.data$start_index)
 }
 
@@ -173,14 +178,14 @@
     
     if(!nrow(x)) {
       return(tibble::tibble(year = integer(), start_dayte = as.Date(integer()),
-                            end_dayte = as.Date(integer()), gsdd = numeric()))
+                            end_dayte = as.Date(integer()), gsdd = numeric(), truncation = character()))
     }
     x <- x |>
       dplyr::mutate(.start_dayte = start_dayte,
                     start_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$start_index - 1L),
                     end_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$end_index - 1L),
       ) |>
-      dplyr::select("year", "start_dayte", "end_dayte", "gsdd")
+      dplyr::select("year", "start_dayte", "end_dayte", "gsdd", "truncation")
     
     return(x)
   }

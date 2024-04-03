@@ -195,3 +195,44 @@ test_that("gss last", {
     gss
   })
 })
+
+test_that("gss truncation start", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  data$temperature[data$date <= as.Date("2019-04-11")] <- 6
+  gss <- gss(data, ignore_truncation =TRUE)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss truncation end", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  data$temperature[data$date >= as.Date("2019-08-28")] <- 5
+  gss <- gss(data, ignore_truncation =TRUE)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss truncation both ends", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  data$temperature[data$date <= as.Date("2019-04-11")] <- 6
+  data$temperature[data$date >= as.Date("2019-08-28")] <- 5
+  gss <- gss(data, ignore_truncation =TRUE)
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss truncation all", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  data$temperature <- 6
+  gss <- gss(data, ignore_truncation =TRUE)
+  expect_snapshot({
+    gss
+  })
+})

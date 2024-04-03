@@ -20,5 +20,5 @@ gss_vctr <- function(
   if(vld_data(gss)) {
     return(gss)
   }
-  tibble::tibble(start_index = integer(0), end_index = integer(0), gsdd = numeric(0))
+  tibble::tibble(start_index = integer(0), end_index = integer(0), gsdd = numeric(0), truncation = character(0))
 }
