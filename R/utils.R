@@ -8,7 +8,7 @@ longest_run <- function(x) {
   cumsum <- cumsum(rle$lengths)
   to <- cumsum[wch]
   from <- if(wch == 1) 1L else cumsum[wch-1] + 1L
-  x[from:to]
+  from:to
 }
 
 sum_vector <- function(from, to, ..vector) {

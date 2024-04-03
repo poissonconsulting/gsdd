@@ -58,7 +58,7 @@ gss_plot <- function(
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
                         color = "red") +
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
-                       alpha = 1/3) +
+                       alpha = 1/4) +
     ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
     ggplot2::scale_y_continuous("Water Temperature (C)") +

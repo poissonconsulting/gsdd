@@ -40,7 +40,8 @@
     }
     return(NA_real_)
   }
-  x <- longest_run(x)
+  run <- longest_run(x)
+  x <- x[run]
   length_x <- length(x)
   if(length_x < min_length || anyNA(x)) {
     if(msgs) {
@@ -111,6 +112,9 @@
     )) |>
     pick_season(pick = pick) |>
     dplyr::select("start_index", "end_index", "gsdd", "truncation") |>
+    dplyr::mutate(
+      start_index = .data$start_index + run[1] - 1L,
+      end_index = .data$end_index + run[1] - 1L) |>
     dplyr::arrange(.data$start_index)
 }
 
