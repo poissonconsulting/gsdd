@@ -52,7 +52,7 @@
       # A tibble: 1 x 4
         start_index end_index  gsdd truncation
               <int>     <int> <dbl> <chr>     
-      1           2       274  1618 end       
+      1           2       274  1618 none      
     Code
       gss4_1
     Output

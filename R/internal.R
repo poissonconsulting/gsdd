@@ -50,6 +50,7 @@
   }
   # create rolling mean vector from x and window width
   rollmean <- zoo::rollmean(x = x, k = window_width)
+  length_rollmean <- length(rollmean)
   
   # pick which indices have values above start temp that begin runs
   start_index <- index_begin_run(rollmean > start_temp)
@@ -77,7 +78,7 @@
       }
       return(NA_real_)
     }
-    end_index <- as.integer(c(end_index, length(rollmean)))
+    end_index <- as.integer(c(end_index, length_rollmean))
   }
   
   tidyr::expand_grid(
@@ -97,9 +98,9 @@
       end_index = .data$end_index + (as.integer(window_width) - 1L),
       ndays = .data$end_index - .data$start_index + 1L,
       truncation = dplyr::case_when(
-        start_index == 1L & end_index == length_x ~ "both",
+        start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp ~ "both",
         start_index == 1L ~ "start",
-        end_index == length_x ~ "end",
+        end_index == length_x & rollmean[length_rollmean] > end_temp ~ "end",
         TRUE ~ "none")
     ) |>
     dplyr::mutate(gsdd = purrr::map2_dbl(
