@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# gsdd 0.0.1.9000
+
+- Added `truncation` column to output of `gss()` to indicate if season truncated.
+
+
 # gsdd 0.0.1
 
 - Added a `NEWS.md` file to track changes to the package.
