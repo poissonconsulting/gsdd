@@ -46,8 +46,11 @@ gss_plot <- function(
     )
   
   gp <- x |>
+    dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start_date)) |>
+    dplyr::filter(.data$dayte >= dttr2::dtt_dayte(start_date, start_date),
+                  .data$dayte <= dttr2::dtt_dayte(end_date, start_date)) |>
     ggplot2::ggplot() +
-    ggplot2::aes(x = .data$date, y = .data$temperature) +
+    ggplot2::aes(x = .data$dayte, y = .data$temperature) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
                         color = "red") +
     ggplot2::geom_line() +
