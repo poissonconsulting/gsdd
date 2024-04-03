@@ -45,15 +45,21 @@ gss_plot <- function(
     threshold = factor(c("Start", "End"), c("Start", "End"))
     )
   
-  gp <- x |>
+  data <- x |>
     dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start_date)) |>
     dplyr::filter(.data$dayte >= dttr2::dtt_dayte(start_date, start_date),
-                  .data$dayte <= dttr2::dtt_dayte(end_date, start_date)) |>
-    ggplot2::ggplot() +
-    ggplot2::aes(x = .data$dayte, y = .data$temperature) +
+                  .data$dayte <= dttr2::dtt_dayte(end_date, start_date))
+  
+  range <- range(data$temperature)
+  gss$ymin <- min(c(0, range[1]))
+  gss$ymax <- max(c(0, range[2]))
+
+  gp <- ggplot2::ggplot(data = data) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
                         color = "red") +
-    ggplot2::geom_line() +
+    ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
+                       alpha = 1/3) +
+    ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
     ggplot2::scale_y_continuous("Water Temperature (C)") +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
