@@ -58,7 +58,6 @@
   if (!length(start_index)) {
     return(0)
   }
-  
   # if season starts on first day, ignore_truncation left
   if (start_index[1] == 1L) {
     if (ignore_truncation %in% c("none", "end")) {

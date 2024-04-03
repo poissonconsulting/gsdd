@@ -27,6 +27,40 @@
               <int>     <int> <dbl> <chr>     
       1          78       310 3899. none      
 
+# gss start with perfect temperature
+
+    Code
+      gss5
+    Output
+      # A tibble: 1 x 4
+        start_index end_index  gsdd truncation
+              <int>     <int> <dbl> <chr>     
+      1           2       272  1605 none      
+    Code
+      gss5_1
+    Output
+      # A tibble: 1 x 4
+        start_index end_index  gsdd truncation
+              <int>     <int> <dbl> <chr>     
+      1           1       273 1617. start     
+
+# gss end with perfect temperature
+
+    Code
+      gss4
+    Output
+      # A tibble: 1 x 4
+        start_index end_index  gsdd truncation
+              <int>     <int> <dbl> <chr>     
+      1           2       274  1618 end       
+    Code
+      gss4_1
+    Output
+      # A tibble: 1 x 4
+        start_index end_index  gsdd truncation
+              <int>     <int> <dbl> <chr>     
+      1           2       274 1618. end       
+
 # if max temp in vector is lower than start_temp the function return no row
 
     Code

@@ -34,6 +34,28 @@ test_that("gss trims missing values", {
   })
 })
 
+test_that("gss start with perfect temperature", {
+  x <- c(rep(5, 7), rep(6, 260), rep(3,7))
+  gss5 <- gss_vctr(x, ignore_truncation = TRUE)
+  x <- c(rep(5.01, 7), rep(6, 260), rep(3.6,7))
+  gss5_1 <- gss_vctr(x, ignore_truncation = TRUE)
+  expect_snapshot({
+    gss5
+    gss5_1
+  })
+})
+
+test_that("gss end with perfect temperature", {
+  x <- c(rep(5, 7), rep(6, 260), rep(4,7))
+  gss4 <- gss_vctr(x, ignore_truncation = TRUE)
+  x <- c(rep(5, 7), rep(6, 260), rep(4.01,7))
+  gss4_1 <- gss_vctr(x, ignore_truncation = TRUE)
+  expect_snapshot({
+    gss4
+    gss4_1
+  })
+})
+
 test_that("start temp must be greater than or equal to end temp", {
   x <- temperature_data$temperature
   expect_chk_error(gss_vctr(x, end_temp = 40, start_temp = 30))
