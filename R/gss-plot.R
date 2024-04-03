@@ -14,7 +14,7 @@ gss_plot <- function(
     start_date = as.Date("1972-03-01"), 
     end_date = as.Date("1972-11-30"), 
     min_length = NULL,
-    ignore_truncation = FALSE,
+    ignore_truncation = TRUE,
     start_temp = 5,
     end_temp = 4,
     window_width = 7,
@@ -50,7 +50,7 @@ gss_plot <- function(
     dplyr::filter(.data$dayte >= dttr2::dtt_dayte(start_date, start_date),
                   .data$dayte <= dttr2::dtt_dayte(end_date, start_date))
   
-  range <- range(data$temperature)
+  range <- range(data$temperature, na.rm = TRUE)
   gss$ymin <- min(c(0, range[1]))
   gss$ymax <- max(c(0, range[2]))
 
