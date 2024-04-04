@@ -103,7 +103,7 @@
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
-<p>The <code>gssd</code> package provides to calculate the GSSD, GDD and GSS from water temperature data.</p>
+<p>The <code>gssd</code> package provides functions to calculate the GSSD, GDD and GSS from water temperature data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/gsdd/" class="external-link">gsdd</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="reference/temperature_data.html">temperature_data</a></span></span>
@@ -119,51 +119,21 @@
 <span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1  2019 3605.</span></span>
 <span><span class="fu"><a href="reference/gss.html">gss</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 5</span></span>
 <span><span class="co">#&gt; # Groups:   year [1]</span></span>
-<span><span class="co">#&gt;    year start_dayte end_dayte   gsdd</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;date&gt;      &lt;date&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  2019 1971-03-20  1971-11-07 3899.</span></span></code></pre></div>
+<span><span class="co">#&gt;    year start_dayte end_dayte   gsdd truncation</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;date&gt;      &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt; 1  2019 1971-03-20  1971-11-07 3899. none</span></span></code></pre></div>
 <p>It also provides a function to calculate GSDD from a vector.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="reference/temperature_data.html">temperature_data</a></span><span class="op">$</span><span class="va">temperature</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/gsdd_vctr.html">gsdd_vctr</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3898.806</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="multiple-seasons">Multiple Seasons<a class="anchor" aria-label="anchor" href="#multiple-seasons"></a>
-</h3>
-<p>The user has the option to pick the <code>"first"</code>/<code>"last"</code> or <code>"longest"</code>/<code>"shortest"</code> season or the season with the <code>"biggest"</code>/<code>"smallest"</code> GSDD. If the user picks the <code>"longest"</code> season but there are multiple seasons with the longest length then the candidate season with the <code>"biggest"</code> GSDD is selected. Conversely in the case of multiple <code>"shortest"</code> seasons then the candidate with the <code>"smallest"</code> GSDD is selected.</p>
-<p>In most cases there will only be one season and the choice will be immaterial.</p>
-<p>However, consider the following edge case with two growing seasons.</p>
+<p>And to plot water temperature data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">temperature2</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/gss.html">gss</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
-<span><span class="co">#&gt; # Groups:   year [1]</span></span>
-<span><span class="co">#&gt;    year start_dayte end_dayte   gsdd</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;date&gt;      &lt;date&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  2019 1971-04-08  1971-06-04   500</span></span>
-<span><span class="co">#&gt; 2  2019 1971-07-15  1971-09-03   800</span></span></code></pre></div>
-<p>Different selection criteria result in very different answers. In fact choosing the longest season results in the lowest GSDD! It is for this reason that the <code>gsdd</code> package by default calculates the GSDD and GDD across <code>"all"</code> growing seasons.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/gsdd.html">gsdd</a></span><span class="op">(</span><span class="va">data</span>, pick <span class="op">=</span> <span class="st">"longest"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span><span class="co">#&gt;    year  gsdd</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  2019   500</span></span>
-<span><span class="fu"><a href="reference/gsdd.html">gsdd</a></span><span class="op">(</span><span class="va">data</span>, pick <span class="op">=</span> <span class="st">"shortest"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span><span class="co">#&gt;    year  gsdd</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  2019   800</span></span>
-<span><span class="fu"><a href="reference/gsdd.html">gsdd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span><span class="co">#&gt;    year  gsdd</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  2019  1300</span></span></code></pre></div>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gss_plot.html">gss_plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png"><!-- --></p>
 </div>
 </div>
 
