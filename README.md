@@ -59,8 +59,8 @@ remotes::install_github("poissonconsulting/gsdd")
 
 ## Implementation
 
-The `gssd` package provides to calculate the GSSD, GDD and GSS from
-water temperature data.
+The `gssd` package provides functions to calculate the GSSD, GDD and GSS
+from water temperature data.
 
 ``` r
 library(gsdd)
@@ -77,11 +77,11 @@ gdd(data)
 #>   <int> <dbl>
 #> 1  2019 3605.
 gss(data)
-#> # A tibble: 1 × 4
+#> # A tibble: 1 × 5
 #> # Groups:   year [1]
-#>    year start_dayte end_dayte   gsdd
-#>   <int> <date>      <date>     <dbl>
-#> 1  2019 1971-03-20  1971-11-07 3899.
+#>    year start_dayte end_dayte   gsdd truncation
+#>   <int> <date>      <date>     <dbl> <chr>     
+#> 1  2019 1971-03-20  1971-11-07 3899. none
 ```
 
 It also provides a function to calculate GSDD from a vector.
@@ -93,52 +93,10 @@ gsdd_vctr(x)
 #> [1] 3898.806
 ```
 
-### Multiple Seasons
-
-The user has the option to pick the `"first"`/`"last"` or
-`"longest"`/`"shortest"` season or the season with the
-`"biggest"`/`"smallest"` GSDD. If the user picks the `"longest"` season
-but there are multiple seasons with the longest length then the
-candidate season with the `"biggest"` GSDD is selected. Conversely in
-the case of multiple `"shortest"` seasons then the candidate with the
-`"smallest"` GSDD is selected.
-
-In most cases there will only be one season and the choice will be
-immaterial.
-
-However, consider the following edge case with two growing seasons.
+And to plot water temperature data.
 
 ``` r
-data$temperature <- data$temperature2
-
-gss(data)
-#> # A tibble: 2 × 4
-#> # Groups:   year [1]
-#>    year start_dayte end_dayte   gsdd
-#>   <int> <date>      <date>     <dbl>
-#> 1  2019 1971-04-08  1971-06-04   500
-#> 2  2019 1971-07-15  1971-09-03   800
+gss_plot(data)
 ```
 
-Different selection criteria result in very different answers. In fact
-choosing the longest season results in the lowest GSDD! It is for this
-reason that the `gsdd` package by default calculates the GSDD and GDD
-across `"all"` growing seasons.
-
-``` r
-gsdd(data, pick = "longest")
-#> # A tibble: 1 × 2
-#>    year  gsdd
-#>   <int> <dbl>
-#> 1  2019   500
-gsdd(data, pick = "shortest")
-#> # A tibble: 1 × 2
-#>    year  gsdd
-#>   <int> <dbl>
-#> 1  2019   800
-gsdd(data)
-#> # A tibble: 1 × 2
-#>    year  gsdd
-#>   <int> <dbl>
-#> 1  2019  1300
-```
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->

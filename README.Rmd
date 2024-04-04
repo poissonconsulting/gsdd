@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`gsdd` is an R package to calculate Growing Season Degree Days (GSDD),  Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature data.
+`gsdd` is an R package to calculate Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature data.
 
 GSSD is a water temperature metric that is a useful predictor of age-0 trout size at the beginning of winter. 
 It is the accumulated thermal units (in C) during the growing season based on the mean daily water temperature values.
@@ -54,7 +54,7 @@ remotes::install_github("poissonconsulting/gsdd")
 
 ## Implementation
 
-The `gssd` package provides to calculate the GSSD, GDD and GSS from water temperature data.
+The `gssd` package provides functions to calculate the GSSD, GDD and GSS from water temperature data.
 
 ```{r}
 library(gsdd)
@@ -72,26 +72,8 @@ x <- gsdd::temperature_data$temperature
 gsdd_vctr(x)
 ```
 
-### Multiple Seasons
+And to plot water temperature data.
 
-The user has the option to pick the `"first"`/`"last"` or  `"longest"`/`"shortest"` season or the season with the `"biggest"`/`"smallest"` GSDD.
-If the user picks the `"longest"` season but there are multiple seasons with the longest length then the candidate  season with the `"biggest"` GSDD is selected.
-Conversely in the case of multiple `"shortest"` seasons then the candidate with the `"smallest"` GSDD is selected.
-
-In most cases there will only be one season and the choice will be immaterial. 
-
-However, consider the following edge case with two growing seasons.
 ```{r}
-data$temperature <- data$temperature2
-
-gss(data)
-```
-
-Different selection criteria result in very different answers.
-In fact choosing the longest season results in the lowest GSDD!
-It is for this reason that the `gsdd` package by default calculates the GSDD and GDD across `"all"` growing seasons.
-```{r}
-gsdd(data, pick = "longest")
-gsdd(data, pick = "shortest")
-gsdd(data)
+gss_plot(data)
 ```
