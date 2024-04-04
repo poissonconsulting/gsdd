@@ -26,6 +26,14 @@ test_that("gss_plot ignore truncation", {
   expect_warning(expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), min_length = 120, msgs = FALSE, ignore_truncation = TRUE), "gss_plot4"), "missing values")
 })
 
+test_that("gss_plot two year facet", {
+  data <- gsdd::temperature_data
+  data$date <- dttr2::dtt_add_years(data$date, 4L)
+  data$temperature <- data$temperature + 0.5
+  data <- rbind(data, gsdd::temperature_data)
+  expect_snapshot_plot(gss_plot(data, ncol = 1), "gss_plot6")
+})
+
 # test_that("gss_plot wrap", {
 #   data <- gsdd::temperature_data
 #   expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), end_date = as.Date("1972-02-01")), "gss_plot5")

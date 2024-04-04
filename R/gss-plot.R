@@ -19,6 +19,8 @@ gss_plot <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
+    nrow = NULL,
+    ncol = NULL,
     msgs = TRUE) {
   
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
@@ -27,6 +29,9 @@ gss_plot <- function(
       call. = FALSE
     )
   }
+  
+  chk_null_or(nrow, vld = vld_count)
+  chk_null_or(ncol, vld = vld_count)
   
   gss <- .gss(
     x, 
@@ -69,7 +74,7 @@ gss_plot <- function(
   gss$ymax <- max(c(0, range[2]))
   
   gp <- ggplot2::ggplot(data = data) +
-    ggplot2::facet_wrap(~.data$year) +
+    ggplot2::facet_wrap(~.data$year, nrow = nrow, ncol = ncol) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
                         color = "#E8613C") +
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),

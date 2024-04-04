@@ -14,6 +14,8 @@ gss_plot(
   end_temp = 4,
   window_width = 7,
   pick = "all",
+  nrow = NULL,
+  ncol = NULL,
   msgs = TRUE
 )
 }
@@ -56,6 +58,10 @@ width of the rolling mean window in days. By default 7.}
 "longest", "shortest", "first" or "last" 'season' or the season with the
 "biggest" or "smallest" GSDD. By default the returned value is the
 the GSDD value for the "longest" 'season'.}
+
+\item{nrow}{A count of the number of rows to facet by.}
+
+\item{ncol}{A count of the number of columns to facet by.}
 
 \item{msgs}{A flag specifying whether to provide messages.}
 }

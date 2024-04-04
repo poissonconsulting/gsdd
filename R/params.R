@@ -16,6 +16,8 @@
 #' If NULL then set to be the difference between `start_date` and `end_date`
 #' (ignoring the year).
 #' @param msgs A flag specifying whether to provide messages.
+#' @param ncol A count of the number of columns to facet by.
+#' @param nrow A count of the number of rows to facet by.
 #' @param pick A string specifying whether to pick the
 #' "longest", "shortest", "first" or "last" 'season' or the season with the
 #' "biggest" or "smallest" GSDD. By default the returned value is the

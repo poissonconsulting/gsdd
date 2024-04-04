@@ -24,6 +24,10 @@ If NULL then set to be the difference between \code{start_date} and \code{end_da
 
 \item{msgs}{A flag specifying whether to provide messages.}
 
+\item{ncol}{A count of the number of columns to facet by.}
+
+\item{nrow}{A count of the number of rows to facet by.}
+
 \item{pick}{A string specifying whether to pick the
 "longest", "shortest", "first" or "last" 'season' or the season with the
 "biggest" or "smallest" GSDD. By default the returned value is the
