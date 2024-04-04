@@ -44,7 +44,8 @@ gss_plot <- function(
     x,
     start_date = start_date, 
     end_date = end_date, 
-    window_width = window_width)
+    window_width = window_width) |>
+    dplyr::mutate(series = "Moving")
   
   start_end_temperature <- tibble::tibble(
     temperature = c(start_temp, end_temp),
@@ -54,7 +55,10 @@ gss_plot <- function(
   data <- x |>
     dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start_date)) |>
     dplyr::filter(.data$dayte >= dttr2::dtt_dayte(start_date, start_date),
-                  .data$dayte <= dttr2::dtt_dayte(end_date, start_date))
+                  .data$dayte <= dttr2::dtt_dayte(end_date, start_date)) |>
+    dplyr::mutate(series = "Daily") |>
+    dplyr::bind_rows(rollmean) |>
+    dplyr::mutate(series = factor(.data$series, c("Daily", "Moving")))
   
   range <- range(data$temperature, na.rm = TRUE)
   gss$ymin <- min(c(0, range[1]))
@@ -62,17 +66,16 @@ gss_plot <- function(
 
   gp <- ggplot2::ggplot(data = data) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
-                        color = "red") +
+                        color = "#E8613C") +
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
                        alpha = 1/4) +
-    ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature)) +
-    ggplot2::geom_line(data = rollmean, ggplot2::aes(x = .data$dayte, y = .data$temperature)) +
+    ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature, group = .data$series, color = .data$series)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
     ggplot2::scale_y_continuous("Water Temperature (C)") +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
+    ggplot2::scale_color_manual("Series", values = c("#3063A3", "black")) +
     ggplot2::expand_limits(y = 0) +
     NULL
 
   gp  
 }
-
