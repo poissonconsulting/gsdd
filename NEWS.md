@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# gsdd 0.0.2.9000
+# gsdd 0.1.0
 
 - Added `gss_plot()` to output ggplot object of temperature time series.
 
