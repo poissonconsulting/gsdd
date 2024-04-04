@@ -34,7 +34,21 @@ test_that("gss_plot two year facet", {
   expect_snapshot_plot(gss_plot(data, ncol = 1), "gss_plot6")
 })
 
-# test_that("gss_plot wrap", {
-#   data <- gsdd::temperature_data
-#   expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), end_date = as.Date("1972-02-01")), "gss_plot5")
-# })
+test_that("gss_plot wrap cut year", {
+  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-06-01"), end_date = as.Date("1972-11-01"), min_length = 120), "gss_plot8")
+})
+
+test_that("gss_plot wrap cut year dec", {
+  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-06-01"), end_date = as.Date("1972-12-31"), min_length = 120), "gss_plot9")
+})
+
+test_that("gss_plot wrap feb 28st", {
+  skip("need to fix wrapping on year")
+  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-02-15"), end_date = as.Date("1972-01-15"), min_length = 120), "gss_plot10")
+})
+
+test_that("gss_plot exclude feb 1st", {
+  skip("need to fix wrapping on year")
+  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-06-01"), end_date = as.Date("1972-02-15"), min_length = 120), "gss_plot11")
+})
+
