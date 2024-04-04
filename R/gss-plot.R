@@ -51,10 +51,13 @@ gss_plot <- function(
   start_end_temperature <- tibble::tibble(
     temperature = c(start_temp, end_temp),
     threshold = factor(c("Start", "End"), c("Start", "End"))
-    )
+  )
   
   data <- x |>
-    dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start_date)) |>
+    dplyr::mutate(year = dttr2::dtt_study_year(.data$date, start = start_date),
+                  year = stringr::str_extract(.data$year, "^\\d{4,4}"),
+                  year = as.integer(.data$year),
+                  dayte = dttr2::dtt_dayte(.data$date, start_date)) |>
     dplyr::filter(.data$dayte >= dttr2::dtt_dayte(start_date, start_date),
                   .data$dayte <= dttr2::dtt_dayte(end_date, start_date)) |>
     dplyr::mutate(series = "Daily") |>
@@ -64,8 +67,9 @@ gss_plot <- function(
   range <- range(data$temperature, na.rm = TRUE)
   gss$ymin <- min(c(0, range[1]))
   gss$ymax <- max(c(0, range[2]))
-
+  
   gp <- ggplot2::ggplot(data = data) +
+    ggplot2::facet_wrap(~.data$year) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
                         color = "#E8613C") +
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
@@ -77,6 +81,6 @@ gss_plot <- function(
     ggplot2::scale_color_manual("Series", values = c("#3063A3", "black")) +
     ggplot2::expand_limits(y = 0) +
     NULL
-
+  
   gp  
 }

@@ -11,16 +11,16 @@ test_that("gss_plot", {
 test_that("gss_plot shifted", {
   data <- gsdd::temperature_data
   data$temperature[1:100] <- NA_real_
-  expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), min_length = 120, msgs = FALSE), "gss_plot3")
+  expect_warning(expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), min_length = 120, msgs = FALSE), "gss_plot3"), "missing values")
 })
 
 test_that("gss_plot ignore truncation", {
   data <- gsdd::temperature_data
   data$temperature[1:100] <- NA_real_
-  expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), min_length = 120, msgs = FALSE, ignore_truncation = TRUE), "gss_plot4")
+  expect_warning(expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), min_length = 120, msgs = FALSE, ignore_truncation = TRUE), "gss_plot4"), "missing values")
 })
 
 # test_that("gss_plot wrap", {
 #   data <- gsdd::temperature_data
-#   expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), end_date = as.Date("1972-02-01")), "gss_plot4")
+#   expect_snapshot_plot(gss_plot(data, start_date = as.Date("1972-03-01"), end_date = as.Date("1972-02-01")), "gss_plot5")
 # })
