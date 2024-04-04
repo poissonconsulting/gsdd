@@ -5,7 +5,8 @@
                       end_temp,
                       window_width,
                       pick,
-                      msgs) {
+                      msgs,
+                      .rollmean = FALSE) {
   chk_numeric(x)
   chk_vector(x)
   chk_lte(length(x), 366)
@@ -33,6 +34,7 @@
     c("biggest", "smallest", "longest", "shortest", "first", "last", "all"))
   
   chk_flag(msgs)
+  chk_flag(.rollmean)
   
   if(length(x) < min_length) {
     if (msgs) {
@@ -52,6 +54,11 @@
   # create rolling mean vector from x and window width
   rollmean <- zoo::rollmean(x = x, k = window_width)
   length_rollmean <- length(rollmean)
+  if(.rollmean) {
+    pad <- floor(window_width / 2)
+    index <- seq_len(length_rollmean) + pad
+    return(tibble::tibble(index = index, temperature = rollmean))
+  }
   
   # pick which indices have values above start temp that begin runs
   start_index <- index_begin_run(rollmean > start_temp)
@@ -116,6 +123,58 @@
       start_index = .data$start_index + run[1] - 1L,
       end_index = .data$end_index + run[1] - 1L) |>
     dplyr::arrange(.data$start_index)
+}
+
+.roll_mean <- function(
+    x, 
+    start_date, 
+    end_date, 
+    window_width) {
+  check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
+  chk_date(start_date)
+  chk_date(end_date)
+  
+  end_dayte <- dttr2::dtt_dayte(end_date, start_date)
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
+  
+  x <- x |>
+    dplyr::mutate(
+      date = dttr2::dtt_date(.data$date)) |>
+    check_key("date", x_name = "x") |>
+    dplyr::arrange(.data$date)
+  
+  x <- x |>
+    dplyr::mutate(
+      year = dttr2::dtt_study_year(.data$date, start = start_date),
+      year = stringr::str_extract(.data$year, "^\\d{4,4}"),
+      year = as.integer(.data$year),
+      dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
+    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
+    dplyr::group_by(.data$year) |>
+    dplyr::arrange(.data$dayte)
+  
+  x <- x |>
+    dplyr::group_modify(~gss_vctr(
+      .x$temperature,
+      ignore_truncation = TRUE, 
+      min_length = window_width * 2,
+      start_temp = 5,
+      end_temp = 4, 
+      window_width = window_width, 
+      msgs = FALSE,
+      .rollmean = TRUE), .keep = TRUE)
+  
+  if(!nrow(x)) {
+    return(tibble::tibble(year = integer(), dayte = as.Date(integer()),
+                          temperature = numeric()))
+  }
+  x <- x |>
+    dplyr::mutate(.start_dayte = start_dayte,
+                  dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$index - 1L)
+    ) |>
+    dplyr::select("year", "dayte", "temperature")
+  
+  return(x)
 }
 
 .gss <- function(

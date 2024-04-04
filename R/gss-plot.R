@@ -40,6 +40,12 @@ gss_plot <- function(
     pick = pick,
     msgs = msgs)
   
+  rollmean <- .roll_mean(
+    x,
+    start_date = start_date, 
+    end_date = end_date, 
+    window_width = window_width)
+  
   start_end_temperature <- tibble::tibble(
     temperature = c(start_temp, end_temp),
     threshold = factor(c("Start", "End"), c("Start", "End"))
@@ -60,6 +66,7 @@ gss_plot <- function(
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
                        alpha = 1/4) +
     ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature)) +
+    ggplot2::geom_line(data = rollmean, ggplot2::aes(x = .data$dayte, y = .data$temperature)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
     ggplot2::scale_y_continuous("Water Temperature (C)") +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
