@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# gsdd 0.0.2.9000
+
+- Added `gss_plot()` to output ggplot object of temperature time series.
+
+
 # gsdd 0.0.2
 
 - Added `truncation` column to output of `gss()` to indicate if season truncated.
