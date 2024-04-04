@@ -11,7 +11,7 @@ test_that("gss_plot", {
 test_that("gss_plot pick longest", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2
-  expect_snapshot_plot(gss_plot(data, pick = "longest"), "gss_plot2")
+  expect_snapshot_plot(gss_plot(data, pick = "longest"), "gss_plot5")
 })
 
 test_that("gss_plot shifted", {
