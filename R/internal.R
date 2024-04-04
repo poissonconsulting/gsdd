@@ -56,7 +56,7 @@
   length_rollmean <- length(rollmean)
   if(.rollmean) {
     pad <- floor(window_width / 2)
-    index <- seq_len(length_rollmean) + pad
+    index <- seq_len(length_rollmean) + pad + run[1] - 1L
     return(tibble::tibble(index = index, temperature = rollmean))
   }
   
@@ -171,7 +171,7 @@
   x <- x |>
     dplyr::mutate(.start_dayte = start_dayte,
                   dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$index - 1L)
-    ) |>
+    ) |> 
     dplyr::select("year", "dayte", "temperature")
   
   return(x)

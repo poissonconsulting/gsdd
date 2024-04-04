@@ -9,7 +9,7 @@ gss_plot(
   start_date = as.Date("1972-03-01"),
   end_date = as.Date("1972-11-30"),
   min_length = NULL,
-  ignore_truncation = TRUE,
+  ignore_truncation = FALSE,
   start_temp = 5,
   end_temp = 4,
   window_width = 7,

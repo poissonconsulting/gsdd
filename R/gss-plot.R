@@ -14,7 +14,7 @@ gss_plot <- function(
     start_date = as.Date("1972-03-01"), 
     end_date = as.Date("1972-11-30"), 
     min_length = NULL,
-    ignore_truncation = TRUE,
+    ignore_truncation = FALSE,
     start_temp = 5,
     end_temp = 4,
     window_width = 7,
@@ -45,7 +45,8 @@ gss_plot <- function(
     start_date = start_date, 
     end_date = end_date, 
     window_width = window_width) |>
-    dplyr::mutate(series = "Moving")
+    dplyr::mutate(series = "Moving") |>
+    dplyr::filter(!is.na(.data$temperature))
   
   start_end_temperature <- tibble::tibble(
     temperature = c(start_temp, end_temp),
