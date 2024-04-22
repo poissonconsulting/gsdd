@@ -149,8 +149,8 @@
       year = stringr::str_extract(.data$year, "^\\d{4,4}"),
       year = as.integer(.data$year),
       dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
-    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
     dplyr::group_by(.data$year) |>
+    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
     dplyr::arrange(.data$dayte)
   
   x <- x |>
@@ -209,8 +209,8 @@
       year = stringr::str_extract(.data$year, "^\\d{4,4}"),
       year = as.integer(.data$year),
       dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
-    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
     dplyr::group_by(.data$year) |>
+    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
     dplyr::arrange(.data$dayte)
   
   if(is.null(min_length)) {
