@@ -125,6 +125,15 @@
     dplyr::arrange(.data$start_index)
 }
 
+complete_dates <- function(x, start_date, start_dayte, end_dayte) {
+  x <- x |>
+    dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
+    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
+    dplyr::arrange(.data$dayte)
+  
+  x
+}
+
 .roll_mean <- function(
     x, 
     start_date, 
@@ -147,13 +156,9 @@
     dplyr::mutate(
       year = dttr2::dtt_study_year(.data$date, start = start_date),
       year = stringr::str_extract(.data$year, "^\\d{4,4}"),
-      year = as.integer(.data$year),
-      dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
+      year = as.integer(.data$year)) |>
     dplyr::group_by(.data$year) |>
-    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
-    dplyr::arrange(.data$dayte)
-  
-  x <- x |>
+    dplyr::group_modify(~complete_dates(.x, start_date, start_dayte, end_dayte)) |>
     dplyr::group_modify(~gss_vctr(
       .x$temperature,
       ignore_truncation = TRUE, 
@@ -207,11 +212,9 @@
     dplyr::mutate(
       year = dttr2::dtt_study_year(.data$date, start = start_date),
       year = stringr::str_extract(.data$year, "^\\d{4,4}"),
-      year = as.integer(.data$year),
-      dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
+      year = as.integer(.data$year)) |>
     dplyr::group_by(.data$year) |>
-    dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
-    dplyr::arrange(.data$dayte)
+    dplyr::group_modify(~complete_dates(.x, start_date, start_dayte, end_dayte))
   
   if(is.null(min_length)) {
     min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
