@@ -45,12 +45,14 @@ gss_plot <- function(
     pick = pick,
     msgs = msgs)
   
+  moving <- paste(window_width, "Day")
+  
   rollmean <- .roll_mean(
     x,
     start_date = start_date, 
     end_date = end_date, 
     window_width = window_width) |>
-    dplyr::mutate(series = "Moving") |>
+    dplyr::mutate(series = moving) |>
     dplyr::filter(!is.na(.data$temperature))
   
   start_end_temperature <- tibble::tibble(
@@ -67,7 +69,7 @@ gss_plot <- function(
                   .data$dayte <= dttr2::dtt_dayte(end_date, start_date)) |>
     dplyr::mutate(series = "Daily") |>
     dplyr::bind_rows(rollmean) |>
-    dplyr::mutate(series = factor(.data$series, c("Daily", "Moving")))
+    dplyr::mutate(series = factor(.data$series, c("Daily", moving)))
   
   range <- range(data$temperature, na.rm = TRUE)
   gss$ymin <- min(c(0, range[1]))
@@ -83,8 +85,9 @@ gss_plot <- function(
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
     ggplot2::scale_y_continuous("Water Temperature (C)") +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
-    ggplot2::scale_color_manual("Series", values = c("#3063A3", "black")) +
+    ggplot2::scale_color_manual("Mean", values = c("#3063A3", "black")) +
     ggplot2::expand_limits(y = 0) +
+    ggplot2::guides(color = ggplot2::guide_legend(order = 1)) +
     NULL
   
   gp  
