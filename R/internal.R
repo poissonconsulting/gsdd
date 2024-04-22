@@ -125,10 +125,31 @@
     dplyr::arrange(.data$start_index)
 }
 
-dayte_seq <- function(start_dayte, end_dayte, first_date) {
-  leap_day <- dttr2::dtt_dayte(dttr2::dtt_date("1972-02-29"))
-  seq <- dttr2::dtt_seq(start_dayte, end_dayte)
-  seq
+leap_study_year <- function(first_date, start_date) {
+  study_year <- dttr2::dtt_study_year(first_date, start_date)
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
+  
+  before <- dttr2::dtt_year(start_dayte) == 1972L
+  
+  regex <- if(before) "^\\d{4,4}" else "\\d{4,4}$"
+  
+  year <- stringr::str_extract(study_year, regex) |>
+    as.integer()
+
+  (year%%4 == 0) & ((year%%100 != 0) | (year%%400 == 0))
+}
+
+dayte_seq <- function(start_date, end_date, first_date) {
+  end_dayte <- dttr2::dtt_dayte(end_date, start_date)
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
+  x <- dplyr::tibble(dayte = dttr2::dtt_seq(start_dayte, end_dayte))
+  
+  if(!leap_study_year(first_date, start_date)) {
+    leap_dayte <- dttr2::dtt_date("1972-02-29")
+    x <- x |> 
+      dplyr::filter(.data$dayte != leap_dayte) 
+  }
+  x
 }
 
 complete_dates <- function(x, start_date, end_date) {
@@ -136,11 +157,12 @@ complete_dates <- function(x, start_date, end_date) {
   end_dayte <- dttr2::dtt_dayte(end_date, start_date)
   start_dayte <- dttr2::dtt_dayte(start_date, start_date)
   
-  y <- dplyr::tibble(dayte = dayte_seq(start_dayte, end_dayte, min(x$date)))
+  y <- dayte_seq(start_date, end_date, min(x$date))
   
   x <- x |>
     dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
     dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
+#    dplyr::right_join(y, by = "dayte") |>
     dplyr::arrange(.data$dayte)
 
   x
@@ -166,8 +188,8 @@ complete_dates <- function(x, start_date, end_date) {
   
   x <- x |>
     dplyr::mutate(
-      study_year = dttr2::dtt_study_year(.data$date, start = start_date),
-      year = stringr::str_extract(.data$study_year, "^\\d{4,4}"),
+      year = dttr2::dtt_study_year(.data$date, start = start_date),
+      year = stringr::str_extract(.data$year, "^\\d{4,4}"),
       year = as.integer(.data$year)) |>
     dplyr::group_by(.data$year) |>
     dplyr::group_modify(~complete_dates(.x, start_date, end_date)) |>
@@ -222,8 +244,8 @@ complete_dates <- function(x, start_date, end_date) {
   
   x <- x |>
     dplyr::mutate(
-      study_year = dttr2::dtt_study_year(.data$date, start = start_date),
-      year = stringr::str_extract(.data$study_year, "^\\d{4,4}"),
+      year = dttr2::dtt_study_year(.data$date, start = start_date),
+      year = stringr::str_extract(.data$year, "^\\d{4,4}"),
       year = as.integer(.data$year)) |>
     dplyr::group_by(.data$year) |>
     dplyr::group_modify(~complete_dates(.x, start_date, end_date))
