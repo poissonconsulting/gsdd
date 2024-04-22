@@ -75,12 +75,26 @@ gss_plot <- function(
   gss$ymin <- min(c(0, range[1]))
   gss$ymax <- max(c(0, range[2]))
   
+  gss_start <- gss |>
+    dplyr::filter(!.data$truncation %in% c("both", "start"))
+  
+  gss_end <- gss |>
+    dplyr::filter(!.data$truncation %in% c("both", "end"))
+  
   gp <- ggplot2::ggplot(data = data) +
     ggplot2::facet_wrap(~.data$year, nrow = nrow, ncol = ncol) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
                         color = "#E8613C") +
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
                        alpha = 1/4) +
+    ggplot2::geom_segment(data = gss, ggplot2::aes(x = .data$start_dayte, xend = .data$end_dayte, y = .data$ymin),
+                       alpha = 1/2) +
+    ggplot2::geom_segment(data = gss, ggplot2::aes(x = .data$start_dayte, xend = .data$end_dayte, y = .data$ymax),
+                          alpha = 1/2) +
+    ggplot2::geom_segment(data = gss_start, ggplot2::aes(y = .data$ymin, yend = .data$ymax, x = .data$start_dayte),
+                          alpha = 1/2) +
+    ggplot2::geom_segment(data = gss_end, ggplot2::aes(y = .data$ymin, yend = .data$ymax, x = .data$end_dayte),
+                          alpha = 1/2) +
     ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature, group = .data$series, color = .data$series)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
     ggplot2::scale_y_continuous("Water Temperature (C)") +
