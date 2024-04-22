@@ -125,12 +125,24 @@
     dplyr::arrange(.data$start_index)
 }
 
-complete_dates <- function(x, start_date, start_dayte, end_dayte) {
+dayte_seq <- function(start_dayte, end_dayte, first_date) {
+  leap_day <- dttr2::dtt_dayte(dttr2::dtt_date("1972-02-29"))
+  seq <- dttr2::dtt_seq(start_dayte, end_dayte)
+  seq
+}
+
+complete_dates <- function(x, start_date, end_date) {
+  
+  end_dayte <- dttr2::dtt_dayte(end_date, start_date)
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
+  
+  y <- dplyr::tibble(dayte = dayte_seq(start_dayte, end_dayte, min(x$date)))
+  
   x <- x |>
     dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
     dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
     dplyr::arrange(.data$dayte)
-  
+
   x
 }
 
@@ -154,11 +166,11 @@ complete_dates <- function(x, start_date, start_dayte, end_dayte) {
   
   x <- x |>
     dplyr::mutate(
-      year = dttr2::dtt_study_year(.data$date, start = start_date),
-      year = stringr::str_extract(.data$year, "^\\d{4,4}"),
+      study_year = dttr2::dtt_study_year(.data$date, start = start_date),
+      year = stringr::str_extract(.data$study_year, "^\\d{4,4}"),
       year = as.integer(.data$year)) |>
     dplyr::group_by(.data$year) |>
-    dplyr::group_modify(~complete_dates(.x, start_date, start_dayte, end_dayte)) |>
+    dplyr::group_modify(~complete_dates(.x, start_date, end_date)) |>
     dplyr::group_modify(~gss_vctr(
       .x$temperature,
       ignore_truncation = TRUE, 
@@ -210,11 +222,11 @@ complete_dates <- function(x, start_date, start_dayte, end_dayte) {
   
   x <- x |>
     dplyr::mutate(
-      year = dttr2::dtt_study_year(.data$date, start = start_date),
-      year = stringr::str_extract(.data$year, "^\\d{4,4}"),
+      study_year = dttr2::dtt_study_year(.data$date, start = start_date),
+      year = stringr::str_extract(.data$study_year, "^\\d{4,4}"),
       year = as.integer(.data$year)) |>
     dplyr::group_by(.data$year) |>
-    dplyr::group_modify(~complete_dates(.x, start_date, start_dayte, end_dayte))
+    dplyr::group_modify(~complete_dates(.x, start_date, end_date))
   
   if(is.null(min_length)) {
     min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
