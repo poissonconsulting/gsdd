@@ -314,8 +314,12 @@ test_that("gss not shift", {
       -0.02625, -0.101979166666667, -0.185677083333333, -0.173229166666667, 
       -0.321458333333333, -0.395, -0.394791666666667)), 
     row.names = c(NA, -212L), class = c("tbl_df", "tbl", "data.frame"))
+
+  gss <- gss(data, min_length = 60)
   
-  skip()
-  gss(data, min_length = 60)
+  expect_snapshot({
+    gss
+  })
+  
   gss_plot(data, min_length = 60)
 })

@@ -295,3 +295,14 @@
         <int> <date>      <date>     <dbl> <chr>     
       1  2019 1971-03-01  1971-11-30  1650 both      
 
+# gss not shift
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 5
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd truncation
+        <int> <date>      <date>     <dbl> <chr>     
+      1  2019 1971-06-08  1971-09-29  738. none      
+

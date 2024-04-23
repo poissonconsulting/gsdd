@@ -135,7 +135,7 @@ leap_study_year <- function(first_date, start_date) {
   
   year <- stringr::str_extract(study_year, regex) |>
     as.integer()
-
+  
   (year%%4 == 0) & ((year%%100 != 0) | (year%%400 == 0))
 }
 
@@ -156,13 +156,20 @@ complete_dates <- function(x, start_date, end_date) {
   
   end_dayte <- dttr2::dtt_dayte(end_date, start_date)
   start_dayte <- dttr2::dtt_dayte(start_date, start_date)
-  
-  y <- dayte_seq(start_date, end_date, min(x$date))
-  
+
   x <- x |>
     dplyr::mutate(dayte = dttr2::dtt_dayte(.data$date, start = start_date)) |>
     dplyr::filter(.data$dayte >= start_dayte, .data$dayte <= end_dayte) |>
-#    dplyr::right_join(y, by = "dayte") |>
+    dplyr::arrange(.data$dayte)
+    
+  if(!nrow(x)) {
+    return(x)
+  }
+  
+  y <- dayte_seq(start_date, end_date, min(x$date))
+
+  x <- x |>
+    dplyr::right_join(y, by = "dayte") |>
     dplyr::arrange(.data$dayte)
 
   x
