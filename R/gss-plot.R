@@ -8,7 +8,9 @@
 #' @export
 #'
 #' @examples
-#' gss_plot(gsdd::temperature_data)
+#' \dontrun {
+#'   gss_plot(gsdd::temperature_data)
+#' }
 gss_plot <- function(
     x, 
     start_date = as.Date("1972-03-01"), 

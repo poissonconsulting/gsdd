@@ -72,7 +72,9 @@ A ggplot object.
 Plots the growing seasons in a year.
 }
 \examples{
-gss_plot(gsdd::temperature_data)
+\dontrun {
+  gss_plot(gsdd::temperature_data)
+}
 }
 \seealso{
 \code{\link[=gss]{gss()}}
