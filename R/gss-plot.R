@@ -32,6 +32,13 @@ gss_plot <- function(
     )
   }
   
+  if (!requireNamespace("latex2exp", quietly = TRUE)) {
+    stop(
+      "Package \"latex2exp\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  
   chk_null_or(nrow, vld = vld_count)
   chk_null_or(ncol, vld = vld_count)
   
