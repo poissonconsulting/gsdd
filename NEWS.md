@@ -3,7 +3,7 @@
 # gsdd 0.1.0.9000
 
 -  Added `complete = FALSE` argument to `gsdd_vctr()` and `gss_vctr()` to specify whether the vector of water temperatures represents the complete growing period.
-- Modified `gsdd()`, `gss()` and `gss_plot()` so that a growing season is not considered to be truncated at the start and/or end if the water temperature is above the threshold at the start and/or end dates.
+- Modified `gsdd()`, `gdd()`, `gss()` and `gss_plot()` so that a growing season is not considered to be truncated at the start and/or end if the water temperature is above the threshold at the start and/or end dates.
 - Modified `gss_plot()` so
   - growing season now includes border to indicate if truncated.
   - x-axis now always includes start and end dates.
