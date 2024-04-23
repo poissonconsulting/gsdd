@@ -60,13 +60,16 @@ gss_plot <- function(
     threshold = factor(c("Start", "End"), c("Start", "End"))
   )
   
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
+  end_dayte <- dttr2::dtt_dayte(end_date, start_date)
+  
   data <- x |>
     dplyr::mutate(year = dttr2::dtt_study_year(.data$date, start = start_date),
                   year = stringr::str_extract(.data$year, "^\\d{4,4}"),
                   year = as.integer(.data$year),
                   dayte = dttr2::dtt_dayte(.data$date, start_date)) |>
-    dplyr::filter(.data$dayte >= dttr2::dtt_dayte(start_date, start_date),
-                  .data$dayte <= dttr2::dtt_dayte(end_date, start_date)) |>
+    dplyr::filter(.data$dayte >= start_dayte,
+                  .data$dayte <= end_dayte) |>
     dplyr::mutate(series = "Daily") |>
     dplyr::bind_rows(rollmean) |>
     dplyr::mutate(series = factor(.data$series, c("Daily", moving)))
