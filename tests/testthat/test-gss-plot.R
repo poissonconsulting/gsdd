@@ -133,3 +133,10 @@ test_that("gss_plot not shift", {
   
   expect_warning(expect_snapshot_plot(gss_plot(data, min_length = 60), "gss_plot12"))
 })
+
+
+test_that("gss_plot starts above 5", {
+  data <- gsdd::temperature_data
+  data <- data[-(1:85),]
+  expect_snapshot_plot(gss_plot(data, min_length = 60, ignore_truncation = TRUE), "gss_plot13")
+})
