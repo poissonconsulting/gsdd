@@ -20,7 +20,7 @@ temperature data.
 
 GSSD is a water temperature metric that is a useful predictor of age-0
 trout size at the beginning of winter. It is the accumulated thermal
-units (in C) during the growing season based on the mean daily water
+units (in °C) during the growing season based on the mean daily water
 temperature values. GDD is the GSSD to a particular date.
 
 The GSDD is calculated across the longest consecutive sequence of
@@ -84,7 +84,15 @@ gss(data)
 #> 1  2019 1971-03-20  1971-11-07 3899. none
 ```
 
-It also provides a function to calculate GSDD from a vector.
+It also provides a function to plot water temperature data.
+
+``` r
+gss_plot(data)
+```
+
+![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
+
+And to calculate GSDD from a vector.
 
 ``` r
 x <- gsdd::temperature_data$temperature
@@ -92,11 +100,3 @@ x <- gsdd::temperature_data$temperature
 gsdd_vctr(x)
 #> [1] 3898.806
 ```
-
-And to plot water temperature data.
-
-``` r
-gss_plot(data)
-```
-
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->

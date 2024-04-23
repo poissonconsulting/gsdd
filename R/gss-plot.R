@@ -100,7 +100,7 @@ gss_plot <- function(
                           alpha = 1/2) +
     ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature, group = .data$series, color = .data$series)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
-    ggplot2::scale_y_continuous("Water Temperature (C)") +
+    ggplot2::scale_y_continuous(latex2exp::TeX("Water Temperature $($$^{\\circ}C)$")) +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
     ggplot2::scale_color_manual("Mean", values = c("#3063A3", "black")) +
     ggplot2::expand_limits(x = c(start_dayte, end_dayte), y = 0) +

@@ -26,6 +26,7 @@ Imports:
     chk,
     dplyr,
     dttr2,
+    latex2exp,
     purrr,
     rlang,
     stringr,
