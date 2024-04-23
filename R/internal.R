@@ -71,8 +71,8 @@
     return(0)
   }
   # if season starts on first day, ignore_truncation left
-  if (!complete_start && start_index[1] == 1L) {
-    if (ignore_truncation %in% c("none", "end")) {
+  if (start_index[1] == 1L) {
+    if (!complete_start && ignore_truncation %in% c("none", "end")) {
       if (msgs) {
         msg("The growing season is truncated at the start of the sequence.")
       }
@@ -83,7 +83,7 @@
   end_index <- index_begin_run(rollmean < end_temp)
   # if season doesnt end ignore_truncation right
   if (!length(end_index) || max(start_index) > max(end_index)) {
-    if (ignore_truncation %in% c("none", "start")) {
+    if (!complete_end && ignore_truncation %in% c("none", "start")) {
       if (msgs) {
         msg("The growing season is truncated at the end of the sequence.")
       }
@@ -109,9 +109,9 @@
       end_index = .data$end_index + (as.integer(window_width) - 1L),
       ndays = .data$end_index - .data$start_index + 1L,
       truncation = dplyr::case_when(
-        !complete_start & start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp ~ "both",
-        !complete_start & start_index == 1L ~ "start",
-        end_index == length_x & rollmean[length_rollmean] > end_temp ~ "end",
+        start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp & !complete_start & !complete_end ~ "both",
+        start_index == 1L & !complete_start ~ "start",
+        end_index == length_x & rollmean[length_rollmean] > end_temp & !complete_end ~ "end",
         TRUE ~ "none")
     ) |>
     dplyr::mutate(gsdd = purrr::map2_dbl(
