@@ -4,6 +4,12 @@
 \alias{params}
 \title{Parameters for functions}
 \arguments{
+\item{complete}{A flag specifying whether the vector of water temperatures
+represents the complete possible growing period (by default FALSE).
+If TRUE a growing season is not considered to be truncated
+at the start and/or end if the water temperature is above the threshold
+at the start and/or ends.}
+
 \item{end_date}{A Date scalar of the last date
 within each year to consider (the year is ignored).}
 

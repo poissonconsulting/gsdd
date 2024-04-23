@@ -323,3 +323,15 @@ test_that("gss not shift", {
   
   gss_plot(data, min_length = 60)
 })
+
+test_that("gss above from start to finish", {
+  data <- gsdd::temperature_data
+  data$temperature <- 6
+  gss_ignore <- gss(data, ignore_truncation = TRUE)
+  gss <- gss(data)
+  expect_snapshot({
+    gss_ignore
+    gss
+  })
+})
+

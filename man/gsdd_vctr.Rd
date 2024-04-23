@@ -12,6 +12,7 @@ gsdd_vctr(
   end_temp = 4,
   window_width = 7,
   pick = "all",
+  complete = FALSE,
   msgs = TRUE
 )
 }
@@ -45,6 +46,12 @@ width of the rolling mean window in days. By default 7.}
 "longest", "shortest", "first" or "last" 'season' or the season with the
 "biggest" or "smallest" GSDD. By default the returned value is the
 the GSDD value for the "longest" 'season'.}
+
+\item{complete}{A flag specifying whether the vector of water temperatures
+represents the complete possible growing period (by default FALSE).
+If TRUE a growing season is not considered to be truncated
+at the start and/or end if the water temperature is above the threshold
+at the start and/or ends.}
 
 \item{msgs}{A flag specifying whether to provide messages.}
 }

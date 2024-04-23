@@ -5,6 +5,7 @@
                       end_temp,
                       window_width,
                       pick,
+                      complete,
                       msgs,
                       .rollmean = FALSE) {
   chk_numeric(x)
@@ -32,7 +33,7 @@
   chk_subset(
     pick, 
     c("biggest", "smallest", "longest", "shortest", "first", "last", "all"))
-  
+  chk_flag(complete)
   chk_flag(msgs)
   chk_flag(.rollmean)
   
@@ -43,6 +44,8 @@
     return(NA_real_)
   }
   run <- longest_run(x)
+  complete_start <- complete & run[1] == 1L
+  complete_end <- complete & run[length(run)] == length(x)
   x <- x[run]
   length_x <- length(x)
   if(length_x < min_length || anyNA(x)) {
@@ -68,7 +71,7 @@
     return(0)
   }
   # if season starts on first day, ignore_truncation left
-  if (start_index[1] == 1L) {
+  if (!complete_start && start_index[1] == 1L) {
     if (ignore_truncation %in% c("none", "end")) {
       if (msgs) {
         msg("The growing season is truncated at the start of the sequence.")
@@ -106,8 +109,8 @@
       end_index = .data$end_index + (as.integer(window_width) - 1L),
       ndays = .data$end_index - .data$start_index + 1L,
       truncation = dplyr::case_when(
-        start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp ~ "both",
-        start_index == 1L ~ "start",
+        !complete_start & start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp ~ "both",
+        !complete_start & start_index == 1L ~ "start",
         end_index == length_x & rollmean[length_rollmean] > end_temp ~ "end",
         TRUE ~ "none")
     ) |>
