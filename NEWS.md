@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# gsdd 0.1.0.9000
+# gsdd 0.2.0
 
 -  Added `complete = FALSE` argument to `gsdd_vctr()` and `gss_vctr()` to specify whether the vector of water temperatures represents the complete growing period.
 - Modified `gsdd()`, `gdd()`, `gss()` and `gss_plot()` so that a growing season is not considered to be truncated at the start and/or end if the water temperature is above the threshold at the start and/or end dates.
