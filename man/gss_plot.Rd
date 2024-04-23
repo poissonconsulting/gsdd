@@ -72,7 +72,7 @@ A ggplot object.
 Plots the growing seasons in a year.
 }
 \examples{
-\dontrun {
+\dontrun{
   gss_plot(gsdd::temperature_data)
 }
 }

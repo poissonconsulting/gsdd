@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun {
+#' \dontrun{
 #'   gss_plot(gsdd::temperature_data)
 #' }
 gss_plot <- function(
