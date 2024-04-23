@@ -68,11 +68,11 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p><code>gsdd</code> is an R package to calculate Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and Growing Seasons (GSS) from water temperature data.</p>
-<p>GSSD is a water temperature metric that is a useful predictor of age-0 trout size at the beginning of winter. It is the accumulated thermal units (in C) during the growing season based on the mean daily water temperature values. GDD is the GSSD to a particular date.</p>
+<p>GSSD is a water temperature metric that is a useful predictor of age-0 trout size at the beginning of winter. It is the accumulated thermal units (in °C) during the growing season based on the mean daily water temperature values. GDD is the GSSD to a particular date.</p>
 <p>The GSDD is calculated across the longest consecutive sequence of non-missing values. Truncation occurs when the start and/or end of the sequence of non-missing values is part way through a growing season. If the user chooses to ignore truncation then the returned value(s) are very likely to be less than the actual value(s).</p>
 <p>The default values and implementation of the growing season are based on Coleman and Fausch (2007) who stated that</p>
 <blockquote>
-<p>We defined the start of the growing season as the beginning of the first week that average stream temperatures exceeded and remained above 5C for the season; the end of the growing season was defined as the last day of the first week that average stream temperature dropped below 4C.</p>
+<p>We defined the start of the growing season as the beginning of the first week that average stream temperatures exceeded and remained above 5°C for the season; the end of the growing season was defined as the last day of the first week that average stream temperature dropped below 4°C.</p>
 </blockquote>
 <p>For the purposes of the calculation week refers to a seven day rolling average as opposed to the calendar week. If there are multiple growing ‘seasons’ within the same year then by default the returned value is the sum of the GSDD values for <code>"all"</code> seasons.</p>
 <div class="section level3">
@@ -112,16 +112,16 @@
 <span><span class="co">#&gt;    year start_dayte end_dayte   gsdd truncation</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;date&gt;      &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;     </span></span>
 <span><span class="co">#&gt; 1  2019 1971-03-20  1971-11-07 3899. none</span></span></code></pre></div>
-<p>It also provides a function to calculate GSDD from a vector.</p>
+<p>It also provides a function to plot water temperature data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gss_plot.html">gss_plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png"><!-- --></p>
+<p>And to calculate GSDD from a vector.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="reference/temperature_data.html">temperature_data</a></span><span class="op">$</span><span class="va">temperature</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/gsdd_vctr.html">gsdd_vctr</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3898.806</span></span></code></pre></div>
-<p>And to plot water temperature data.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/gss_plot.html">gss_plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png"><!-- --></p>
 </div>
 </div>
 
