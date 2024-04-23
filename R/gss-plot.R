@@ -103,7 +103,7 @@ gss_plot <- function(
     ggplot2::scale_y_continuous("Water Temperature (C)") +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
     ggplot2::scale_color_manual("Mean", values = c("#3063A3", "black")) +
-    ggplot2::expand_limits(y = 0) +
+    ggplot2::expand_limits(x = c(start_dayte, end_dayte), y = 0) +
     ggplot2::guides(color = ggplot2::guide_legend(order = 1)) +
     NULL
   
