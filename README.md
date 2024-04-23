@@ -34,9 +34,9 @@ Coleman and Fausch (2007) who stated that
 
 > We defined the start of the growing season as the beginning of the
 > first week that average stream temperatures exceeded and remained
-> above 5C for the season; the end of the growing season was defined as
+> above 5°C for the season; the end of the growing season was defined as
 > the last day of the first week that average stream temperature dropped
-> below 4C.
+> below 4°C.
 
 For the purposes of the calculation week refers to a seven day rolling
 average as opposed to the calendar week. If there are multiple growing
