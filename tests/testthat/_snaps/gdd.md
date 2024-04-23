@@ -108,3 +108,43 @@
         <int> <dbl>
       1  2019    NA
 
+# gdd if all above
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019  1284
+
+---
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019  1284
+
+# gdd start truncation
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019    NA
+
+# gdd start truncation ignore
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019  1278
+

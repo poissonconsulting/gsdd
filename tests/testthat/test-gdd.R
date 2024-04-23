@@ -98,3 +98,41 @@ test_that("gdd NA if missing", {
     gdd
   })
 })
+
+test_that("gdd if all above", {
+  data <- temperature_data
+  data$temperature <- 6
+  gdd <- gdd(data)
+  expect_snapshot({
+    gdd
+  })
+})
+
+test_that("gdd if all above", {
+  data <- temperature_data
+  data$temperature <- 6
+  gdd <- gdd(data)
+  expect_snapshot({
+    gdd
+  })
+})
+
+test_that("gdd start truncation", {
+  data <- temperature_data
+  data$temperature <- 6
+  data <- data[data$date >= as.Date("2019-03-02"),]
+  expect_message(gdd <- gdd(data), "The growing season is truncated at the start of the sequence.")
+  expect_snapshot({
+    gdd
+  })
+})
+
+test_that("gdd start truncation ignore", {
+  data <- temperature_data
+  data$temperature <- 6
+  data <- data[data$date >= as.Date("2019-03-02"),]
+  gdd <- gdd(data, ignore_truncation = TRUE)
+  expect_snapshot({
+    gdd
+  })
+})
