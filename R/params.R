@@ -16,6 +16,8 @@
 #' of the mean daily water temperature vector 
 #' or a string of "start", "end", "none" (equivalent to FALSE) or "both"
 #' (equivalent to TRUE) specifying which type of truncation to ignore.
+#' @param latex A flag specifying whether to use LaTeX to include degree
+#' symbol in y-axis label.
 #' @param min_length A whole number of the minimum length to consider.
 #' Must be at least twice the window width but no more than 365.
 #' If NULL then set to be the difference between `start_date` and `end_date`

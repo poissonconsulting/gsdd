@@ -8,6 +8,12 @@ test_that("gss_plot", {
   expect_snapshot_plot(gss_plot(data), "gss_plot2")
 })
 
+test_that("gss_plot latex", {
+  data <- gsdd::temperature_data
+  data$temperature <- data$temperature2
+  expect_snapshot_plot(gss_plot(data, latex = TRUE), "gss_plot22")
+})
+
 test_that("gss_plot pick longest", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2

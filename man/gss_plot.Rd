@@ -14,6 +14,7 @@ gss_plot(
   end_temp = 4,
   window_width = 7,
   pick = "all",
+  latex = FALSE,
   nrow = NULL,
   ncol = NULL,
   msgs = TRUE
@@ -59,6 +60,9 @@ width of the rolling mean window in days. By default 7.}
 "biggest" or "smallest" GSDD. By default the returned value is the
 the GSDD value for the "longest" 'season'.}
 
+\item{latex}{A flag specifying whether to use LaTeX to include degree
+symbol in y-axis label.}
+
 \item{nrow}{A count of the number of rows to facet by.}
 
 \item{ncol}{A count of the number of columns to facet by.}
@@ -72,9 +76,7 @@ A ggplot object.
 Plots the growing seasons in a year.
 }
 \examples{
-\dontrun{
-  gss_plot(gsdd::temperature_data)
-}
+gss_plot(gsdd::temperature_data)
 }
 \seealso{
 \code{\link[=gss]{gss()}}

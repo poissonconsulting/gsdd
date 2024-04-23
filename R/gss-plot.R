@@ -8,9 +8,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'   gss_plot(gsdd::temperature_data)
-#' }
+#' gss_plot(gsdd::temperature_data)
 gss_plot <- function(
     x, 
     start_date = as.Date("1972-03-01"), 
@@ -21,6 +19,7 @@ gss_plot <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
+    latex = FALSE,
     nrow = NULL,
     ncol = NULL,
     msgs = TRUE) {
@@ -93,6 +92,12 @@ gss_plot <- function(
   gss_end <- gss |>
     dplyr::filter(!.data$truncation %in% c("both", "end"))
   
+  ylab <- if(latex) {
+    latex2exp::TeX("Water Temperature $($$^{\\circ}C)$") 
+  } else {
+    "Water Temperature (C)"
+  }
+  
   gp <- ggplot2::ggplot(data = data) +
     ggplot2::facet_wrap(~.data$year, nrow = nrow, ncol = ncol) +
     ggplot2::geom_hline(data = start_end_temperature, ggplot2::aes(yintercept = .data$temperature, linetype = .data$threshold),
@@ -100,7 +105,7 @@ gss_plot <- function(
     ggplot2::geom_rect(data = gss, ggplot2::aes(xmin = .data$start_dayte, xmax = .data$end_dayte, ymin = .data$ymin, ymax = .data$ymax),
                        alpha = 1/4) +
     ggplot2::geom_segment(data = gss, ggplot2::aes(x = .data$start_dayte, xend = .data$end_dayte, y = .data$ymin),
-                       alpha = 1/2) +
+                          alpha = 1/2) +
     ggplot2::geom_segment(data = gss, ggplot2::aes(x = .data$start_dayte, xend = .data$end_dayte, y = .data$ymax),
                           alpha = 1/2) +
     ggplot2::geom_segment(data = gss_start, ggplot2::aes(y = .data$ymin, yend = .data$ymax, x = .data$start_dayte),
@@ -109,7 +114,7 @@ gss_plot <- function(
                           alpha = 1/2) +
     ggplot2::geom_line(ggplot2::aes(x = .data$dayte, y = .data$temperature, group = .data$series, color = .data$series)) +
     ggplot2::scale_x_date("Date", date_labels = "%b", date_breaks = "month") +
-    ggplot2::scale_y_continuous(latex2exp::TeX("Water Temperature $($$^{\\circ}C)$")) +
+    ggplot2::scale_y_continuous(ylab) +
     ggplot2::scale_linetype_manual("Threshold", values = c("dotdash", "dashed")) +
     ggplot2::scale_color_manual("Mean", values = c("#3063A3", "black")) +
     ggplot2::expand_limits(x = c(start_dayte, end_dayte), y = 0) +
