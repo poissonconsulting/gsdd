@@ -36,7 +36,7 @@
       # A tibble: 1 x 2
          year  gsdd
         <int> <dbl>
-      1  2019  545.
+      1  2019  529.
 
 # gsdd ignore truncation tiny window
 

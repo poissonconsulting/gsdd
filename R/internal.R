@@ -5,6 +5,7 @@
                       end_temp,
                       window_width,
                       pick,
+                      complete,
                       msgs,
                       .rollmean = FALSE) {
   chk_numeric(x)
@@ -32,7 +33,7 @@
   chk_subset(
     pick, 
     c("biggest", "smallest", "longest", "shortest", "first", "last", "all"))
-  
+  chk_flag(complete)
   chk_flag(msgs)
   chk_flag(.rollmean)
   
@@ -43,6 +44,8 @@
     return(NA_real_)
   }
   run <- longest_run(x)
+  complete_start <- complete & run[1] == 1L
+  complete_end <- complete & run[length(run)] == length(x)
   x <- x[run]
   length_x <- length(x)
   if(length_x < min_length || anyNA(x)) {
@@ -69,7 +72,7 @@
   }
   # if season starts on first day, ignore_truncation left
   if (start_index[1] == 1L) {
-    if (ignore_truncation %in% c("none", "end")) {
+    if (!complete_start && ignore_truncation %in% c("none", "end")) {
       if (msgs) {
         msg("The growing season is truncated at the start of the sequence.")
       }
@@ -80,7 +83,7 @@
   end_index <- index_begin_run(rollmean < end_temp)
   # if season doesnt end ignore_truncation right
   if (!length(end_index) || max(start_index) > max(end_index)) {
-    if (ignore_truncation %in% c("none", "start")) {
+    if (!complete_end && ignore_truncation %in% c("none", "start")) {
       if (msgs) {
         msg("The growing season is truncated at the end of the sequence.")
       }
@@ -106,9 +109,9 @@
       end_index = .data$end_index + (as.integer(window_width) - 1L),
       ndays = .data$end_index - .data$start_index + 1L,
       truncation = dplyr::case_when(
-        start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp ~ "both",
-        start_index == 1L ~ "start",
-        end_index == length_x & rollmean[length_rollmean] > end_temp ~ "end",
+        start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp & !complete_start & !complete_end ~ "both",
+        start_index == 1L & !complete_start ~ "start",
+        end_index == length_x & rollmean[length_rollmean] > end_temp & !complete_end ~ "end",
         TRUE ~ "none")
     ) |>
     dplyr::mutate(gsdd = purrr::map2_dbl(
@@ -208,6 +211,7 @@ complete_dates <- function(x, start_date, end_date) {
       end_temp = 4, 
       window_width = window_width, 
       msgs = FALSE,
+      complete = TRUE,
       .rollmean = TRUE), .keep = TRUE)
   
   if(!nrow(x)) {
@@ -265,7 +269,14 @@ complete_dates <- function(x, start_date, end_date) {
     x <- x |>
       dplyr::summarise(gsdd = gsdd_vctr(
         .data$temperature,     
-        ignore_truncation = ignore_truncation, min_length = min_length, start_temp, end_temp = end_temp, window_width = window_width, pick = pick, msgs = msgs), .groups = "keep") |>
+        ignore_truncation = ignore_truncation, 
+        min_length = min_length, 
+        start_temp = start_temp, 
+        end_temp = end_temp, 
+        window_width = window_width, 
+        pick = pick, 
+        complete = TRUE,
+        msgs = msgs), .groups = "keep") |>
       dplyr::ungroup()
     
     return(x)
@@ -281,6 +292,7 @@ complete_dates <- function(x, start_date, end_date) {
         end_temp = end_temp, 
         window_width = window_width, 
         pick = pick,
+        complete = TRUE,
         msgs = msgs), .keep = TRUE)
     
     if(!nrow(x)) {

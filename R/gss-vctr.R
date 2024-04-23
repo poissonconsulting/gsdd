@@ -6,6 +6,7 @@ gss_vctr <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
+    complete = FALSE,
     msgs = TRUE,
     .rollmean = FALSE) {
   gss <- .gss_vctr(
@@ -16,6 +17,7 @@ gss_vctr <- function(
     end_temp = end_temp,
     window_width = window_width, 
     pick = pick,
+    complete = complete,
     msgs = msgs,
     .rollmean = .rollmean)
   
