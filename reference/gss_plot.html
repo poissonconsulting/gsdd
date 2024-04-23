@@ -61,6 +61,7 @@
 <span>  end_temp <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  window_width <span class="op">=</span> <span class="fl">7</span>,</span>
 <span>  pick <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  latex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  nrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ncol <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  msgs <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -126,6 +127,11 @@ width of the rolling mean window in days. By default 7.</p></dd>
 the GSDD value for the "longest" 'season'.</p></dd>
 
 
+<dt>latex</dt>
+<dd><p>A flag specifying whether to use LaTeX to include degree
+symbol in y-axis label.</p></dd>
+
+
 <dt>nrow</dt>
 <dd><p>A count of the number of rows to facet by.</p></dd>
 
@@ -151,9 +157,8 @@ the GSDD value for the "longest" 'season'.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">gss_plot</span><span class="op">(</span><span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="temperature_data.html">temperature_data</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gss_plot</span><span class="op">(</span><span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="temperature_data.html">temperature_data</a></span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="gss_plot-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
