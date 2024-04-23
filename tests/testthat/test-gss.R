@@ -73,8 +73,19 @@ test_that("gss works", {
 })
 
 test_that("gss works shortened", {
-  expect_message(gss <- gss(temperature_data, min_length = 100, end_date = as.Date("1972-09-29")),
+  data <- temperature_data
+  data <- data[data$date <= as.Date("2019-09-28"),]
+  expect_message(gss <- gss(data, min_length = 100, end_date = as.Date("1972-09-29")),
                  "The growing season is truncated at the end of the sequence.")
+  expect_snapshot({
+    gss
+  })
+})
+
+test_that("gss works shortened truncated", {
+  data <- temperature_data
+  data <- data[data$date <= as.Date("2019-09-28"),]
+  gss <- gss(data, min_length = 100, end_date = as.Date("1972-09-29"), ignore_truncation = "end")
   expect_snapshot({
     gss
   })
@@ -200,6 +211,7 @@ test_that("gss truncation start", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2
   data$temperature[data$date <= as.Date("2019-04-11")] <- 6
+  data <- data[data$date >= as.Date("2019-03-02"),]
   gss <- gss(data, ignore_truncation =TRUE)
   expect_snapshot({
     gss
@@ -210,6 +222,7 @@ test_that("gss truncation end", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2
   data$temperature[data$date >= as.Date("2019-08-28")] <- 5
+  data <- data[data$date <= as.Date("2019-11-29"),]
   gss <- gss(data, ignore_truncation =TRUE)
   expect_snapshot({
     gss
@@ -221,7 +234,8 @@ test_that("gss truncation both ends", {
   data$temperature <- data$temperature2
   data$temperature[data$date <= as.Date("2019-04-11")] <- 6
   data$temperature[data$date >= as.Date("2019-08-28")] <- 5
-  gss <- gss(data, ignore_truncation =TRUE)
+  data <- data[data$date >= as.Date("2019-03-02") & data$date <= as.Date("2019-11-29"),]
+  gss <- gss(data, min_length = 100, ignore_truncation =TRUE)
   expect_snapshot({
     gss
   })
@@ -231,7 +245,8 @@ test_that("gss truncation all", {
   data <- gsdd::temperature_data
   data$temperature <- data$temperature2
   data$temperature <- 6
-  gss <- gss(data, ignore_truncation =TRUE)
+  data <- data[data$date >= as.Date("2019-03-02") & data$date <= as.Date("2019-11-29"),]
+  gss <- gss(data, min_length = 100, ignore_truncation =TRUE)
   expect_snapshot({
     gss
   })
@@ -327,11 +342,18 @@ test_that("gss not shift", {
 test_that("gss above from start to finish", {
   data <- gsdd::temperature_data
   data$temperature <- 6
-  gss_ignore <- gss(data, ignore_truncation = TRUE)
   gss <- gss(data)
   expect_snapshot({
-    gss_ignore
     gss
   })
 })
 
+test_that("gss truncated if missing", {
+  data <- gsdd::temperature_data
+  data <- data[data$date >= as.Date("2019-03-02"),]
+  data$temperature <- 6
+  expect_message(gss <- gss(data), "The growing season is truncated at the start of the sequence.")
+  expect_snapshot({
+    gss
+  })
+})

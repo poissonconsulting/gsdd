@@ -211,6 +211,7 @@ complete_dates <- function(x, start_date, end_date) {
       end_temp = 4, 
       window_width = window_width, 
       msgs = FALSE,
+      complete = TRUE,
       .rollmean = TRUE), .keep = TRUE)
   
   if(!nrow(x)) {
@@ -268,7 +269,14 @@ complete_dates <- function(x, start_date, end_date) {
     x <- x |>
       dplyr::summarise(gsdd = gsdd_vctr(
         .data$temperature,     
-        ignore_truncation = ignore_truncation, min_length = min_length, start_temp, end_temp = end_temp, window_width = window_width, pick = pick, msgs = msgs), .groups = "keep") |>
+        ignore_truncation = ignore_truncation, 
+        min_length = min_length, 
+        start_temp = start_temp, 
+        end_temp = end_temp, 
+        window_width = window_width, 
+        pick = pick, 
+        complete = TRUE,
+        msgs = msgs), .groups = "keep") |>
       dplyr::ungroup()
     
     return(x)
@@ -284,6 +292,7 @@ complete_dates <- function(x, start_date, end_date) {
         end_temp = end_temp, 
         window_width = window_width, 
         pick = pick,
+        complete = TRUE,
         msgs = msgs), .keep = TRUE)
     
     if(!nrow(x)) {

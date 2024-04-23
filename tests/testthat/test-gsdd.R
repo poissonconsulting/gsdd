@@ -22,7 +22,9 @@ test_that("gsdd NA if earlier truncation", {
 })
 
 test_that("gsdd NA if truncated", {
-  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
+  data <- temperature_data 
+  data <- data[data$date >= as.Date("2019-05-02"),]
+  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
                        msgs = FALSE)
   expect_snapshot({
     gsdd
@@ -30,7 +32,9 @@ test_that("gsdd NA if truncated", {
 })
 
 test_that("gsdd ignore truncation", {
-  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
+  data <- temperature_data 
+  data <- data[data$date >= as.Date("2019-05-02"),]
+  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
                        msgs = FALSE, ignore_truncation = TRUE)
   expect_snapshot({
     gsdd

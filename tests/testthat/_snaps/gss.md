@@ -62,7 +62,7 @@
       # Groups:   year [1]
          year start_dayte end_dayte   gsdd truncation
         <int> <date>      <date>     <dbl> <chr>     
-      1  2019 1971-03-20  1971-11-07 3899. start     
+      1  2019 1971-03-20  1971-11-07 3899. none      
 
 # gss preserves if shift before leap year
 
@@ -103,6 +103,17 @@
       # A tibble: 0 x 5
       # i 5 variables: year <int>, start_dayte <date>, end_dayte <date>, gsdd <dbl>,
       #   truncation <chr>
+
+# gss works shortened truncated
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 5
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd truncation
+        <int> <date>      <date>     <dbl> <chr>     
+      1  2019 1971-03-20  1971-09-28 3580. end       
 
 # gss NA if stops before
 
@@ -257,7 +268,7 @@
       # Groups:   year [1]
          year start_dayte end_dayte   gsdd truncation
         <int> <date>      <date>     <dbl> <chr>     
-      1  2019 1971-03-01  1971-06-04   742 start     
+      1  2019 1971-03-02  1971-06-04   736 start     
       2  2019 1971-07-15  1971-09-03   800 none      
 
 # gss truncation end
@@ -270,7 +281,7 @@
          year start_dayte end_dayte   gsdd truncation
         <int> <date>      <date>     <dbl> <chr>     
       1  2019 1971-04-08  1971-06-04   500 none      
-      2  2019 1971-07-15  1971-11-30  1255 end       
+      2  2019 1971-07-15  1971-11-29  1250 end       
 
 # gss truncation both ends
 
@@ -281,8 +292,8 @@
       # Groups:   year [1]
          year start_dayte end_dayte   gsdd truncation
         <int> <date>      <date>     <dbl> <chr>     
-      1  2019 1971-03-01  1971-06-04   742 start     
-      2  2019 1971-07-15  1971-11-30  1255 end       
+      1  2019 1971-03-02  1971-06-04   736 start     
+      2  2019 1971-07-15  1971-11-29  1250 end       
 
 # gss truncation all
 
@@ -293,7 +304,7 @@
       # Groups:   year [1]
          year start_dayte end_dayte   gsdd truncation
         <int> <date>      <date>     <dbl> <chr>     
-      1  2019 1971-03-01  1971-11-30  1650 both      
+      1  2019 1971-03-02  1971-11-29  1638 both      
 
 # gss not shift
 
@@ -309,13 +320,16 @@
 # gss above from start to finish
 
     Code
-      gss_ignore
+      gss
     Output
       # A tibble: 1 x 5
       # Groups:   year [1]
          year start_dayte end_dayte   gsdd truncation
         <int> <date>      <date>     <dbl> <chr>     
-      1  2019 1971-03-01  1971-11-30  1650 both      
+      1  2019 1971-03-01  1971-11-30  1650 none      
+
+# gss truncated if missing
+
     Code
       gss
     Output
