@@ -1,6 +1,7 @@
 #' Parameters for functions
 #'
 #' Descriptions of the parameters for functions
+#' @param atus A positive number of the accumulated thermal units to exceed.
 #' @param complete A flag specifying whether the vector of water temperatures 
 #' represents the complete possible growing period (by default FALSE). 
 #' If TRUE a growing season is not considered to be truncated 
