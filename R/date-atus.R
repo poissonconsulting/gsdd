@@ -12,8 +12,7 @@
 date_atus <- function(
     x,
     atus = 600,
-    start_date = as.Date("1972-03-01"),
-    msgs = TRUE) {
+    start_date = as.Date("1972-03-01")) {
   
   check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
   chk_date(start_date)
@@ -51,8 +50,7 @@ date_atus <- function(
     dplyr::group_modify(~.atu_index(
       .x$temperature,
       .x$date,
-      atus = atus,
-      msgs = msgs), .keep = TRUE) |>
+      atus = atus), .keep = TRUE) |>
     dplyr::mutate(end_date = dttr2::dtt_dayte(end_date, start_date),
                   start_date = start_dayte) |>
     dplyr::select(c("year", "start_date", "end_date", "atus"))                  

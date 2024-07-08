@@ -1,8 +1,7 @@
 .atu_index <- function(
     x,
     date,
-    atus,
-    msgs = TRUE) {
+    atus) {
   
   x <- pmax(x, 0)
   x <- cumsum(x)
