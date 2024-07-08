@@ -27,33 +27,36 @@
     Code
       date_atus
     Output
-      # A tibble: 1 x 4
-      # Groups:   year [1]
+      # A tibble: 2 x 4
+      # Groups:   year [2]
          year start_date end_date    atus
         <int> <date>     <date>     <dbl>
-      1  2019 1972-02-01 1972-05-10  601.
+      1  2018 1972-02-01 NA           NA 
+      2  2019 1972-02-01 1972-05-10  601.
 
 # date_atus shift before leap year
 
     Code
       date_atus
     Output
-      # A tibble: 1 x 4
-      # Groups:   year [1]
+      # A tibble: 2 x 4
+      # Groups:   year [2]
          year start_date end_date    atus
         <int> <date>     <date>     <dbl>
-      1  2019 1972-02-28 1972-05-10  600.
+      1  2018 1972-02-28 NA           NA 
+      2  2019 1972-02-28 1972-05-10  600.
 
 # date_atus shift after leap year
 
     Code
       date_atus
     Output
-      # A tibble: 1 x 4
-      # Groups:   year [1]
+      # A tibble: 2 x 4
+      # Groups:   year [2]
          year start_date end_date    atus
         <int> <date>     <date>     <dbl>
-      1  2019 1971-03-01 1971-05-11  617.
+      1  2018 1971-03-01 NA           NA 
+      2  2019 1971-03-01 1971-05-11  617.
 
 # date_atus change atu and date
 

@@ -4,13 +4,7 @@
 \alias{date_atus}
 \title{Calculate Date of Accumulated Thermal Units (ATUs)}
 \usage{
-date_atus(
-  x,
-  atus = 600,
-  start_date = as.Date("1972-03-01"),
-  min_length = NULL,
-  msgs = TRUE
-)
+date_atus(x, atus = 600, start_date = as.Date("1972-03-01"), msgs = TRUE)
 }
 \arguments{
 \item{x}{A data frame with two columns \code{date} and \code{temperature}.
@@ -24,11 +18,6 @@ mean daily water temperature in degrees centigrade.}
 within each year to consider (the year is ignored).
 #' If \code{start_date} occurs before the \code{end_date} (when ignoring the year)
 then the window is considered  to span two calendar years.}
-
-\item{min_length}{A whole number of the minimum length to consider.
-Must be at least twice the window width but no more than 365.
-If NULL then set to be the difference between \code{start_date} and \code{end_date}
-(ignoring the year).}
 
 \item{msgs}{A flag specifying whether to provide messages.}
 }
