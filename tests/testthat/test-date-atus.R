@@ -66,10 +66,45 @@ test_that("date_atus NA if missing", {
   })
 })
 
+test_that("date_atus not NA if after", {
+  data <- gsdd::temperature_data
+  data$temperature[data$date == as.Date("2019-04-21")] <- NA
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
+  expect_snapshot({
+    date_atus
+  })
+})
+
+test_that("date_atus but NA if on", {
+  data <- gsdd::temperature_data
+  data$temperature[data$date == as.Date("2019-04-20")] <- NA
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
+  expect_snapshot({
+    date_atus
+  })
+})
 
 test_that("date_atus no rows if no data", {
   data <- gsdd::temperature_data[FALSE,]
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
+  expect_snapshot({
+    date_atus
+  })
+})
+
+test_that("date_atus NA if data set starts after", {
+  data <- gsdd::temperature_data
+  data <- data[-1,]
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
+  expect_snapshot({
+    date_atus
+  })
+})
+
+test_that("date_atus NA if data set starts after", {
+  data <- gsdd::temperature_data
+  data <- data[1:150,]
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300, min_length = 200)
   expect_snapshot({
     date_atus
   })

@@ -88,6 +88,28 @@
         <int> <date>     <date>   <dbl>
       1  2019 1972-01-01 NA          NA
 
+# date_atus not NA if after
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date    atus
+        <int> <date>     <date>     <dbl>
+      1  2019 1972-01-01 1972-04-20  304.
+
+# date_atus but NA if on
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date  atus
+        <int> <date>     <date>   <dbl>
+      1  2019 1972-01-01 NA          NA
+
 # date_atus no rows if no data
 
     Code
@@ -95,4 +117,26 @@
     Output
       # A tibble: 0 x 4
       # i 4 variables: year <int>, start_date <date>, end_date <date>, atus <dbl>
+
+# date_atus NA if data set starts after
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date  atus
+        <int> <date>     <date>   <dbl>
+      1  2019 1972-01-01 NA          NA
+
+---
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date    atus
+        <int> <date>     <date>     <dbl>
+      1  2019 1972-01-01 1972-04-20  304.
 
