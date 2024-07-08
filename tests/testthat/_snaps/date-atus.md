@@ -129,7 +129,7 @@
         <int> <date>     <date>   <dbl>
       1  2019 1972-01-01 NA          NA
 
----
+# date_atus not NA if data set starts after
 
     Code
       date_atus
@@ -139,4 +139,15 @@
          year start_date end_date    atus
         <int> <date>     <date>     <dbl>
       1  2019 1972-01-01 1972-04-20  304.
+
+# date_atus NA if not enough data to reach
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date  atus
+        <int> <date>     <date>   <dbl>
+      1  2019 1972-01-01 NA          NA
 

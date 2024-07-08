@@ -101,10 +101,19 @@ test_that("date_atus NA if data set starts after", {
   })
 })
 
-test_that("date_atus NA if data set starts after", {
+test_that("date_atus not NA if data set starts after", {
   data <- gsdd::temperature_data
   data <- data[1:150,]
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300, min_length = 200)
+  expect_snapshot({
+    date_atus
+  })
+})
+
+test_that("date_atus NA if not enough data to reach", {
+  data <- gsdd::temperature_data
+  data <- data[1:95,]
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
   expect_snapshot({
     date_atus
   })
