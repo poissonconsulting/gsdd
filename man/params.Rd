@@ -4,6 +4,8 @@
 \alias{params}
 \title{Parameters for functions}
 \arguments{
+\item{atus}{A positive number of the accumulated thermal units to exceed.}
+
 \item{complete}{A flag specifying whether the vector of water temperatures
 represents the complete possible growing period (by default FALSE).
 If TRUE a growing season is not considered to be truncated
