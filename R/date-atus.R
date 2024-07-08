@@ -37,6 +37,14 @@ date_atus <- function(
     check_key("date", x_name = "x") |>
     dplyr::arrange(.data$date)
   
+  if(!nrow(x)) {
+    return(tibble::tibble(
+      year = integer(), 
+      start_date = as.Date(integer()), 
+      end_date = as.Date(integer()), 
+      atus = numeric()))
+  }
+  
   x <- x |>
     dplyr::mutate(
       year = dttr2::dtt_study_year(.data$date, start = start_date),
