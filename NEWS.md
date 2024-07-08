@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# gsdd 0.3.0
+
+- Added `date_atus()` to determine date when ATUs reached. (#9).
+- Add `latex = FALSE` argument to `gss_plot()` to turn off use of LaTeX to add degree symbol to y-axis label.
+
+
 # gsdd 0.2.0
 
 -  Added `complete = FALSE` argument to `gsdd_vctr()` and `gss_vctr()` to specify whether the vector of water temperatures represents the complete growing period.
