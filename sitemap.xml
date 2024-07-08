@@ -1,57 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gdd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gsdd-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gsdd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gsdd_vctr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gss.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gss_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/params.html</loc>
-  </url>
-  <url>
-    <loc>/reference/temperature_data.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/ISSUE_TEMPLATE.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/SUPPORT.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/date_atus.html</loc></url>
+<url><loc>/reference/gdd.html</loc></url>
+<url><loc>/reference/gsdd-package.html</loc></url>
+<url><loc>/reference/gsdd.html</loc></url>
+<url><loc>/reference/gsdd_vctr.html</loc></url>
+<url><loc>/reference/gss.html</loc></url>
+<url><loc>/reference/gss_plot.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/params.html</loc></url>
+<url><loc>/reference/temperature_data.html</loc></url>
 </urlset>
+
