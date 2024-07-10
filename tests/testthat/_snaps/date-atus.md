@@ -154,3 +154,25 @@
         <int> <date>     <date>   <dbl>
       1  2019 1972-01-01 NA          NA
 
+# date_atus picks correct day to exceed 20
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date    atus
+        <int> <date>     <date>     <dbl>
+      1  2019 1972-01-01 1972-01-02    20
+
+# date_atus picks correct day to exceed 600
+
+    Code
+      date_atus
+    Output
+      # A tibble: 1 x 4
+      # Groups:   year [1]
+         year start_date end_date    atus
+        <int> <date>     <date>     <dbl>
+      1  2019 1972-01-01 1972-01-31   600
+
