@@ -1,7 +1,7 @@
 #' Calculate Date of Accumulated Thermal Units (ATUs)
 #' 
 #' Calculates the date on which a specified number of Accumulated Thermal Units (ATUs)
-#' are exceeded.
+#' are meet or exceeded.
 #' 
 #' @inheritParams params
 #' @return A tibble with four columns `year`, `start_date`, `end_date` and `atus`.
