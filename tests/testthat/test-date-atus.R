@@ -117,3 +117,33 @@ test_that("date_atus NA if not enough data to reach", {
     date_atus
   })
 })
+
+test_that("date_atus picks correct day to exceed 20", {
+  data <- tibble::tibble(
+    date = seq.Date(
+      from = as.Date("2019-01-01"),
+      to = as.Date("2019-12-31"),
+      by = "day"),
+    temperature = c(0, rep(20, 364)))
+  
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 20)
+  
+  expect_snapshot({
+    date_atus
+  })
+})
+
+test_that("date_atus picks correct day to exceed 600", {
+  data <- tibble::tibble(
+    date = seq.Date(
+      from = as.Date("2019-01-01"),
+      to = as.Date("2019-12-31"),
+      by = "day"),
+    temperature = c(0, rep(20, 364)))
+  
+  date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 600)
+  
+  expect_snapshot({
+    date_atus
+  })
+})

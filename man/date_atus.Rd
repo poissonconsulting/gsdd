@@ -24,7 +24,7 @@ A tibble with four columns \code{year}, \code{start_date}, \code{end_date} and \
 }
 \description{
 Calculates the date on which a specified number of Accumulated Thermal Units (ATUs)
-are exceeded.
+are meet or exceeded.
 }
 \examples{
 date_atus(gsdd::temperature_data)
