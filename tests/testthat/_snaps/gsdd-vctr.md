@@ -1,7 +1,7 @@
 # Gets triangle
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x    ma
@@ -21,7 +21,7 @@
 # Gets asymmetric triangle
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x    ma
@@ -41,7 +41,7 @@
 # 2 asymetric triangles, first one longer but lower, second should be chosen.
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x     ma
@@ -61,7 +61,7 @@
 # 2 asymetric triangles, first one longer but lower, second should be chosen unless longest.
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x     ma
@@ -81,7 +81,7 @@
 # 2 asymetric triangles, second one longer but lower, first one should be chosen.
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x    ma
@@ -101,7 +101,7 @@
 # Right truncated triangle
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x    ma
@@ -121,7 +121,7 @@
 # Left truncated triangle
 
     Code
-      tibble::tibble(index = 1:length(x), x = x, ma = ma)
+      tibble::tibble(index = seq_along(x), x = x, ma = ma)
     Output
       # A tibble: 184 x 3
          index     x    ma

@@ -232,7 +232,7 @@ test_that("Gets triangle", {
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
   
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   
   expect_equal(gsdd_vctr(x, min_length = 184), sum(x[9:26]))
@@ -243,7 +243,7 @@ test_that("Gets asymmetric triangle", {
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
   
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   expect_equal(gsdd_vctr(x, min_length = 184), sum(x[9:26]))
 })
@@ -260,7 +260,7 @@ test_that("2 asymetric triangles, first one longer but lower, second should be c
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
 
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   
   expect_equal(gsdd_vctr(x, pick = "biggest", min_length = 184), sum(x[41:61]))
@@ -278,7 +278,7 @@ test_that("2 asymetric triangles, first one longer but lower, second should be c
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
   
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   
   expect_equal(gsdd_vctr(x, pick = "longest", min_length = 184), 193)
@@ -295,7 +295,7 @@ test_that("2 asymetric triangles, second one longer but lower, first one should 
   )
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   
   expect_equal(gsdd_vctr(x, pick = "biggest", min_length = 184), sum(x[3:24]))
@@ -308,9 +308,9 @@ test_that("Right truncated triangle", {
     seq(21, 5, by = -2)
   )
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
-  data <- tibble::tibble(index = 1:length(x), x = x, ma = ma)
+  data <- tibble::tibble(index = seq_along(x), x = x, ma = ma)
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
@@ -326,7 +326,7 @@ test_that("Left truncated triangle", {
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
   
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
