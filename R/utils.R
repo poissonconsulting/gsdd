@@ -1,13 +1,13 @@
 longest_run <- function(x) {
   rle <- rle(!is.na(x))
   wch <- which(rle$values)
-  if(!length(wch)) { 
+  if (!length(wch)) {
     return(numeric(0))
   }
   wch <- wch[which.max(rle$length[rle$values])]
   cumsum <- cumsum(rle$lengths)
   to <- cumsum[wch]
-  from <- if(wch == 1) 1L else cumsum[wch-1] + 1L
+  from <- if (wch == 1) 1L else cumsum[wch - 1] + 1L
   from:to
 }
 

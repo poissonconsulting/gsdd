@@ -1,5 +1,5 @@
 #' Mean Daily Water Temperature Data
-#' 
+#'
 #' @format A tibble with columns:
 #' \describe{
 #' \item{date}{A Date vector.}

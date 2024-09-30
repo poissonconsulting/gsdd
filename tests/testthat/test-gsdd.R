@@ -22,28 +22,34 @@ test_that("gsdd NA if earlier truncation", {
 })
 
 test_that("gsdd NA if truncated", {
-  data <- temperature_data 
-  data <- data[data$date >= as.Date("2019-05-02"),]
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
-                       msgs = FALSE)
+  data <- temperature_data
+  data <- data[data$date >= as.Date("2019-05-02"), ]
+  gsdd <- gsdd(data,
+    start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
+    msgs = FALSE
+  )
   expect_snapshot({
     gsdd
   })
 })
 
 test_that("gsdd ignore truncation", {
-  data <- temperature_data 
-  data <- data[data$date >= as.Date("2019-05-02"),]
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
-                       msgs = FALSE, ignore_truncation = TRUE)
+  data <- temperature_data
+  data <- data[data$date >= as.Date("2019-05-02"), ]
+  gsdd <- gsdd(data,
+    start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-30"),
+    msgs = FALSE, ignore_truncation = TRUE
+  )
   expect_snapshot({
     gsdd
   })
 })
 
 test_that("gsdd ignore truncation tiny window", {
-  gsdd <- gsdd(temperature_data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-07"),
-                       msgs = FALSE, ignore_truncation = TRUE, window_width = 3)
+  gsdd <- gsdd(temperature_data,
+    start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-07"),
+    msgs = FALSE, ignore_truncation = TRUE, window_width = 3
+  )
   expect_snapshot({
     gsdd
   })
@@ -56,9 +62,11 @@ test_that("gsdd multiple years", {
   data2$date <- dttr2::dtt_set_year(data2$date, 1972L)
   data2$temperature <- data2$temperature + 1
   data <- rbind(data, data2)
-  
-  gsdd <- gsdd(data, start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-07"),
-                       msgs = FALSE, ignore_truncation = TRUE, window_width = 3)
+
+  gsdd <- gsdd(data,
+    start_date = as.Date("1972-05-01"), end_date = as.Date("1972-05-07"),
+    msgs = FALSE, ignore_truncation = TRUE, window_width = 3
+  )
   expect_snapshot({
     gsdd
   })

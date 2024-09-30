@@ -1,5 +1,5 @@
 #' Calculate Growing Seasons (GSS)
-#' 
+#'
 #' Calculate the start and end and gsdd values of all growing seasons in a year.
 #'
 #' @inheritParams params
@@ -11,9 +11,9 @@
 #' @examples
 #' gss(gsdd::temperature_data)
 gss <- function(
-    x, 
-    start_date = as.Date("1972-03-01"), 
-    end_date = as.Date("1972-11-30"), 
+    x,
+    start_date = as.Date("1972-03-01"),
+    end_date = as.Date("1972-11-30"),
     min_length = NULL,
     ignore_truncation = FALSE,
     start_temp = 5,
@@ -21,16 +21,16 @@ gss <- function(
     window_width = 7,
     pick = "all",
     msgs = TRUE) {
-  
   .gss(
-    x, 
-    start_date = start_date, 
-    end_date = end_date, 
+    x,
+    start_date = start_date,
+    end_date = end_date,
     ignore_truncation = ignore_truncation,
     min_length = min_length,
     start_temp = start_temp,
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
-    msgs = msgs)
+    msgs = msgs
+  )
 }
