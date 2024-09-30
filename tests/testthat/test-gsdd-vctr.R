@@ -28,7 +28,7 @@ test_that("vector must not contain NA values", {
 
 test_that("gsdd_vctr trims missing values", {
   x <- temperature_data$temperature
-  x[c(1,length(x))] <- NA_real_
+  x[c(1, length(x))] <- NA_real_
   expect_equal(gsdd_vctr(x), 3898.80557580767)
 })
 
@@ -72,7 +72,7 @@ test_that("if start_temp is reached at start of vector x, indicies do not fall o
 })
 
 test_that("x must have a length less than 366", {
-  expect_error(gsdd_vctr(rep(5,367)))
+  expect_error(gsdd_vctr(rep(5, 367)))
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
@@ -116,8 +116,8 @@ test_that("Gets growth period longest period.", {
   gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
   gsdd_vctr <- gsdd_vctr(x,
-                  window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                  ignore_truncation = TRUE, pick = "longest"
+    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+    ignore_truncation = TRUE, pick = "longest"
   )
   expect_equal(gsdd_vctr, 500)
 })
@@ -127,8 +127,8 @@ test_that("Gets growth period all gsdd_vctr.", {
   gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
   gsdd_vctr <- gsdd_vctr(x,
-                  window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                  ignore_truncation = TRUE, pick = "all"
+    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+    ignore_truncation = TRUE, pick = "all"
   )
   expect_equal(gsdd_vctr, 1300)
 })
@@ -138,8 +138,8 @@ test_that("Gets growth period shortest", {
   gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
   gsdd_vctr <- gsdd_vctr(x,
-                  window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                  ignore_truncation = TRUE, pick = "shortest"
+    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+    ignore_truncation = TRUE, pick = "shortest"
   )
   expect_equal(gsdd_vctr, 800)
 })
@@ -147,8 +147,8 @@ test_that("Gets growth period shortest", {
 test_that("Gets all by default", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
   gsdd_vctr <- gsdd_vctr(x,
-                         window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                         ignore_truncation = TRUE
+    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+    ignore_truncation = TRUE
   )
   expect_equal(gsdd_vctr, 1300)
 })
@@ -158,8 +158,8 @@ test_that("Gets growth period longest", {
   gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
   gsdd_vctr <- gsdd_vctr(x,
-                  window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                  ignore_truncation = TRUE, pick = "longest"
+    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+    ignore_truncation = TRUE, pick = "longest"
   )
   expect_equal(gsdd_vctr, 500)
 })
@@ -230,20 +230,20 @@ test_that("Gets with two weeks and 3 day window and smaller", {
 test_that("Gets triangle", {
   x <- c(seq(-5, 9), 10, seq(9, -5), rep(-1, 153))
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
-  
+
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
-  
+
   expect_equal(gsdd_vctr(x, min_length = 184), sum(x[9:26]))
 })
 
 test_that("Gets asymmetric triangle", {
   x <- c(seq(-5, 9), 10, seq(9.5, -5.5), rep(-6, 152))
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
-  
+
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
   expect_equal(gsdd_vctr(x, min_length = 184), sum(x[9:26]))
 })
@@ -260,9 +260,9 @@ test_that("2 asymetric triangles, first one longer but lower, second should be c
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
 
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
-  
+
   expect_equal(gsdd_vctr(x, pick = "biggest", min_length = 184), sum(x[41:61]))
 })
 
@@ -276,11 +276,11 @@ test_that("2 asymetric triangles, first one longer but lower, second should be c
     rep(0, 126)
   )
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
-  
+
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
-  
+
   expect_equal(gsdd_vctr(x, pick = "longest", min_length = 184), 193)
 })
 
@@ -295,9 +295,9 @@ test_that("2 asymetric triangles, second one longer but lower, first one should 
   )
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
-  
+
   expect_equal(gsdd_vctr(x, pick = "biggest", min_length = 184), sum(x[3:24]))
 })
 
@@ -308,11 +308,11 @@ test_that("Right truncated triangle", {
     seq(21, 5, by = -2)
   )
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
-  data <- tibble::tibble(index = 1:length(x), x = x, ma = ma)
+  data <- tibble::tibble(index = seq_along(x), x = x, ma = ma)
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
-  
+
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
   expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), sum(x[15:length(x)]))
 })
@@ -321,35 +321,35 @@ test_that("Left truncated triangle", {
   x <- c(
     seq(6, 25, by = 2),
     seq(25, 0, by = -2),
-    rep(0,161)
+    rep(0, 161)
   )
   ma <- zoo::rollmean(x, k = 7, align = "center", na.pad = TRUE)
-  
+
   testthat::expect_snapshot({
-    tibble::tibble(index = 1:length(x), x = x, ma = ma)
+    tibble::tibble(index = seq_along(x), x = x, ma = ma)
   })
-  
+
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
   expect_equal(gsdd_vctr(x, ignore_truncation = "start", msgs = FALSE, min_length = 184), sum(x[0:25]))
 })
 
 test_that("NA if less than 14 values after trimming trailing NAs", {
-  x <- c(rep(1,13), rep(NA,100))
-  expect_message(expect_identical(gsdd_vctr(x, min_length = 14),NA_real_), "The length of the longest non-missing sequence in `x` must be at least 14.")
-  x <- c(rep(1,15), rep(NA,100))
-  expect_identical(gsdd_vctr(x, min_length = 15),0)
+  x <- c(rep(1, 13), rep(NA, 100))
+  expect_message(expect_identical(gsdd_vctr(x, min_length = 14), NA_real_), "The length of the longest non-missing sequence in `x` must be at least 14.")
+  x <- c(rep(1, 15), rep(NA, 100))
+  expect_identical(gsdd_vctr(x, min_length = 15), 0)
 })
 
 test_that("NA if less than 20 values after trimming trailing NAs", {
-  x <- c(rep(1,21), rep(NA,100))
-  expect_message(expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22),NA_real_), "The length of the longest non-missing sequence in `x` must be at least 22.")
-  x <- c(rep(1,22), rep(NA,100))
-  expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22),0)
+  x <- c(rep(1, 21), rep(NA, 100))
+  expect_message(expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22), NA_real_), "The length of the longest non-missing sequence in `x` must be at least 22.")
+  x <- c(rep(1, 22), rep(NA, 100))
+  expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22), 0)
 })
 
 test_that("extracts longest non-missing sequence (not just trim tails)", {
-  x <- c(NA,1,NA,rep(1,13),NA,1,NA)
-  expect_identical(gsdd_vctr(x, msgs = FALSE),NA_real_) 
-  x <- c(NA,1,NA,rep(1,14),NA,1,NA)
-  expect_identical(gsdd_vctr(x, min_length = 14),0) 
+  x <- c(NA, 1, NA, rep(1, 13), NA, 1, NA)
+  expect_identical(gsdd_vctr(x, msgs = FALSE), NA_real_)
+  x <- c(NA, 1, NA, rep(1, 14), NA, 1, NA)
+  expect_identical(gsdd_vctr(x, min_length = 14), 0)
 })

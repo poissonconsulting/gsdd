@@ -27,7 +27,7 @@ test_that("gss returns no rows when missing summer", {
 
 test_that("gss trims missing values", {
   x <- temperature_data$temperature
-  x[c(1,length(x))] <- NA_real_
+  x[c(1, length(x))] <- NA_real_
   gss <- gss_vctr(x, msgs = FALSE)
   expect_snapshot({
     gss
@@ -35,9 +35,9 @@ test_that("gss trims missing values", {
 })
 
 test_that("gss start with perfect temperature", {
-  x <- c(rep(5, 7), rep(6, 260), rep(3,7))
+  x <- c(rep(5, 7), rep(6, 260), rep(3, 7))
   gss5 <- gss_vctr(x, ignore_truncation = TRUE)
-  x <- c(rep(5.01, 7), rep(6, 260), rep(3.6,7))
+  x <- c(rep(5.01, 7), rep(6, 260), rep(3.6, 7))
   gss5_1 <- gss_vctr(x, ignore_truncation = TRUE)
   expect_snapshot({
     gss5
@@ -46,9 +46,9 @@ test_that("gss start with perfect temperature", {
 })
 
 test_that("gss end with perfect temperature", {
-  x <- c(rep(5, 7), rep(6, 260), rep(4,7))
+  x <- c(rep(5, 7), rep(6, 260), rep(4, 7))
   gss4 <- gss_vctr(x, ignore_truncation = TRUE)
-  x <- c(rep(5, 7), rep(6, 260), rep(4.01,7))
+  x <- c(rep(5, 7), rep(6, 260), rep(4.01, 7))
   gss4_1 <- gss_vctr(x, ignore_truncation = TRUE)
   expect_snapshot({
     gss4
@@ -89,7 +89,7 @@ test_that("if start_temp is reached at start of vector x, indicies do not fall o
 })
 
 test_that("x must have a length less than 366", {
-  expect_error(gss_vctr(rep(5,367)))
+  expect_error(gss_vctr(rep(5, 367)))
 })
 
 test_that("growth period with biggest GSDD even though shorter period.", {
@@ -103,8 +103,8 @@ test_that("growth period with higher GSDD even though shorter period.", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
   gss1 <- gss_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
   gss2 <- gss_vctr(x,
-                  window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-                  ignore_truncation = TRUE
+    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+    ignore_truncation = TRUE
   )
   expect_snapshot({
     gss1

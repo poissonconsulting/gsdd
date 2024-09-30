@@ -22,17 +22,18 @@ gsdd_vctr <- function(
     complete = FALSE,
     msgs = TRUE) {
   gss <- .gss_vctr(
-    x, 
-    ignore_truncation = ignore_truncation, 
+    x,
+    ignore_truncation = ignore_truncation,
     min_length = min_length,
-    start_temp = start_temp, 
+    start_temp = start_temp,
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
     complete = complete,
-    msgs = msgs)
-  
-  if(vld_scalar(gss)) {
+    msgs = msgs
+  )
+
+  if (vld_scalar(gss)) {
     return(gss)
   }
   sum(gss$gsdd)

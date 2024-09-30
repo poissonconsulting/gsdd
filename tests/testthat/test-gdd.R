@@ -7,7 +7,7 @@ test_that("gdd works", {
 
 test_that("gdd shifts by 10", {
   data <- temperature_data
-  data <- data[-(1:10),]
+  data <- data[-(1:10), ]
   gdd <- gdd(data, min_length = 14)
   expect_snapshot({
     gdd
@@ -16,7 +16,7 @@ test_that("gdd shifts by 10", {
 
 test_that("gdd preserves if shift start date", {
   data <- temperature_data
-  data <- data[-(1:10),]
+  data <- data[-(1:10), ]
   gdd <- gdd(data, start_date = as.Date("2019-02-01"), min_length = 14)
   expect_snapshot({
     gdd
@@ -35,7 +35,7 @@ test_that("gdd preserves if shift start date", {
 test_that("gdd one message", {
   data <- temperature_data
 
-  data <- data[-(1:100),]
+  data <- data[-(1:100), ]
   expect_message(gdd <- gdd(data, min_length = 14), "The growing season is truncated at the start of the sequence.")
   expect_snapshot({
     gdd
@@ -72,7 +72,7 @@ test_that("gdd works very shortened", {
 test_that("gdd present if stops at", {
   data <- temperature_data
 
-  data <- data[data$date <= as.Date("2019-09-30"),]
+  data <- data[data$date <= as.Date("2019-09-30"), ]
   gdd <- gdd(data, min_length = 14)
   expect_snapshot({
     gdd
@@ -81,8 +81,8 @@ test_that("gdd present if stops at", {
 
 test_that("gdd NA if stops before", {
   data <- temperature_data
-  
-  data <- data[data$date <= as.Date("2019-09-29"),]
+
+  data <- data[data$date <= as.Date("2019-09-29"), ]
   gdd <- gdd(data, min_length = 14)
   expect_snapshot({
     gdd
@@ -120,7 +120,7 @@ test_that("gdd if all above", {
 test_that("gdd start truncation", {
   data <- temperature_data
   data$temperature <- 6
-  data <- data[data$date >= as.Date("2019-03-02"),]
+  data <- data[data$date >= as.Date("2019-03-02"), ]
   expect_message(gdd <- gdd(data), "The growing season is truncated at the start of the sequence.")
   expect_snapshot({
     gdd
@@ -130,7 +130,7 @@ test_that("gdd start truncation", {
 test_that("gdd start truncation ignore", {
   data <- temperature_data
   data$temperature <- 6
-  data <- data[data$date >= as.Date("2019-03-02"),]
+  data <- data[data$date >= as.Date("2019-03-02"), ]
   gdd <- gdd(data, ignore_truncation = TRUE)
   expect_snapshot({
     gdd
