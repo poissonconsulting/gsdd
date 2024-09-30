@@ -14,16 +14,16 @@ test_that("date_atus start year independent", {
 
 test_that("date_atus changes if shift start date", {
   data <- gsdd::temperature_data
-  data <- data[-(1:10),]
+  data <- data[-(1:10), ]
   date_atus <- date_atus(data, start_date = as.Date("2019-02-01"))
   expect_snapshot({
     date_atus
   })
 })
- 
+
 test_that("date_atus shift before leap year", {
   data <- gsdd::temperature_data
-  data <- data[-(1:10),]
+  data <- data[-(1:10), ]
   date_atus <- date_atus(data, start_date = as.Date("2019-02-28"))
   expect_snapshot({
     date_atus
@@ -32,7 +32,7 @@ test_that("date_atus shift before leap year", {
 
 test_that("date_atus shift after leap year", {
   data <- gsdd::temperature_data
-  data <- data[-(1:10),]
+  data <- data[-(1:10), ]
   date_atus <- date_atus(data, start_date = as.Date("2019-03-01"))
   expect_snapshot({
     date_atus
@@ -84,7 +84,7 @@ test_that("date_atus but NA if on", {
 })
 
 test_that("date_atus no rows if no data", {
-  data <- gsdd::temperature_data[FALSE,]
+  data <- gsdd::temperature_data[FALSE, ]
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
   expect_snapshot({
     date_atus
@@ -93,7 +93,7 @@ test_that("date_atus no rows if no data", {
 
 test_that("date_atus NA if data set starts after", {
   data <- gsdd::temperature_data
-  data <- data[-1,]
+  data <- data[-1, ]
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
   expect_snapshot({
     date_atus
@@ -102,7 +102,7 @@ test_that("date_atus NA if data set starts after", {
 
 test_that("date_atus not NA if data set starts after", {
   data <- gsdd::temperature_data
-  data <- data[1:150,]
+  data <- data[1:150, ]
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
   expect_snapshot({
     date_atus
@@ -111,7 +111,7 @@ test_that("date_atus not NA if data set starts after", {
 
 test_that("date_atus NA if not enough data to reach", {
   data <- gsdd::temperature_data
-  data <- data[1:95,]
+  data <- data[1:95, ]
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 300)
   expect_snapshot({
     date_atus
@@ -123,11 +123,13 @@ test_that("date_atus picks correct day to exceed 20", {
     date = seq.Date(
       from = as.Date("2019-01-01"),
       to = as.Date("2019-12-31"),
-      by = "day"),
-    temperature = c(0, rep(20, 364)))
-  
+      by = "day"
+    ),
+    temperature = c(0, rep(20, 364))
+  )
+
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 20)
-  
+
   expect_snapshot({
     date_atus
   })
@@ -138,11 +140,13 @@ test_that("date_atus picks correct day to exceed 600", {
     date = seq.Date(
       from = as.Date("2019-01-01"),
       to = as.Date("2019-12-31"),
-      by = "day"),
-    temperature = c(0, rep(20, 364)))
-  
+      by = "day"
+    ),
+    temperature = c(0, rep(20, 364))
+  )
+
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 600)
-  
+
   expect_snapshot({
     date_atus
   })
