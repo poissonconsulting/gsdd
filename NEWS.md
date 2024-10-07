@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# gsdd 0.3.0.9000
+
+- Internal changes.
+
 # gsdd 0.3.0
 
 - Added `date_atus()` to determine date when ATUs reached. (#9).
