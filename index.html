@@ -6,11 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Calculate Growing Season Degree Days from Water Temperature Data • gsdd</title>
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="katex-auto.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Calculate Growing Season Degree Days from Water Temperature Data">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto_Condensed-0.4.9/font.css" rel="stylesheet">
+<link href="deps/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<link href="deps/Playfair_Display-0.4.9/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><link href="deps/KaTex-0.16.10/katex.min.css" rel="stylesheet">
+<script src="deps/KaTex-0.16.10/katex.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Calculate Growing Season Degree Days from Water Temperature Data">
 <meta name="description" content="Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and the Growing Seasons (GSS) from water temperature data. GSSD is a water temperature metric that is a useful predictor of age-0 trout size at the beginning of winter. It is the accumulated thermal units (in C) during the growing season based on the mean daily water temperature values. GDD is the GSSD to a particular date.">
 <meta property="og:description" content="Calculates Growing Season Degree Days (GSDD), Growing Degree Days (GDD) and the Growing Seasons (GSS) from water temperature data. GSSD is a water temperature metric that is a useful predictor of age-0 trout size at the beginning of winter. It is the accumulated thermal units (in C) during the growing season based on the mean daily water temperature values. GDD is the GSSD to a particular date.">
 </head>
@@ -79,7 +83,7 @@
 </h2>
 <p>The <code>gssd</code> package provides functions to calculate the GSSD, GDD and GSS from water temperature data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/gsdd/" class="external-link">gsdd</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/gsdd/">gsdd</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">gsdd</span><span class="fu">::</span><span class="va"><a href="reference/temperature_data.html">temperature_data</a></span></span>
 <span></span>
 <span><span class="fu"><a href="reference/gsdd.html">gsdd</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -145,7 +149,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Joe Thorley <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://www.poissonconsulting.ca/author/joe-thorley/" class="external-link">Joe Thorley</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Sarah Lyons <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6745-6796" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Teck Resources <br><small class="roles"> Funder, copyright holder </small>  </li>
 <li><a href="authors.html">More about authors...</a></li>
@@ -167,7 +172,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joe Thorley, Sarah Lyons, Teck Resources.</p>
+  <p>Developed by <a href="https://www.poissonconsulting.ca/author/joe-thorley/" class="external-link">Joe Thorley</a>, Sarah Lyons, Teck Resources.</p>
 </div>
 
 <div class="pkgdown-footer-right">
