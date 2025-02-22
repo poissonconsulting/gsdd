@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2024 Teck Coal Ltd.
+Copyright (c) 2024 Elk Valley Resources Ltd.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
