@@ -26,8 +26,9 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Jill Brooks [contributor]
   \item Bronwen Lewis [contributor]
+  \item Jill Brooks [contributor]
+  \item Duncan Kennedy [contributor]
   \item Elk Valley Resources [funder, copyright holder]
 }
 

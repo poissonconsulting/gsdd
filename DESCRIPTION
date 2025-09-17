@@ -6,8 +6,9 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-7683-4592")),
     person("Sarah", "Lyons", role = "aut",
            comment = c(ORCID = "0000-0002-6745-6796")),
-    person("Jill", "Brooks", role = "ctb"),
     person("Bronwen", "Lewis", role = "ctb"),
+    person("Jill", "Brooks", role = "ctb"),
+    person("Duncan", "Kennedy", role = "ctb"),
     person("Elk Valley Resources", role = c("fnd", "cph"))
   )
 Description: Calculates Growing Season Degree Days (GSDD), Growing Degree
@@ -40,5 +41,5 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2.9000
+RoxygenNote: 7.3.3.9000
 Config/Needs/website: poissonconsulting/poissontemplate
