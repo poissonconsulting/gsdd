@@ -16,8 +16,8 @@ test_that("growth_days works", {
     expect_identical(growth_days(c(1:20)), c(rep(1, 20)))
 })
 
-test_that("pgti_growth_factory works", {
-  pgti_growth <- pgti_growth_factory(4, 10, 16)
+test_that("growth_pgti_factory works", {
+  pgti_growth <- growth_pgti_factory(4, 10, 16)
   expect_identical(pgti_growth(-1), 0)
   expect_identical(pgti_growth(0), 0)
   expect_identical(pgti_growth(0.5), 0)

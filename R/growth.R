@@ -37,8 +37,8 @@ growth_days <- function(vec) {
 #' @export
 #'
 #' @examples
-#' gdd(gsdd::temperature_data)
-pgti_growth_factory <- function(Tmin, Topt, Tmax) {
+#' growth_pgti_factory(3,10,17)(1:20)
+growth_pgti_factory <- function(Tmin, Topt, Tmax) {
   chk_number(Tmin)
   chk_number(Topt)
   chk_number(Tmax)
