@@ -62,7 +62,7 @@ at the start of the growing season(s) in C.}
 
 \item{Tmax}{A positive real number of the maximum mean daily water temperature for growth.}
 
-\item{vec}{A double vector of mean daily water temperature values.}
+\item{vec}{A numeric vector of mean daily water temperature values.}
 
 \item{window_width}{A positive whole number of the
 width of the rolling mean window in days. By default 7.}

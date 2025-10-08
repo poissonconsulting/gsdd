@@ -1,5 +1,6 @@
 #' Growing Degree Days Growth Metric
 #'
+#' Days with a negative mean daily water temperature are assigned 0 growth.
 #'
 #' @inheritParams params
 #' @return A double vector of the growth metric.
@@ -9,11 +10,16 @@
 #' @examples
 #' growth_gdd(c(1,2,3,4,5,6,7,8,9,10))
 growth_gdd <- function(vec) {
-  vec
+  chk_numeric(vec)
+  chk_not_any_na(vec)
+  y <- vec
+  y[vec < 0] <- 0
+  y
 }
 
 #' Days Growth Metric
 #'
+#' Days with a negative mean daily water temperature are assigned 0 growth.
 #'
 #' @inheritParams params
 #' @return A double vector of the growth metric.
@@ -23,7 +29,11 @@ growth_gdd <- function(vec) {
 #' @examples
 #' growth_days(c(1,2,3,4,5,6,7,8,9,10))
 growth_days <- function(vec) {
-  rep(1, length(vec))
+  chk_numeric(vec)
+  chk_not_any_na(vec)
+  y <- rep(1, length(vec))
+  y[vec < 0] <- 0
+  y
 }
 
 
@@ -46,11 +56,15 @@ growth_pgti_factory <- function(Tmin, Topt, Tmax) {
   chk_lt(Tmin, Topt)
   chk_gt(Tmax, Topt)
 
-  function(x) {
-    y <- (x - Tmin) * (x - Tmax) 
-    x <- y / (y - (x - Topt)^2)
-    x[x < 0] <- 0
-    x
+  function(vec) {
+    chk_numeric(vec)
+    chk_not_any_na(vec)
+    
+    y <- (vec - Tmin) * (vec - Tmax) 
+    y <- y / (y - (vec - Topt)^2)
+    y[y < 0] <- 0
+    y[vec < 0] <- 0
+    y
   }
 }#' Generate Trapezoid Growth Function
 #'
@@ -73,14 +87,18 @@ growth_trapezoid_factory <- function(Tmin, Topt, Topt2, Tmax) {
   chk_lt(Tmin, Topt)
   chk_gt(Tmax, Topt2)
 
-  function(x) {
-    blw <- 1 - (Topt - x) / (Topt - Tmin)
-    abv <- 1 - (x - Topt2) / (Tmax - Topt2)
+  function(vec) {
+    chk_numeric(vec)
+    chk_not_any_na(vec)
 
-    y <- rep(1, length(x))
-    y[x < Topt] <- blw[x < Topt]
-    y[x > Topt2] <- abv[x > Topt2]
+    blw <- 1 - (Topt - vec) / (Topt - Tmin)
+    abv <- 1 - (vec - Topt2) / (Tmax - Topt2)
+
+    y <- rep(1, length(vec))
+    y[vec < Topt] <- blw[vec < Topt]
+    y[vec > Topt2] <- abv[vec > Topt2]
     y[y < 0] <- 0
+    y[vec < 0] <- 0
     y
   }
 }

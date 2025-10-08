@@ -41,7 +41,7 @@
 #' @param Topt2 A positive real number of the upper optimum mean daily water temperature for growth.
 #' @param Tmin A positive real number of the minimum mean daily water temperature for growth.
 #' @param Tmax A positive real number of the maximum mean daily water temperature for growth.
-#' @param vec A double vector of mean daily water temperature values.
+#' @param vec A numeric vector of mean daily water temperature values.
 #' @param window_width A positive whole number of the
 #' width of the rolling mean window in days. By default 7.
 #' @param x A data frame with two columns `date` and `temperature`.

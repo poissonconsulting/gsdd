@@ -7,13 +7,13 @@
 growth_gdd(vec)
 }
 \arguments{
-\item{vec}{A double vector of mean daily water temperature values.}
+\item{vec}{A numeric vector of mean daily water temperature values.}
 }
 \value{
 A double vector of the growth metric.
 }
 \description{
-Growing Degree Days Growth Metric
+Days with a negative mean daily water temperature are assigned 0 growth.
 }
 \examples{
 growth_gdd(c(1,2,3,4,5,6,7,8,9,10))
