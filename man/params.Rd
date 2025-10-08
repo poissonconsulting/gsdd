@@ -56,6 +56,8 @@ at the start of the growing season(s) in C.}
 
 \item{Topt}{A positive real number of the optimum mean daily water temperature for growth.}
 
+\item{Topt2}{A positive real number of the upper optimum mean daily water temperature for growth.}
+
 \item{Tmin}{A positive real number of the minimum mean daily water temperature for growth.}
 
 \item{Tmax}{A positive real number of the maximum mean daily water temperature for growth.}

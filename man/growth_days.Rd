@@ -10,7 +10,7 @@ growth_days(vec)
 \item{vec}{A double vector of mean daily water temperature values.}
 }
 \value{
-A double vector of the days.
+A double vector of the growth metric.
 }
 \description{
 Days Growth Metric
@@ -19,5 +19,9 @@ Days Growth Metric
 growth_days(c(1,2,3,4,5,6,7,8,9,10))
 }
 \seealso{
-\code{\link[=growth_gdd]{growth_gdd()}}
+Other growth: 
+\code{\link{growth_gdd}()},
+\code{\link{growth_pgti_factory}()},
+\code{\link{growth_trapezoid_factory}()}
 }
+\concept{growth}

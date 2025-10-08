@@ -38,6 +38,7 @@
 #' @param start_temp A positive real number of the average water temperature
 #' at the start of the growing season(s) in C.
 #' @param Topt A positive real number of the optimum mean daily water temperature for growth.
+#' @param Topt2 A positive real number of the upper optimum mean daily water temperature for growth.
 #' @param Tmin A positive real number of the minimum mean daily water temperature for growth.
 #' @param Tmax A positive real number of the maximum mean daily water temperature for growth.
 #' @param vec A double vector of mean daily water temperature values.

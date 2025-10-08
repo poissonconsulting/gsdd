@@ -2,8 +2,8 @@
 #'
 #'
 #' @inheritParams params
-#' @return A double vector of the growing degree days.
-#' @seealso [growth_days()]
+#' @return A double vector of the growth metric.
+#' @family growth
 #' @export
 #'
 #' @examples
@@ -16,8 +16,8 @@ growth_gdd <- function(vec) {
 #'
 #'
 #' @inheritParams params
-#' @return A double vector of the days.
-#' @seealso [growth_gdd()]
+#' @return A double vector of the growth metric.
+#' @family growth
 #' @export
 #'
 #' @examples
@@ -32,8 +32,8 @@ growth_days <- function(vec) {
 #' A function factor to generate PGTI growth functions.
 #'
 #' @inheritParams params
-#' @return A tibble with two columns `year` and `gdd`.
-#' @seealso [gsdd()]
+#' @return A double vector of the growth metric.
+#' @family growth
 #' @export
 #'
 #' @examples
@@ -52,5 +52,35 @@ growth_pgti_factory <- function(Tmin, Topt, Tmax) {
     x[x < 0] <- 0
     x
   }
-}
+}#' Generate Trapezoid Growth Function
+#'
+#' A function factor to generate trapezoidal growth functions.
+#'
+#' @inheritParams params
+#' @return A double vector of the growth metric.
+#' @family growth
+#' @export
+#'
+#' @examples
+#' growth_trapezoid_factory(3,10,12,17)(1:20)
+growth_trapezoid_factory <- function(Tmin, Topt, Topt2, Tmax) {
+  chk_number(Tmin)
+  chk_number(Topt)
+  chk_number(Topt2)
+  chk_number(Tmax)
+  chk_gt(Topt)
+  chk_gte(Topt2, Topt)
+  chk_lt(Tmin, Topt)
+  chk_gt(Tmax, Topt2)
 
+  function(x) {
+    blw <- 1 - (Topt - x) / (Topt - Tmin)
+    abv <- 1 - (x - Topt2) / (Tmax - Topt2)
+
+    y <- rep(1, length(x))
+    y[x < Topt] <- blw[x < Topt]
+    y[x > Topt2] <- abv[x > Topt2]
+    y[y < 0] <- 0
+    y
+  }
+}
