@@ -11,8 +11,8 @@ longest_run <- function(x) {
   from:to
 }
 
-sum_vector <- function(from, to, ..vector) {
-  sum(..vector[from:to])
+sum_vector <- function(from, to, fun, ..vector) {
+  sum(fun(..vector[from:to]))
 }
 
 is_even <- function(x) {

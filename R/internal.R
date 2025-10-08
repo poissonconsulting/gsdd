@@ -5,6 +5,7 @@
                       end_temp,
                       window_width,
                       pick,
+                      fun,
                       complete,
                       msgs,
                       .rollmean = FALSE) {
@@ -34,6 +35,7 @@
     pick,
     c("biggest", "smallest", "longest", "shortest", "first", "last", "all")
   )
+  chk_function(fun)
   chk_flag(complete)
   chk_flag(msgs)
   chk_flag(.rollmean)
@@ -69,7 +71,7 @@
 
   # no GSDD if season never starts
   if (!length(start_index)) {
-    return(0)
+    return(fun(0))
   }
   # if season starts on first day, ignore_truncation left
   if (start_index[1] == 1L) {
@@ -77,7 +79,7 @@
       if (msgs) {
         msg("The growing season is truncated at the start of the sequence.")
       }
-      return(NA_real_)
+      return(fun(NA_real_))
     }
   }
   # pick which indices have values above and temp that begin runs
@@ -88,7 +90,7 @@
       if (msgs) {
         msg("The growing season is truncated at the end of the sequence.")
       }
-      return(NA_real_)
+      return(fun(NA_real_))
     }
     end_index <- as.integer(c(end_index, length_rollmean))
   }
@@ -120,6 +122,7 @@
       .x = .data$start_index,
       .y = .data$end_index,
       .f = sum_vector,
+      fun = fun,
       ..vector = x
     )) |>
     pick_season(pick = pick) |>
@@ -245,12 +248,14 @@ complete_dates <- function(x, start_date, end_date) {
     end_temp,
     window_width,
     pick,
+    fun,
     msgs,
     gss = TRUE) {
   check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
   chk_date(start_date)
   chk_date(end_date)
   chk_null_or(min_length, vld = vld_whole_number)
+  chk_function(fun)
 
   end_dayte <- dttr2::dtt_dayte(end_date, start_date)
   start_dayte <- dttr2::dtt_dayte(start_date, start_date)
@@ -285,6 +290,7 @@ complete_dates <- function(x, start_date, end_date) {
         end_temp = end_temp,
         window_width = window_width,
         pick = pick,
+        fun = fun,
         complete = TRUE,
         msgs = msgs
       ), .groups = "keep") |>

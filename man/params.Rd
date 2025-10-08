@@ -20,6 +20,8 @@ at the end of the growing season(s) in C.
 It must be greater than or equal to
 the start temperature.}
 
+\item{fun}{A function that takes a non-zero length double vector of mean daily water temperature values and returns a double vector of the equivalent growth metrics. Must be able to handle \code{0} and \code{NA_real} values. The growth metrics are summed to give GSDD so if they are multiplicative they should be logged by the functions and then exponentiated upon return.}
+
 \item{ignore_truncation}{A flag specifying whether to ignore truncation
 of the mean daily water temperature vector
 or a string of "start", "end", "none" (equivalent to FALSE) or "both"

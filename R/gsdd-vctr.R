@@ -19,6 +19,7 @@ gsdd_vctr <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
+    fun = identity,
     complete = FALSE,
     msgs = TRUE) {
   gss <- .gss_vctr(
@@ -29,6 +30,7 @@ gsdd_vctr <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
+    fun = fun,
     complete = complete,
     msgs = msgs
   )
