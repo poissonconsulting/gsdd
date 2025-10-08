@@ -40,7 +40,7 @@ gss_plot <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
-    fun = growth_gdd,
+    fun = growth_degdays,
     msgs = msgs
   )
 

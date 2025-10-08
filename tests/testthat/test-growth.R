@@ -1,10 +1,10 @@
-test_that("growth_gdd works", {
-    expect_identical(growth_gdd(-1), 0)
-    expect_identical(growth_gdd(0), 0)
-    expect_identical(growth_gdd(0.5), 0.5)
-    expect_identical(growth_gdd(1), 1)
-    expect_identical(growth_gdd(c(2,1)), c(2,1))
-    expect_identical(growth_gdd(c(-1:20)), c(0,0,1:20))
+test_that("growth_degdays works", {
+    expect_identical(growth_degdays(-1), 0)
+    expect_identical(growth_degdays(0), 0)
+    expect_identical(growth_degdays(0.5), 0.5)
+    expect_identical(growth_degdays(1), 1)
+    expect_identical(growth_degdays(c(2,1)), c(2,1))
+    expect_identical(growth_degdays(c(-1:20)), c(0,0,1:20))
 })
 
 test_that("growth_days works", {

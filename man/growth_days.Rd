@@ -20,7 +20,7 @@ growth_days(c(1,2,3,4,5,6,7,8,9,10))
 }
 \seealso{
 Other growth: 
-\code{\link{growth_gdd}()},
+\code{\link{growth_degdays}()},
 \code{\link{growth_pgti_factory}()},
 \code{\link{growth_trapezoid_factory}()}
 }

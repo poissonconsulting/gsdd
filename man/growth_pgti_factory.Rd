@@ -25,7 +25,7 @@ growth_pgti_factory(3,10,17)(1:20)
 \seealso{
 Other growth: 
 \code{\link{growth_days}()},
-\code{\link{growth_gdd}()},
+\code{\link{growth_degdays}()},
 \code{\link{growth_trapezoid_factory}()}
 }
 \concept{growth}

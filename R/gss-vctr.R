@@ -6,7 +6,7 @@ gss_vctr <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
-    fun = growth_gdd,
+    fun = growth_degdays,
     complete = FALSE,
     msgs = TRUE,
     .rollmean = FALSE) {

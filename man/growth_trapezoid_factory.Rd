@@ -27,7 +27,7 @@ growth_trapezoid_factory(3,10,12,17)(1:20)
 \seealso{
 Other growth: 
 \code{\link{growth_days}()},
-\code{\link{growth_gdd}()},
+\code{\link{growth_degdays}()},
 \code{\link{growth_pgti_factory}()}
 }
 \concept{growth}

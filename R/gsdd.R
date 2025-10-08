@@ -60,7 +60,7 @@ gsdd <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
-    fun = growth_gdd,
+    fun = growth_degdays,
     msgs = TRUE) {
   .gss(
     x,

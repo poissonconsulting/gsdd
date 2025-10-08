@@ -8,8 +8,8 @@
 #' @export
 #'
 #' @examples
-#' growth_gdd(c(1,2,3,4,5,6,7,8,9,10))
-growth_gdd <- function(vec) {
+#' growth_degdays(c(1,2,3,4,5,6,7,8,9,10))
+growth_degdays <- function(vec) {
   chk_numeric(vec)
   chk_not_any_na(vec)
   y <- vec
