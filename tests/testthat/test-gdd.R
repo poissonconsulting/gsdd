@@ -143,3 +143,11 @@ test_that("gdd works growth_days", {
     gdd
   })
 })
+
+test_that("gdd works growth_days", {
+  gdd <- gdd(temperature_data, min_length = 14, fun = pgti_growth_factory(5.6, 13.6, 21.7))
+  expect_snapshot({
+    gdd
+  })
+})
+

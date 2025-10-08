@@ -54,6 +54,12 @@ then the window is considered  to span two calendar years.}
 \item{start_temp}{A positive real number of the average water temperature
 at the start of the growing season(s) in C.}
 
+\item{Topt}{A positive real number of the optimum mean daily water temperature for growth.}
+
+\item{Tmin}{A positive real number of the minimum mean daily water temperature for growth.}
+
+\item{Tmax}{A positive real number of the maximum mean daily water temperature for growth.}
+
 \item{vec}{A double vector of mean daily water temperature values.}
 
 \item{window_width}{A positive whole number of the
