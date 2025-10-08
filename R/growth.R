@@ -1,7 +1,5 @@
 #' Growing Degree Days Growth Metric
 #'
-#' Days with a negative mean daily water temperature are assigned 0 growth.
-#'
 #' @inheritParams params
 #' @return A double vector of the growth metric.
 #' @family growth
@@ -9,17 +7,17 @@
 #'
 #' @examples
 #' growth_degdays(c(1,2,3,4,5,6,7,8,9,10))
-growth_degdays <- function(vec) {
+growth_degdays <- function(vec, Tmin = 0) {
   chk_numeric(vec)
   chk_not_any_na(vec)
+  chk_number(Tmin)
+  chk_gte(Tmin)
   y <- vec
-  y[vec < 0] <- 0
+  y[vec < Tmin] <- 0
   y
 }
 
 #' Days Growth Metric
-#'
-#' Days with a negative mean daily water temperature are assigned 0 growth.
 #'
 #' @inheritParams params
 #' @return A double vector of the growth metric.
@@ -28,11 +26,13 @@ growth_degdays <- function(vec) {
 #'
 #' @examples
 #' growth_days(c(1,2,3,4,5,6,7,8,9,10))
-growth_days <- function(vec) {
+growth_days <- function(vec, Tmin = 0) {
   chk_numeric(vec)
   chk_not_any_na(vec)
+  chk_number(Tmin)
+  chk_gte(Tmin)
   y <- rep(1, length(vec))
-  y[vec < 0] <- 0
+  y[vec < Tmin] <- 0
   y
 }
 

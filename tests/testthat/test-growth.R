@@ -5,6 +5,7 @@ test_that("growth_degdays works", {
     expect_identical(growth_degdays(1), 1)
     expect_identical(growth_degdays(c(2,1)), c(2,1))
     expect_identical(growth_degdays(c(-1:20)), c(0,0,1:20))
+    expect_identical(growth_degdays(c(-1:20), Tmin = 2), c(0,0, 0, 2:20))
 })
 
 test_that("growth_days works", {
@@ -14,6 +15,8 @@ test_that("growth_days works", {
     expect_identical(growth_days(1), 1)
     expect_identical(growth_days(c(2,1)), c(1,1))
     expect_identical(growth_days(c(-1:20)), c(0,rep(1, 21)))
+    expect_identical(growth_days(c(-1:20), Tmin = 2), c(0,0,0,rep(1, 19)))
+
 })
 
 test_that("growth_pgti_factory works", {

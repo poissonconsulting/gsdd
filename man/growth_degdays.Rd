@@ -4,16 +4,18 @@
 \alias{growth_degdays}
 \title{Growing Degree Days Growth Metric}
 \usage{
-growth_degdays(vec)
+growth_degdays(vec, Tmin = 0)
 }
 \arguments{
 \item{vec}{A numeric vector of mean daily water temperature values.}
+
+\item{Tmin}{A positive real number of the minimum mean daily water temperature for growth.}
 }
 \value{
 A double vector of the growth metric.
 }
 \description{
-Days with a negative mean daily water temperature are assigned 0 growth.
+Growing Degree Days Growth Metric
 }
 \examples{
 growth_degdays(c(1,2,3,4,5,6,7,8,9,10))
