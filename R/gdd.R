@@ -20,7 +20,7 @@ gdd <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
-    fun = identity,
+    fun = growth_gdd,
     msgs = TRUE) {
   chk_flag(ignore_truncation)
 

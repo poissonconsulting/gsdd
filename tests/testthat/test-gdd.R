@@ -136,3 +136,10 @@ test_that("gdd start truncation ignore", {
     gdd
   })
 })
+
+test_that("gdd works growth_days", {
+  gdd <- gdd(temperature_data, min_length = 14, fun = growth_days)
+  expect_snapshot({
+    gdd
+  })
+})

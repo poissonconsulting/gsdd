@@ -37,6 +37,7 @@
 #' then the window is considered  to span two calendar years.
 #' @param start_temp A positive real number of the average water temperature
 #' at the start of the growing season(s) in C.
+#' @param vec A double vector of mean daily water temperature values.
 #' @param window_width A positive whole number of the
 #' width of the rolling mean window in days. By default 7.
 #' @param x A data frame with two columns `date` and `temperature`.

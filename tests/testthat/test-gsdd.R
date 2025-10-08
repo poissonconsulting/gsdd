@@ -1,5 +1,5 @@
-test_that("gsdd works", {
-  gsdd <- gsdd(temperature_data)
+test_that("gsdd works growth_days", {
+  gsdd <- gsdd(temperature_data, fun = growth_days)
   expect_snapshot({
     gsdd
   })
@@ -81,6 +81,13 @@ test_that("gsdd spans a year", {
   data <- temperature_data
   data$date <- dttr2::dtt_add_days(data$date, 200)
   gsdd <- gsdd(data, start_date = as.Date("1972-12-15"), end_date = as.Date("1972-01-15"), ignore_truncation = TRUE)
+  expect_snapshot({
+    gsdd
+  })
+})
+
+test_that("gsdd works", {
+  gsdd <- gsdd(temperature_data)
   expect_snapshot({
     gsdd
   })

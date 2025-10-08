@@ -363,3 +363,10 @@ test_that("gss truncated if missing", {
     gss
   })
 })
+
+test_that("gss growth_days", {
+  gss <- gss(temperature_data, fun = growth_days)
+  expect_snapshot({
+    gss
+  })
+})

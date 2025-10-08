@@ -54,6 +54,8 @@ then the window is considered  to span two calendar years.}
 \item{start_temp}{A positive real number of the average water temperature
 at the start of the growing season(s) in C.}
 
+\item{vec}{A double vector of mean daily water temperature values.}
+
 \item{window_width}{A positive whole number of the
 width of the rolling mean window in days. By default 7.}
 

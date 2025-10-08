@@ -79,7 +79,7 @@
       if (msgs) {
         msg("The growing season is truncated at the start of the sequence.")
       }
-      return(fun(NA_real_))
+      return(NA_real_)
     }
   }
   # pick which indices have values above and temp that begin runs
@@ -90,7 +90,7 @@
       if (msgs) {
         msg("The growing season is truncated at the end of the sequence.")
       }
-      return(fun(NA_real_))
+      return(NA_real_)
     }
     end_index <- as.integer(c(end_index, length_rollmean))
   }
@@ -309,6 +309,7 @@ complete_dates <- function(x, start_date, end_date) {
         end_temp = end_temp,
         window_width = window_width,
         pick = pick,
+        fun = fun,
         complete = TRUE,
         msgs = msgs
       ), .keep = TRUE)

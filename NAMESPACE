@@ -2,6 +2,8 @@
 
 export(date_atus)
 export(gdd)
+export(growth_days)
+export(growth_gdd)
 export(gsdd)
 export(gsdd_vctr)
 export(gss)
