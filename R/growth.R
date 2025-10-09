@@ -13,7 +13,7 @@ growth_degdays <- function(vec, Tmin = 0) {
   chk_number(Tmin)
   chk_gte(Tmin)
   y <- vec
-  y[vec < Tmin] <- 0
+  y[vec <= Tmin] <- 0
   y
 }
 
@@ -32,7 +32,7 @@ growth_days <- function(vec, Tmin = 0) {
   chk_number(Tmin)
   chk_gte(Tmin)
   y <- rep(1, length(vec))
-  y[vec < Tmin] <- 0
+  y[vec <= Tmin] <- 0
   y
 }
 
@@ -63,7 +63,7 @@ growth_pgti_factory <- function(Tmin, Topt, Tmax) {
     y <- (vec - Tmin) * (vec - Tmax) 
     y <- y / (y - (vec - Topt)^2)
     y[y < 0] <- 0
-    y[vec < 0] <- 0
+    y[vec <= 0] <- 0
     y
   }
 }#' Generate Trapezoid Growth Function
@@ -98,7 +98,7 @@ growth_trapezoid_factory <- function(Tmin, Topt, Topt2, Tmax) {
     y[vec < Topt] <- blw[vec < Topt]
     y[vec > Topt2] <- abv[vec > Topt2]
     y[y < 0] <- 0
-    y[vec < 0] <- 0
+    y[vec <= 0] <- 0
     y
   }
 }
