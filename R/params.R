@@ -13,6 +13,7 @@
 #' at the end of the growing season(s) in C.
 #' It must be greater than or equal to
 #' the start temperature.
+#' @param fun A function that takes a non-zero length double vector of mean daily water temperature values and returns a double vector of the equivalent growth metrics. Must be able to handle `0` and `NA_real` values. The growth metrics are summed to give GSDD so if they are multiplicative they should be logged by the functions and then exponentiated upon return.
 #' @param ignore_truncation A flag specifying whether to ignore truncation
 #' of the mean daily water temperature vector
 #' or a string of "start", "end", "none" (equivalent to FALSE) or "both"
@@ -36,6 +37,11 @@
 #' then the window is considered  to span two calendar years.
 #' @param start_temp A positive real number of the average water temperature
 #' at the start of the growing season(s) in C.
+#' @param Topt A positive real number of the optimum mean daily water temperature for growth.
+#' @param Topt2 A positive real number of the upper optimum mean daily water temperature for growth.
+#' @param Tmin A positive real number of the minimum mean daily water temperature for growth.
+#' @param Tmax A positive real number of the maximum mean daily water temperature for growth.
+#' @param vec A numeric vector of mean daily water temperature values.
 #' @param window_width A positive whole number of the
 #' width of the rolling mean window in days. By default 7.
 #' @param x A data frame with two columns `date` and `temperature`.

@@ -337,3 +337,14 @@
       # i 5 variables: year <int>, start_dayte <date>, end_dayte <date>, gsdd <dbl>,
       #   truncation <chr>
 
+# gss growth_days
+
+    Code
+      gss
+    Output
+      # A tibble: 1 x 5
+      # Groups:   year [1]
+         year start_dayte end_dayte   gsdd truncation
+        <int> <date>      <date>     <dbl> <chr>     
+      1  2019 1971-03-20  1971-11-07   233 none      
+

@@ -20,6 +20,7 @@ gdd <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
+    fun = growth_degdays,
     msgs = TRUE) {
   chk_flag(ignore_truncation)
 
@@ -38,6 +39,7 @@ gdd <- function(
     window_width = window_width,
     pick = pick,
     msgs = msgs,
+    fun = fun,
     gss = FALSE
   ) |>
     dplyr::rename(gdd = "gsdd")
@@ -57,6 +59,7 @@ gdd <- function(
     window_width = window_width,
     pick = "last",
     msgs = msgs,
+    fun = fun,
     gss = NULL
   )
 

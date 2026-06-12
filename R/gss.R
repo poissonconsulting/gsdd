@@ -20,6 +20,7 @@ gss <- function(
     end_temp = 4,
     window_width = 7,
     pick = "all",
+    fun = growth_degdays,
     msgs = TRUE) {
   .gss(
     x,
@@ -31,6 +32,7 @@ gss <- function(
     end_temp = end_temp,
     window_width = window_width,
     pick = pick,
+    fun = fun,
     msgs = msgs
   )
 }

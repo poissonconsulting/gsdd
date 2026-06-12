@@ -148,3 +148,23 @@
         <int> <dbl>
       1  2019  1278
 
+# gdd works growth_days
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019   195
+
+---
+
+    Code
+      gdd
+    Output
+      # A tibble: 1 x 2
+         year   gdd
+        <int> <dbl>
+      1  2019  74.0
+

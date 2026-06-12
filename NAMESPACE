@@ -2,6 +2,10 @@
 
 export(date_atus)
 export(gdd)
+export(growth_days)
+export(growth_degdays)
+export(growth_pgti_factory)
+export(growth_trapezoid_factory)
 export(gsdd)
 export(gsdd_vctr)
 export(gss)
