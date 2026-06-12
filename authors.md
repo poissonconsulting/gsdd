@@ -16,7 +16,7 @@
 
 - **[Duncan
   Kennedy](https://www.poissonconsulting.ca/author/duncan-kennedy/)**.
-  Contributor.
+  Contributor. [](https://orcid.org/0009-0001-4880-5751)
 
 - **Elk Valley Resources**. Funder, copyright holder.
 
