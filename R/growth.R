@@ -66,7 +66,8 @@ growth_pgti_factory <- function(Tmin, Topt, Tmax) {
     y[vec <= 0] <- 0
     y
   }
-}#' Generate Trapezoid Growth Function
+}
+#' Generate Trapezoid Growth Function
 #'
 #' A function factor to generate trapezoidal growth functions.
 #'
