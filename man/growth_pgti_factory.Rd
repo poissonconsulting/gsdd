@@ -23,9 +23,9 @@ A function factor to generate PGTI growth functions.
 growth_pgti_factory(3,10,17)(1:20)
 }
 \seealso{
-Other growth: 
-\code{\link{growth_days}()},
-\code{\link{growth_degdays}()},
-\code{\link{growth_trapezoid_factory}()}
+Other growth:
+\code{\link[=growth_days]{growth_days()}},
+\code{\link[=growth_degdays]{growth_degdays()}},
+\code{\link[=growth_trapezoid_factory]{growth_trapezoid_factory()}}
 }
 \concept{growth}

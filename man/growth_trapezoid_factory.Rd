@@ -25,9 +25,9 @@ A function factor to generate trapezoidal growth functions.
 growth_trapezoid_factory(3,10,12,17)(1:20)
 }
 \seealso{
-Other growth: 
-\code{\link{growth_days}()},
-\code{\link{growth_degdays}()},
-\code{\link{growth_pgti_factory}()}
+Other growth:
+\code{\link[=growth_days]{growth_days()}},
+\code{\link[=growth_degdays]{growth_degdays()}},
+\code{\link[=growth_pgti_factory]{growth_pgti_factory()}}
 }
 \concept{growth}
