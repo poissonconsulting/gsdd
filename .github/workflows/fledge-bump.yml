@@ -8,5 +8,5 @@
     pull-requests: write
   jobs:
     fledge-bump:
-      uses: poissonconsulting/.github/.github/workflows/fledge-bump.yml@f-fledge-automation
+      uses: poissonconsulting/.github/.github/workflows/fledge-bump.yml@f-fledge-automation@v1
       secrets: inherit
