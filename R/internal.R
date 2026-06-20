@@ -161,6 +161,31 @@ dayte_seq <- function(start_date, end_date, first_date) {
   x
 }
 
+# Study years whose data has a long enough non-missing run within the window to
+# possibly contain a growing season. Used to drop the partial facets a wrapping
+# window otherwise creates at the edges of the time series.
+gss_years <- function(x, start_date, end_date, min_length) {
+  end_dayte <- dttr2::dtt_dayte(end_date, start_date)
+  start_dayte <- dttr2::dtt_dayte(start_date, start_date)
+
+  if (is.null(min_length)) {
+    min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
+  }
+
+  x |>
+    dplyr::mutate(
+      date = dttr2::dtt_date(.data$date),
+      year = dttr2::dtt_study_year(.data$date, start = start_date),
+      year = stringr::str_extract(.data$year, "^\\d{4,4}"),
+      year = as.integer(.data$year)
+    ) |>
+    dplyr::group_by(.data$year) |>
+    dplyr::group_modify(~ complete_dates(.x, start_date, end_date)) |>
+    dplyr::summarise(run = length(longest_run(.data$temperature)), .groups = "drop") |>
+    dplyr::filter(.data$run >= min_length) |>
+    dplyr::pull(.data$year)
+}
+
 complete_dates <- function(x, start_date, end_date) {
   end_dayte <- dttr2::dtt_dayte(end_date, start_date)
   start_dayte <- dttr2::dtt_dayte(start_date, start_date)
