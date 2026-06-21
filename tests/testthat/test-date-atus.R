@@ -130,9 +130,10 @@ test_that("date_atus picks correct day to exceed 20", {
 
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 20)
 
-  expect_snapshot({
-    date_atus
-  })
+  # Jan 1 contributes 0 and Jan 2 contributes 20, so 20 ATUs are first
+  # reached on Jan 2 (returned as a dayte in the 1972 reference year).
+  expect_identical(date_atus$end_date, as.Date("1972-01-02"))
+  expect_identical(date_atus$atus, 20)
 })
 
 test_that("date_atus picks correct day to exceed 600", {
@@ -147,7 +148,8 @@ test_that("date_atus picks correct day to exceed 600", {
 
   date_atus <- date_atus(data, start_date = as.Date("2019-01-01"), atu = 600)
 
-  expect_snapshot({
-    date_atus
-  })
+  # Cumulative ATUs on Jan d equal 20 * (d - 1), so 600 ATUs are first
+  # reached on Jan 31 (returned as a dayte in the 1972 reference year).
+  expect_identical(date_atus$end_date, as.Date("1972-01-31"))
+  expect_identical(date_atus$atus, 600)
 })
