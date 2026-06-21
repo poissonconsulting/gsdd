@@ -42,10 +42,10 @@ the start temperature.}
 \item{window_width}{A positive whole number of the
 width of the rolling mean window in days. By default 7.}
 
-\item{pick}{A string specifying whether to pick the
-"longest", "shortest", "first" or "last" 'season' or the season with the
-"biggest" or "smallest" GSDD. By default the returned value is the
-the GSDD value for the "longest" 'season'.}
+\item{pick}{A string specifying which 'season' to pick when more than one
+is present. One of "longest", "shortest", "first" or "last", or the season
+with the "biggest" or "smallest" GSDD, or "all" to use every season.
+By default "all".}
 
 \item{complete}{A flag specifying whether the vector of water temperatures
 represents the complete possible growing period (by default FALSE).
