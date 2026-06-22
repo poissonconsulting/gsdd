@@ -21,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Joe Thorley \email{joe@poissonconsulting.ca} (\href{https://orcid.org/0000-0002-7683-4592}{ORCID})
   \item Sarah Lyons (\href{https://orcid.org/0000-0002-6745-6796}{ORCID})
 }
 
