@@ -78,6 +78,9 @@ gss_plot <- function(
     dplyr::bind_rows(rollmean) |>
     dplyr::mutate(series = factor(.data$series, c("Daily", moving)))
 
+  years <- gss_years(x, start_date, end_date, min_length)
+  data <- dplyr::filter(data, .data$year %in% years)
+
   range <- range(data$temperature, na.rm = TRUE)
   gss$ymin <- min(c(0, range[1]))
   gss$ymax <- max(c(0, range[2]))

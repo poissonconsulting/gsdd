@@ -49,13 +49,11 @@ test_that("gss_plot wrap cut year dec", {
 })
 
 test_that("gss_plot wrap feb 28st", {
-  skip("need to fix wrapping on year")
-  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-02-15"), end_date = as.Date("1972-01-15"), min_length = 120), "gss_plot10")
+  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-02-15"), end_date = as.Date("1972-01-15"), min_length = 120, msgs = FALSE), "gss_plot10")
 })
 
 test_that("gss_plot exclude feb 1st", {
-  skip("need to fix wrapping on year")
-  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-06-01"), end_date = as.Date("1972-02-15"), min_length = 120), "gss_plot11")
+  expect_snapshot_plot(gss_plot(gsdd::temperature_data, start_date = as.Date("1972-06-01"), end_date = as.Date("1972-02-15"), min_length = 120, msgs = FALSE), "gss_plot11")
 })
 
 
