@@ -24,6 +24,9 @@ Useful links:
 
 Authors:
 
+- Joe Thorley <joe@poissonconsulting.ca>
+  ([ORCID](https://orcid.org/0000-0002-7683-4592))
+
 - Sarah Lyons ([ORCID](https://orcid.org/0000-0002-6745-6796))
 
 Other contributors:

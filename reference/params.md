@@ -27,6 +27,14 @@ Descriptions of the parameters for functions
   the growing season(s) in C. It must be greater than or equal to the
   start temperature.
 
+- fun:
+
+  A function that takes a non-zero length double vector of mean daily
+  water temperature values and returns a double vector of the equivalent
+  growth metrics. Must be able to handle `0` values. The growth metrics
+  are summed to give GSDD so if they are multiplicative they should be
+  logged by the functions and then exponentiated upon return.
+
 - ignore_truncation:
 
   A flag specifying whether to ignore truncation of the mean daily water
@@ -76,6 +84,30 @@ Descriptions of the parameters for functions
 
   A positive real number of the average water temperature at the start
   of the growing season(s) in C.
+
+- Topt:
+
+  A positive real number of the optimum mean daily water temperature for
+  growth.
+
+- Topt2:
+
+  A positive real number of the upper optimum mean daily water
+  temperature for growth.
+
+- Tmin:
+
+  A positive real number of the minimum mean daily water temperature for
+  growth.
+
+- Tmax:
+
+  A positive real number of the maximum mean daily water temperature for
+  growth.
+
+- vec:
+
+  A numeric vector of mean daily water temperature values.
 
 - window_width:
 

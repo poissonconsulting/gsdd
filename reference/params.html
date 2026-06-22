@@ -66,6 +66,10 @@ It must be greater than or equal to
 the start temperature.</p></dd>
 
 
+<dt id="arg-fun">fun<a class="anchor" aria-label="anchor" href="#arg-fun"></a></dt>
+<dd><p>A function that takes a non-zero length double vector of mean daily water temperature values and returns a double vector of the equivalent growth metrics. Must be able to handle <code>0</code> values. The growth metrics are summed to give GSDD so if they are multiplicative they should be logged by the functions and then exponentiated upon return.</p></dd>
+
+
 <dt id="arg-ignore-truncation">ignore_truncation<a class="anchor" aria-label="anchor" href="#arg-ignore-truncation"></a></dt>
 <dd><p>A flag specifying whether to ignore truncation
 of the mean daily water temperature vector
@@ -114,6 +118,26 @@ then the window is considered  to span two calendar years.</p></dd>
 <dt id="arg-start-temp">start_temp<a class="anchor" aria-label="anchor" href="#arg-start-temp"></a></dt>
 <dd><p>A positive real number of the average water temperature
 at the start of the growing season(s) in C.</p></dd>
+
+
+<dt id="arg-topt">Topt<a class="anchor" aria-label="anchor" href="#arg-topt"></a></dt>
+<dd><p>A positive real number of the optimum mean daily water temperature for growth.</p></dd>
+
+
+<dt id="arg-topt-">Topt2<a class="anchor" aria-label="anchor" href="#arg-topt-"></a></dt>
+<dd><p>A positive real number of the upper optimum mean daily water temperature for growth.</p></dd>
+
+
+<dt id="arg-tmin">Tmin<a class="anchor" aria-label="anchor" href="#arg-tmin"></a></dt>
+<dd><p>A positive real number of the minimum mean daily water temperature for growth.</p></dd>
+
+
+<dt id="arg-tmax">Tmax<a class="anchor" aria-label="anchor" href="#arg-tmax"></a></dt>
+<dd><p>A positive real number of the maximum mean daily water temperature for growth.</p></dd>
+
+
+<dt id="arg-vec">vec<a class="anchor" aria-label="anchor" href="#arg-vec"></a></dt>
+<dd><p>A numeric vector of mean daily water temperature values.</p></dd>
 
 
 <dt id="arg-window-width">window_width<a class="anchor" aria-label="anchor" href="#arg-window-width"></a></dt>
