@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# gsdd 0.3.0.9003
+
+- Added growth functions. (#14)
+
+
 # gsdd 0.3.0.9002
 
 - Same as previous version.
