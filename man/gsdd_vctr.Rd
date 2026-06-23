@@ -43,10 +43,10 @@ the start temperature.}
 \item{window_width}{A positive whole number of the
 width of the rolling mean window in days. By default 7.}
 
-\item{pick}{A string specifying whether to pick the
-"longest", "shortest", "first" or "last" 'season' or the season with the
-"biggest" or "smallest" GSDD. By default the returned value is the
-the GSDD value for the "longest" 'season'.}
+\item{pick}{A string specifying which 'season' to pick when more than one
+is present. One of "longest", "shortest", "first" or "last", or the season
+with the "biggest" or "smallest" GSDD, or "all" to use every season.
+By default "all".}
 
 \item{fun}{A function that takes a non-zero length double vector of mean daily water temperature values and returns a double vector of the equivalent growth metrics. Must be able to handle \code{0} values. The growth metrics are summed to give GSDD so if they are multiplicative they should be logged by the functions and then exponentiated upon return.}
 
