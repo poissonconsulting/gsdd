@@ -1,5 +1,9 @@
 # Changelog
 
+## gsdd 0.3.0.9004
+
+- Same as previous version.
+
 ## gsdd 0.3.0.9003
 
 - Added growth functions.
