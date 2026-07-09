@@ -12,16 +12,17 @@
 #' gsdd_vctr(c(rep(1, 10), rep(10, 20), rep(1, 200)))
 #' gsdd_vctr(gsdd::temperature_data$temperature)
 gsdd_vctr <- function(
-    x,
-    ignore_truncation = FALSE,
-    min_length = 274,
-    start_temp = 5,
-    end_temp = 4,
-    window_width = 7,
-    pick = "all",
-    fun = growth_degdays,
-    complete = FALSE,
-    msgs = TRUE) {
+  x,
+  ignore_truncation = FALSE,
+  min_length = 274,
+  start_temp = 5,
+  end_temp = 4,
+  window_width = 7,
+  pick = "all",
+  fun = growth_degdays,
+  complete = FALSE,
+  msgs = TRUE
+) {
   gss <- .gss_vctr(
     x,
     ignore_truncation = ignore_truncation,

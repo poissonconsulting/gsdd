@@ -10,10 +10,14 @@
 #' @examples
 #' date_atus(gsdd::temperature_data)
 date_atus <- function(
+  x,
+  atus = 600,
+  start_date = as.Date("1972-03-01")
+) {
+  check_data(
     x,
-    atus = 600,
-    start_date = as.Date("1972-03-01")) {
-  check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
+    list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA))
+  )
   chk_date(start_date)
   chk_number(atus)
   chk_gt(atus)
@@ -49,11 +53,14 @@ date_atus <- function(
     dplyr::group_modify(~ complete_dates(.x, start_date, end_date))
 
   x <- x |>
-    dplyr::group_modify(~ .atu_index(
-      .x$temperature,
-      .x$date,
-      atus = atus
-    ), .keep = TRUE) |>
+    dplyr::group_modify(
+      ~ .atu_index(
+        .x$temperature,
+        .x$date,
+        atus = atus
+      ),
+      .keep = TRUE
+    ) |>
     dplyr::mutate(
       end_date = dttr2::dtt_dayte(end_date, start_date),
       start_date = start_dayte

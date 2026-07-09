@@ -11,17 +11,18 @@
 #' @examples
 #' gdd(gsdd::temperature_data)
 gdd <- function(
-    x,
-    start_date = as.Date("1972-03-01"),
-    end_date = as.Date("1972-09-30"),
-    min_length = NULL,
-    ignore_truncation = FALSE,
-    start_temp = 5,
-    end_temp = 4,
-    window_width = 7,
-    pick = "all",
-    fun = growth_degdays,
-    msgs = TRUE) {
+  x,
+  start_date = as.Date("1972-03-01"),
+  end_date = as.Date("1972-09-30"),
+  min_length = NULL,
+  ignore_truncation = FALSE,
+  start_temp = 5,
+  end_temp = 4,
+  window_width = 7,
+  pick = "all",
+  fun = growth_degdays,
+  msgs = TRUE
+) {
   chk_flag(ignore_truncation)
 
   if (!ignore_truncation) {

@@ -59,8 +59,8 @@ growth_pgti_factory <- function(Tmin, Topt, Tmax) {
   function(vec) {
     chk_numeric(vec)
     chk_not_any_na(vec)
-    
-    y <- (vec - Tmin) * (vec - Tmax) 
+
+    y <- (vec - Tmin) * (vec - Tmax)
     y <- y / (y - (vec - Topt)^2)
     y[y < 0] <- 0
     y[vec <= 0] <- 0

@@ -9,7 +9,10 @@ test_that("vector must be longer than window_width", {
 })
 
 test_that("window_width must be odd", {
-  expect_chk_error(gsdd_vctr(temperature_data$temperature, window_width = 6), "`window_width` must be odd.")
+  expect_chk_error(
+    gsdd_vctr(temperature_data$temperature, window_width = 6),
+    "`window_width` must be odd."
+  )
 })
 
 test_that("gsdd_vctr returns NA when missing summer", {
@@ -33,7 +36,11 @@ test_that("gsdd_vctr trims missing values", {
 })
 
 test_that("start temp must be greater than or equal to end temp", {
-  expect_chk_error(gsdd_vctr(temperature_data$temperature, end_temp = 40, start_temp = 30))
+  expect_chk_error(gsdd_vctr(
+    temperature_data$temperature,
+    end_temp = 40,
+    start_temp = 30
+  ))
 })
 
 test_that("if max temp in vector is lower than start_temp the function return 0", {
@@ -42,23 +49,40 @@ test_that("if max temp in vector is lower than start_temp the function return 0"
 })
 
 test_that("if end_temp is not reached, gsdd_vctr calculated to end of vector and message is provided.", {
-  expect_message(expect_identical(gsdd_vctr(temperature_data$temperature, end_temp = -40), NA_real_), "The growing season is truncated at the end of the sequence.")
+  expect_message(
+    expect_identical(
+      gsdd_vctr(temperature_data$temperature, end_temp = -40),
+      NA_real_
+    ),
+    "The growing season is truncated at the end of the sequence."
+  )
 })
 
 test_that("truncated at 100.", {
   x <- temperature_data$temperature
   x[100] <- NA_real_
-  expect_message(expect_identical(gsdd_vctr(x, min_length = 184), NA_real_), "The growing season is truncated at the start of the sequence.")
+  expect_message(
+    expect_identical(gsdd_vctr(x, min_length = 184), NA_real_),
+    "The growing season is truncated at the start of the sequence."
+  )
 })
 
 test_that("truncated at 200.", {
   x <- temperature_data$temperature
   x[200] <- NA_real_
-  expect_message(expect_identical(gsdd_vctr(x, min_length = 184), NA_real_), "The growing season is truncated at the end of the sequence.")
+  expect_message(
+    expect_identical(gsdd_vctr(x, min_length = 184), NA_real_),
+    "The growing season is truncated at the end of the sequence."
+  )
 })
 
 test_that("if end_temp is reached at end of vector x, indicies do not fall off the edge", {
-  gsdd_vctr <- gsdd_vctr(temperature_data$temperature, end_temp = -4, msgs = FALSE, ignore_truncation = TRUE)
+  gsdd_vctr <- gsdd_vctr(
+    temperature_data$temperature,
+    end_temp = -4,
+    msgs = FALSE,
+    ignore_truncation = TRUE
+  )
   expect_equal(gsdd_vctr, 3921.63308)
 })
 
@@ -67,7 +91,13 @@ test_that("if start_temp is reached at start of vector x, indicies do not fall o
   x <- x[163:length(x)]
   gsdd_vctr <- gsdd_vctr(x, end_temp = 4, msgs = FALSE)
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE, min_length = 184)
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    end_temp = 4,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    min_length = 184
+  )
   expect_equal(gsdd_vctr, 2687.98160174586)
 })
 
@@ -76,78 +106,156 @@ test_that("x must have a length less than 366", {
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
-  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "biggest")
+  gsdd_vctr <- gsdd_vctr(
+    temperature_data$temperature2,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    pick = "biggest"
+  )
   expect_equal(gsdd_vctr, 800)
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
-  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "last")
+  gsdd_vctr <- gsdd_vctr(
+    temperature_data$temperature2,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    pick = "last"
+  )
   expect_equal(gsdd_vctr, 800)
 })
 
 test_that("Gets growth period with biggest gsdd_vctr even though shorter period.", {
-  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "first")
+  gsdd_vctr <- gsdd_vctr(
+    temperature_data$temperature2,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    pick = "first"
+  )
   expect_equal(gsdd_vctr, 500)
 })
 
 test_that("Gets growth period with smallest gsdd_vctr.", {
-  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "smallest")
+  gsdd_vctr <- gsdd_vctr(
+    temperature_data$temperature2,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    pick = "smallest"
+  )
   expect_equal(gsdd_vctr, 500)
 })
 
 test_that("Gets growth period with all gsdd_vctr.", {
-  gsdd_vctr <- gsdd_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9, pick = "all")
+  gsdd_vctr <- gsdd_vctr(
+    temperature_data$temperature2,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    pick = "all"
+  )
   expect_equal(gsdd_vctr, 1300)
 })
 
 test_that("Gets growth period with higher gsdd_vctr even though shorter period.", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE
+  )
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-    ignore_truncation = TRUE, pick = "biggest"
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    pick = "biggest"
   )
   expect_equal(gsdd_vctr, 800)
 })
 
 test_that("Gets growth period longest period.", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE
+  )
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-    ignore_truncation = TRUE, pick = "longest"
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    pick = "longest"
   )
   expect_equal(gsdd_vctr, 500)
 })
 
 test_that("Gets growth period all gsdd_vctr.", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE
+  )
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-    ignore_truncation = TRUE, pick = "all"
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    pick = "all"
   )
   expect_equal(gsdd_vctr, 1300)
 })
 
 test_that("Gets growth period shortest", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE
+  )
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-    ignore_truncation = TRUE, pick = "shortest"
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    pick = "shortest"
   )
   expect_equal(gsdd_vctr, 800)
 })
 
 test_that("Gets all by default", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gsdd_vctr <- gsdd_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
     ignore_truncation = TRUE
   )
   expect_equal(gsdd_vctr, 1300)
@@ -155,19 +263,36 @@ test_that("Gets all by default", {
 
 test_that("Gets growth period longest", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gsdd_vctr <- gsdd_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE
+  )
   expect_equal(gsdd_vctr, NA_real_)
-  gsdd_vctr <- gsdd_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
-    ignore_truncation = TRUE, pick = "longest"
+  gsdd_vctr <- gsdd_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    pick = "longest"
   )
   expect_equal(gsdd_vctr, 500)
 })
 
 test_that("Gets growth gives messages with truncation.", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  expect_message(expect_identical(gsdd_vctr(x), NA_real_), "The growing season is truncated at the start of the sequence.")
-  expect_message(expect_identical(gsdd_vctr(x, ignore_truncation = "start"), NA_real_), "The growing season is truncated at the end of the sequence.")
+  expect_message(
+    expect_identical(gsdd_vctr(x), NA_real_),
+    "The growing season is truncated at the start of the sequence."
+  )
+  expect_message(
+    expect_identical(gsdd_vctr(x, ignore_truncation = "start"), NA_real_),
+    "The growing season is truncated at the end of the sequence."
+  )
 })
 
 test_that("Gets gsdd_vctr with single boiling day.", {
@@ -196,7 +321,10 @@ test_that("Gets with two weeks and 3 day window width - great test", {
   x <- c(rep(0, 100), rep(5.1, 7), rep(3.8, 7), rep(0, 100))
   expect_gte(mean(c(rep(5.1, 2), rep(3.8, 1))), 4)
   expect_lt(mean(c(rep(5.1, 0), rep(3.8, 3))), 4)
-  expect_equal(gsdd_vctr(x, window_width = 3, min_length = 184), 5.1 * 7 + 3.8 * 3)
+  expect_equal(
+    gsdd_vctr(x, window_width = 3, min_length = 184),
+    5.1 * 7 + 3.8 * 3
+  )
 })
 
 test_that("Gets with two weeks and 3 day window and smaller", {
@@ -204,7 +332,10 @@ test_that("Gets with two weeks and 3 day window and smaller", {
   expect_lt(mean(c(rep(5.1, 6), 0)), 5)
   expect_gte(mean(c(rep(5.1, 2), rep(3, 1))), 4)
   expect_lt(mean(c(rep(5.1, 1), rep(3, 2))), 4)
-  expect_equal(gsdd_vctr(x, window_width = 3, min_length = 184), 5.1 * 7 + 3 * 2)
+  expect_equal(
+    gsdd_vctr(x, window_width = 3, min_length = 184),
+    5.1 * 7 + 3 * 2
+  )
 })
 
 test_that("Gets with two weeks and 3 day window and smaller", {
@@ -214,17 +345,26 @@ test_that("Gets with two weeks and 3 day window and smaller", {
 
 test_that("Gets one week with end day after of 0", {
   x <- c(rep(0, 180), rep(5.1, 7), rep(1, 0))
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), 5.1 * 7)
+  expect_equal(
+    gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184),
+    5.1 * 7
+  )
 })
 
 test_that("Gets one week with end day after of 1", {
   x <- c(rep(0, 180), rep(5.1, 7), rep(1, 1))
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), 5.1 * 7 + 1)
+  expect_equal(
+    gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184),
+    5.1 * 7 + 1
+  )
 })
 
 test_that("Gets with two weeks and 3 day window and smaller", {
   x <- c(rep(0, 180), rep(5.1, 7))
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), 5.1 * 7)
+  expect_equal(
+    gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184),
+    5.1 * 7
+  )
 })
 
 test_that("Gets triangle", {
@@ -314,7 +454,10 @@ test_that("Right truncated triangle", {
   })
 
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
-  expect_equal(gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184), sum(x[15:length(x)]))
+  expect_equal(
+    gsdd_vctr(x, ignore_truncation = "end", msgs = FALSE, min_length = 184),
+    sum(x[15:length(x)])
+  )
 })
 
 test_that("Left truncated triangle", {
@@ -330,19 +473,31 @@ test_that("Left truncated triangle", {
   })
 
   expect_equal(gsdd_vctr(x, msgs = FALSE), NA_real_)
-  expect_equal(gsdd_vctr(x, ignore_truncation = "start", msgs = FALSE, min_length = 184), sum(x[0:25]))
+  expect_equal(
+    gsdd_vctr(x, ignore_truncation = "start", msgs = FALSE, min_length = 184),
+    sum(x[0:25])
+  )
 })
 
 test_that("NA if less than 14 values after trimming trailing NAs", {
   x <- c(rep(1, 13), rep(NA, 100))
-  expect_message(expect_identical(gsdd_vctr(x, min_length = 14), NA_real_), "The length of the longest non-missing sequence in `x` must be at least 14.")
+  expect_message(
+    expect_identical(gsdd_vctr(x, min_length = 14), NA_real_),
+    "The length of the longest non-missing sequence in `x` must be at least 14."
+  )
   x <- c(rep(1, 15), rep(NA, 100))
   expect_identical(gsdd_vctr(x, min_length = 15), 0)
 })
 
 test_that("NA if less than 20 values after trimming trailing NAs", {
   x <- c(rep(1, 21), rep(NA, 100))
-  expect_message(expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22), NA_real_), "The length of the longest non-missing sequence in `x` must be at least 22.")
+  expect_message(
+    expect_identical(
+      gsdd_vctr(x, window_width = 11, min_length = 22),
+      NA_real_
+    ),
+    "The length of the longest non-missing sequence in `x` must be at least 22."
+  )
   x <- c(rep(1, 22), rep(NA, 100))
   expect_identical(gsdd_vctr(x, window_width = 11, min_length = 22), 0)
 })

@@ -11,17 +11,18 @@
 #' @examples
 #' gss(gsdd::temperature_data)
 gss <- function(
-    x,
-    start_date = as.Date("1972-03-01"),
-    end_date = as.Date("1972-11-30"),
-    min_length = NULL,
-    ignore_truncation = FALSE,
-    start_temp = 5,
-    end_temp = 4,
-    window_width = 7,
-    pick = "all",
-    fun = growth_degdays,
-    msgs = TRUE) {
+  x,
+  start_date = as.Date("1972-03-01"),
+  end_date = as.Date("1972-11-30"),
+  min_length = NULL,
+  ignore_truncation = FALSE,
+  start_temp = 5,
+  end_temp = 4,
+  window_width = 7,
+  pick = "all",
+  fun = growth_degdays,
+  msgs = TRUE
+) {
   .gss(
     x,
     start_date = start_date,

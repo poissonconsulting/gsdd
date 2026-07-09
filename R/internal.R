@@ -1,14 +1,16 @@
-.gss_vctr <- function(x,
-                      ignore_truncation,
-                      min_length,
-                      start_temp,
-                      end_temp,
-                      window_width,
-                      pick,
-                      fun,
-                      complete,
-                      msgs,
-                      .rollmean = FALSE) {
+.gss_vctr <- function(
+  x,
+  ignore_truncation,
+  min_length,
+  start_temp,
+  end_temp,
+  window_width,
+  pick,
+  fun,
+  complete,
+  msgs,
+  .rollmean = FALSE
+) {
   chk_numeric(x)
   chk_vector(x)
   chk_lte(length(x), 366)
@@ -53,7 +55,11 @@
   length_x <- length(x)
   if (length_x < min_length || anyNA(x)) {
     if (msgs) {
-      msg(paste0("The length of the longest non-missing sequence in `x` must be at least ", min_length, "."))
+      msg(paste0(
+        "The length of the longest non-missing sequence in `x` must be at least ",
+        min_length,
+        "."
+      ))
     }
     return(NA_real_)
   }
@@ -112,19 +118,27 @@
       end_index = .data$end_index + (as.integer(window_width) - 1L),
       ndays = .data$end_index - .data$start_index + 1L,
       truncation = dplyr::case_when(
-        start_index == 1L & end_index == length_x & rollmean[length_rollmean] > end_temp & !complete_start & !complete_end ~ "both",
+        start_index == 1L &
+          end_index == length_x &
+          rollmean[length_rollmean] > end_temp &
+          !complete_start &
+          !complete_end ~ "both",
         start_index == 1L & !complete_start ~ "start",
-        end_index == length_x & rollmean[length_rollmean] > end_temp & !complete_end ~ "end",
+        end_index == length_x &
+          rollmean[length_rollmean] > end_temp &
+          !complete_end ~ "end",
         TRUE ~ "none"
       )
     ) |>
-    dplyr::mutate(gsdd = purrr::map2_dbl(
-      .x = .data$start_index,
-      .y = .data$end_index,
-      .f = sum_vector,
-      fun = fun,
-      ..vector = x
-    )) |>
+    dplyr::mutate(
+      gsdd = purrr::map2_dbl(
+        .x = .data$start_index,
+        .y = .data$end_index,
+        .f = sum_vector,
+        fun = fun,
+        ..vector = x
+      )
+    ) |>
     pick_season(pick = pick) |>
     dplyr::select("start_index", "end_index", "gsdd", "truncation") |>
     dplyr::mutate(
@@ -169,7 +183,10 @@ gss_years <- function(x, start_date, end_date, min_length) {
   start_dayte <- dttr2::dtt_dayte(start_date, start_date)
 
   if (is.null(min_length)) {
-    min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
+    min_length <- max(
+      min(as.integer(end_dayte) - as.integer(start_dayte), 364L),
+      1L
+    )
   }
 
   x |>
@@ -181,7 +198,10 @@ gss_years <- function(x, start_date, end_date, min_length) {
     ) |>
     dplyr::group_by(.data$year) |>
     dplyr::group_modify(~ complete_dates(.x, start_date, end_date)) |>
-    dplyr::summarise(run = length(longest_run(.data$temperature)), .groups = "drop") |>
+    dplyr::summarise(
+      run = length(longest_run(.data$temperature)),
+      .groups = "drop"
+    ) |>
     dplyr::filter(.data$run >= min_length) |>
     dplyr::pull(.data$year)
 }
@@ -209,11 +229,15 @@ complete_dates <- function(x, start_date, end_date) {
 }
 
 .roll_mean <- function(
+  x,
+  start_date,
+  end_date,
+  window_width
+) {
+  check_data(
     x,
-    start_date,
-    end_date,
-    window_width) {
-  check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
+    list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA))
+  )
   chk_date(start_date)
   chk_date(end_date)
 
@@ -235,21 +259,25 @@ complete_dates <- function(x, start_date, end_date) {
     ) |>
     dplyr::group_by(.data$year) |>
     dplyr::group_modify(~ complete_dates(.x, start_date, end_date)) |>
-    dplyr::group_modify(~ gss_vctr(
-      .x$temperature,
-      ignore_truncation = TRUE,
-      min_length = window_width * 2,
-      start_temp = 5,
-      end_temp = 4,
-      window_width = window_width,
-      msgs = FALSE,
-      complete = TRUE,
-      .rollmean = TRUE
-    ), .keep = TRUE)
+    dplyr::group_modify(
+      ~ gss_vctr(
+        .x$temperature,
+        ignore_truncation = TRUE,
+        min_length = window_width * 2,
+        start_temp = 5,
+        end_temp = 4,
+        window_width = window_width,
+        msgs = FALSE,
+        complete = TRUE,
+        .rollmean = TRUE
+      ),
+      .keep = TRUE
+    )
 
   if (!nrow(x)) {
     return(tibble::tibble(
-      year = integer(), dayte = as.Date(integer()),
+      year = integer(),
+      dayte = as.Date(integer()),
       temperature = numeric()
     ))
   }
@@ -264,19 +292,23 @@ complete_dates <- function(x, start_date, end_date) {
 }
 
 .gss <- function(
+  x,
+  start_date,
+  end_date,
+  ignore_truncation,
+  min_length,
+  start_temp,
+  end_temp,
+  window_width,
+  pick,
+  fun,
+  msgs,
+  gss = TRUE
+) {
+  check_data(
     x,
-    start_date,
-    end_date,
-    ignore_truncation,
-    min_length,
-    start_temp,
-    end_temp,
-    window_width,
-    pick,
-    fun,
-    msgs,
-    gss = TRUE) {
-  check_data(x, list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA)))
+    list(date = dttr2::dtt_date("1970-01-01"), temperature = c(1, NA))
+  )
   chk_date(start_date)
   chk_date(end_date)
   chk_null_or(min_length, vld = vld_whole_number)
@@ -302,23 +334,29 @@ complete_dates <- function(x, start_date, end_date) {
     dplyr::group_modify(~ complete_dates(.x, start_date, end_date))
 
   if (is.null(min_length)) {
-    min_length <- max(min(as.integer(end_dayte) - as.integer(start_dayte), 364L), 1L)
+    min_length <- max(
+      min(as.integer(end_dayte) - as.integer(start_dayte), 364L),
+      1L
+    )
   }
 
   if (isFALSE(gss)) {
     x <- x |>
-      dplyr::summarise(gsdd = gsdd_vctr(
-        .data$temperature,
-        ignore_truncation = ignore_truncation,
-        min_length = min_length,
-        start_temp = start_temp,
-        end_temp = end_temp,
-        window_width = window_width,
-        pick = pick,
-        fun = fun,
-        complete = TRUE,
-        msgs = msgs
-      ), .groups = "keep") |>
+      dplyr::summarise(
+        gsdd = gsdd_vctr(
+          .data$temperature,
+          ignore_truncation = ignore_truncation,
+          min_length = min_length,
+          start_temp = start_temp,
+          end_temp = end_temp,
+          window_width = window_width,
+          pick = pick,
+          fun = fun,
+          complete = TRUE,
+          msgs = msgs
+        ),
+        .groups = "keep"
+      ) |>
       dplyr::ungroup()
 
     return(x)
@@ -326,30 +364,42 @@ complete_dates <- function(x, start_date, end_date) {
 
   if (isTRUE(gss)) {
     x <- x |>
-      dplyr::group_modify(~ gss_vctr(
-        .x$temperature,
-        ignore_truncation = ignore_truncation,
-        min_length = min_length,
-        start_temp = start_temp,
-        end_temp = end_temp,
-        window_width = window_width,
-        pick = pick,
-        fun = fun,
-        complete = TRUE,
-        msgs = msgs
-      ), .keep = TRUE)
+      dplyr::group_modify(
+        ~ gss_vctr(
+          .x$temperature,
+          ignore_truncation = ignore_truncation,
+          min_length = min_length,
+          start_temp = start_temp,
+          end_temp = end_temp,
+          window_width = window_width,
+          pick = pick,
+          fun = fun,
+          complete = TRUE,
+          msgs = msgs
+        ),
+        .keep = TRUE
+      )
 
     if (!nrow(x)) {
       return(tibble::tibble(
-        year = integer(), start_dayte = as.Date(integer()),
-        end_dayte = as.Date(integer()), gsdd = numeric(), truncation = character()
+        year = integer(),
+        start_dayte = as.Date(integer()),
+        end_dayte = as.Date(integer()),
+        gsdd = numeric(),
+        truncation = character()
       ))
     }
     x <- x |>
       dplyr::mutate(
         .start_dayte = start_dayte,
-        start_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$start_index - 1L),
-        end_dayte = dttr2::dtt_add_days(.data$.start_dayte, .data$end_index - 1L),
+        start_dayte = dttr2::dtt_add_days(
+          .data$.start_dayte,
+          .data$start_index - 1L
+        ),
+        end_dayte = dttr2::dtt_add_days(
+          .data$.start_dayte,
+          .data$end_index - 1L
+        ),
       ) |>
       dplyr::select("year", "start_dayte", "end_dayte", "gsdd", "truncation")
 

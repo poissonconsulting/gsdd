@@ -26,7 +26,12 @@ test_that("gdd preserves if shift start date", {
 test_that("gdd preserves if shift start date", {
   data <- temperature_data
 
-  gdd <- gdd(data, start_date = as.Date("2019-03-20"), ignore_truncation = TRUE, min_length = 14)
+  gdd <- gdd(
+    data,
+    start_date = as.Date("2019-03-20"),
+    ignore_truncation = TRUE,
+    min_length = 14
+  )
   expect_snapshot({
     gdd
   })
@@ -36,7 +41,10 @@ test_that("gdd one message", {
   data <- temperature_data
 
   data <- data[-(1:100), ]
-  expect_message(gdd <- gdd(data, min_length = 14), "The growing season is truncated at the start of the sequence.")
+  expect_message(
+    gdd <- gdd(data, min_length = 14),
+    "The growing season is truncated at the start of the sequence."
+  )
   expect_snapshot({
     gdd
   })
@@ -121,7 +129,10 @@ test_that("gdd start truncation", {
   data <- temperature_data
   data$temperature <- 6
   data <- data[data$date >= as.Date("2019-03-02"), ]
-  expect_message(gdd <- gdd(data), "The growing season is truncated at the start of the sequence.")
+  expect_message(
+    gdd <- gdd(data),
+    "The growing season is truncated at the start of the sequence."
+  )
   expect_snapshot({
     gdd
   })
@@ -145,9 +156,12 @@ test_that("gdd works growth_days", {
 })
 
 test_that("gdd works growth_pgti_factory", {
-  gdd <- gdd(temperature_data, min_length = 14, fun = growth_pgti_factory(5.6, 13.6, 21.7))
+  gdd <- gdd(
+    temperature_data,
+    min_length = 14,
+    fun = growth_pgti_factory(5.6, 13.6, 21.7)
+  )
   expect_snapshot({
     gdd
   })
 })
-
