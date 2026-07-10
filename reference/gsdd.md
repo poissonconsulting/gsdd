@@ -76,10 +76,10 @@ gsdd(
 
 - pick:
 
-  A string specifying whether to pick the "longest", "shortest", "first"
-  or "last" 'season' or the season with the "biggest" or "smallest"
-  GSDD. By default the returned value is the the GSDD value for the
-  "longest" 'season'.
+  A string specifying which 'season' to pick when more than one is
+  present. One of "longest", "shortest", "first" or "last", or the
+  season with the "biggest" or "smallest" GSDD, or "all" to use every
+  season. By default "all".
 
 - fun:
 
