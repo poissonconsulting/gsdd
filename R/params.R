@@ -27,10 +27,10 @@
 #' @param msgs A flag specifying whether to provide messages.
 #' @param ncol A count of the number of columns to facet by.
 #' @param nrow A count of the number of rows to facet by.
-#' @param pick A string specifying whether to pick the
-#' "longest", "shortest", "first" or "last" 'season' or the season with the
-#' "biggest" or "smallest" GSDD. By default the returned value is the
-#' the GSDD value for the "longest" 'season'.
+#' @param pick A string specifying which 'season' to pick when more than one
+#' is present. One of "longest", "shortest", "first" or "last", or the season
+#' with the "biggest" or "smallest" GSDD, or "all" to use every season.
+#' By default "all".
 #' @param start_date A Date scalar of the first date
 #' within each year to consider (the year is ignored).
 #' #' If `start_date` occurs before the `end_date` (when ignoring the year)
