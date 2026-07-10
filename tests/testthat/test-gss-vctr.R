@@ -81,7 +81,13 @@ test_that("if start_temp is reached at start of vector x, indicies do not fall o
   x <- temperature_data$temperature
   x <- x[163:length(x)]
   gss1 <- gss_vctr(x, end_temp = 4, msgs = FALSE)
-  gss2 <- gss_vctr(x, end_temp = 4, msgs = FALSE, ignore_truncation = TRUE, min_length = 184)
+  gss2 <- gss_vctr(
+    x,
+    end_temp = 4,
+    msgs = FALSE,
+    ignore_truncation = TRUE,
+    min_length = 184
+  )
   expect_snapshot({
     gss1
     gss2
@@ -93,7 +99,12 @@ test_that("x must have a length less than 366", {
 })
 
 test_that("growth period with biggest GSDD even though shorter period.", {
-  gss <- gss_vctr(temperature_data$temperature2, window_width = 3, start_temp = 9, end_temp = 9)
+  gss <- gss_vctr(
+    temperature_data$temperature2,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9
+  )
   expect_snapshot({
     gss
   })
@@ -101,9 +112,19 @@ test_that("growth period with biggest GSDD even though shorter period.", {
 
 test_that("growth period with higher GSDD even though shorter period.", {
   x <- c(rep(10, 50), rep(0, 255), rep(20, 40))
-  gss1 <- gss_vctr(x, window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE)
-  gss2 <- gss_vctr(x,
-    window_width = 3, start_temp = 9, end_temp = 9, msgs = FALSE,
+  gss1 <- gss_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE
+  )
+  gss2 <- gss_vctr(
+    x,
+    window_width = 3,
+    start_temp = 9,
+    end_temp = 9,
+    msgs = FALSE,
     ignore_truncation = TRUE
   )
   expect_snapshot({

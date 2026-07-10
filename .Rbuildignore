@@ -14,3 +14,5 @@
 ^_pkgdown\.yml$
 ^README\.Rmd$
 ^\.claude$
+^[.]?air[.]toml$
+^\.vscode$

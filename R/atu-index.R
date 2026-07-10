@@ -1,7 +1,8 @@
 .atu_index <- function(
-    x,
-    date,
-    atus) {
+  x,
+  date,
+  atus
+) {
   x <- pmax(x, 0)
   x <- cumsum(x)
   wch <- which(x >= atus)

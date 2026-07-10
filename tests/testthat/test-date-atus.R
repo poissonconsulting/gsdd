@@ -6,7 +6,10 @@ test_that("date_atus works", {
 })
 
 test_that("date_atus start year independent", {
-  date_atus <- date_atus(gsdd::temperature_data, start_date = as.Date("1956-03-01"))
+  date_atus <- date_atus(
+    gsdd::temperature_data,
+    start_date = as.Date("1956-03-01")
+  )
   expect_snapshot({
     date_atus
   })
