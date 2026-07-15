@@ -1,5 +1,9 @@
 # Changelog
 
+## gsdd 0.3.0.9006
+
+- Same as previous version.
+
 ## gsdd 0.3.0.9005
 
 - Same as previous version.
