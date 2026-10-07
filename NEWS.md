@@ -1,4 +1,9 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# gsdd 0.3.0.9007
+
+- Same as previous version.
+
 
 # gsdd 0.3.0.9006
 
