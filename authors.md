@@ -26,13 +26,13 @@ Source:
 [`DESCRIPTION`](https://github.com/poissonconsulting/gsdd/blob/main/DESCRIPTION)
 
 Thorley J, Lyons S (2026). *gsdd: Calculate Growing Season Degree Days
-from Water Temperature Data*. R package version 0.3.0.9006,
+from Water Temperature Data*. R package version 0.3.0.9007,
 <https://poissonconsulting.github.io/gsdd/>.
 
     @Manual{,
       title = {gsdd: Calculate Growing Season Degree Days from Water Temperature Data},
       author = {Joe Thorley and Sarah Lyons},
       year = {2026},
-      note = {R package version 0.3.0.9006},
+      note = {R package version 0.3.0.9007},
       url = {https://poissonconsulting.github.io/gsdd/},
     }
